@@ -1,4 +1,4 @@
-package pl.jakubturek.cheatar.server.orm.exception;
+package pl.jakubturek.cheatar.server.dal.exception;
 
 public class SessionFactoryInitializationFailed extends RuntimeException
 {

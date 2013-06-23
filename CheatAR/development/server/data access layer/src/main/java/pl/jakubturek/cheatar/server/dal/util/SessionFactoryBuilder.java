@@ -1,11 +1,11 @@
-package pl.jakubturek.cheatar.server.orm.util;
+package pl.jakubturek.cheatar.server.dal.util;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
-import pl.jakubturek.cheatar.server.orm.exception.SessionFactoryInitializationFailed;
+import pl.jakubturek.cheatar.server.dal.exception.SessionFactoryInitializationFailed;
 
 public class SessionFactoryBuilder
 {

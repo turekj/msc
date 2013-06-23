@@ -1,4 +1,4 @@
-package pl.jakubturek.cheatar.server.orm.model;
+package pl.jakubturek.cheatar.server.dal.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

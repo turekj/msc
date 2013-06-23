@@ -1,9 +1,9 @@
-package pl.jakubturek.cheatar.server.orm.main;
+package pl.jakubturek.cheatar.server.dal.main;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import pl.jakubturek.cheatar.server.orm.model.Word;
-import pl.jakubturek.cheatar.server.orm.util.SessionFactoryBuilder;
+import pl.jakubturek.cheatar.server.dal.model.Word;
+import pl.jakubturek.cheatar.server.dal.util.SessionFactoryBuilder;
 
 public class OrmEntryPoint
 {
