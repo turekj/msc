@@ -12,20 +12,15 @@
     </parent>
 
     <groupId>pl.jakubturek.cheatar.server</groupId>
-    <artifactId>data-access-layer</artifactId>
+    <artifactId>word-dictionary-importer</artifactId>
     <version>1.0</version>
-    <name>CheatAR data access layer</name>
+    <name>CheatAR word dictionary importer</name>
 
     <dependencies>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>4.2.2.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.25</version>
+            <groupId>pl.jakubturek.cheatar.server</groupId>
+            <artifactId>data-access-layer</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 

@@ -19,6 +19,7 @@
 
 	<modules>
 		<module>data-access-layer</module>
+		<module>word-dictionary-importer</module>
 	</modules>
 
 </project>
