@@ -2,7 +2,6 @@ package pl.jakubturek.cheatar.server.wordimporter.provision.impl;
 
 import pl.jakubturek.cheatar.server.dal.model.Word;
 import pl.jakubturek.cheatar.server.wordimporter.exception.NoSuchDataProviderRegistered;
-import pl.jakubturek.cheatar.server.wordimporter.model.WordEntityWrapper;
 import pl.jakubturek.cheatar.server.wordimporter.provision.IDataProvider;
 import pl.jakubturek.cheatar.server.wordimporter.provision.IDataProviderFactory;
 import pl.jakubturek.cheatar.server.wordimporter.provision.providers.WordStreamDataProvider;

@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import pl.jakubturek.cheatar.server.dal.model.Word;
-import pl.jakubturek.cheatar.server.wordimporter.provision.impl.StreamDataProvider;
 import pl.jakubturek.cheatar.server.wordimporter.provision.providers.WordStreamDataProvider;
 
 import java.io.ByteArrayInputStream;
