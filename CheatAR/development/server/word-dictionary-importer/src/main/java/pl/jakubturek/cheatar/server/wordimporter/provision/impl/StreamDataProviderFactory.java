@@ -5,37 +5,27 @@ import pl.jakubturek.cheatar.server.wordimporter.exception.NoSuchDataProviderReg
 import pl.jakubturek.cheatar.server.wordimporter.model.WordEntityWrapper;
 import pl.jakubturek.cheatar.server.wordimporter.provision.IDataProvider;
 import pl.jakubturek.cheatar.server.wordimporter.provision.IDataProviderFactory;
+import pl.jakubturek.cheatar.server.wordimporter.provision.providers.WordStreamDataProvider;
 
+import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FileDataProviderFactory implements IDataProviderFactory
+public class StreamDataProviderFactory implements IDataProviderFactory
 {
-    private final String filename;
+    private final InputStream inputStream;
     private Map<Class<?>, IDataProvider<?>> dataProviders = new LinkedHashMap<Class<?>, IDataProvider<?>>();
 
-    public FileDataProviderFactory(String filename)
+    public StreamDataProviderFactory(InputStream inputStream)
     {
-        this.filename = filename;
+        this.inputStream = inputStream;
 
         registerDataProviders();
     }
 
     private void registerDataProviders()
     {
-        registerWordDataProvider();
-    }
-
-    private void registerWordDataProvider()
-    {
-        dataProviders.put(Word.class, new FileDataProvider<Word>(filename)
-        {
-            @Override
-            protected Word createEntity(String message)
-            {
-                return new WordEntityWrapper(message);
-            }
-        });
+        dataProviders.put(Word.class, new WordStreamDataProvider(inputStream));
     }
 
     @Override
