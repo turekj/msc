@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>pl.jakubturek.cheatar</groupId>
-        <artifactId>cheatar-parent</artifactId>
+        <groupId>pl.jakubturek.cheatar.server</groupId>
+        <artifactId>server-parent</artifactId>
         <version>1.0</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>pl.jakubturek.cheatar.server</groupId>

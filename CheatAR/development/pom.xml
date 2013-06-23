@@ -34,7 +34,7 @@
 	</build>
 
 	<modules>
-		<module>server/data-access-layer</module>
+		<module>server</module>
 	</modules>
 
 </project>
