@@ -4,3 +4,13 @@
 *.jar
 *.war
 *.ear
+
+# Config files #
+trello_settings.xml
+
+# IDE settings #
+.idea/
+*.iml
+
+# Build files #
+target/
