@@ -10,8 +10,6 @@ import pl.jakubturek.cheatar.server.wordimporter.creation.impl.FromStringFactory
 import pl.jakubturek.cheatar.server.wordimporter.provision.impl.StreamDataProvider;
 
 import java.io.ByteArrayInputStream;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 @RunWith(Suite.class)

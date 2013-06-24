@@ -2,9 +2,9 @@ package pl.jakubturek.cheatar.server.wordimporter.provision.impl;
 
 import pl.jakubturek.cheatar.server.dal.model.Word;
 import pl.jakubturek.cheatar.server.wordimporter.creation.IFromStringFactory;
+import pl.jakubturek.cheatar.server.wordimporter.provision.IDataProviderFactory;
 import pl.jakubturek.cheatar.server.wordimporter.provision.IStreamDataProvider;
 import pl.jakubturek.cheatar.server.wordimporter.provision.exception.NoSuchDataProviderRegistered;
-import pl.jakubturek.cheatar.server.wordimporter.provision.IDataProviderFactory;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

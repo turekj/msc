@@ -1,11 +1,12 @@
 package pl.jakubturek.cheatar.server.wordimporter.provision.impl;
 
-import pl.jakubturek.cheatar.server.dal.model.Word;
 import pl.jakubturek.cheatar.server.wordimporter.creation.IFromStringFactory;
 import pl.jakubturek.cheatar.server.wordimporter.provision.IStreamDataProvider;
 
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class StreamDataProvider<T> implements IStreamDataProvider<T>
 {
