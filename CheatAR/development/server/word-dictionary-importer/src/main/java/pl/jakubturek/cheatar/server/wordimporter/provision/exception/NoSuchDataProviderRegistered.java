@@ -1,4 +1,4 @@
-package pl.jakubturek.cheatar.server.wordimporter.exception;
+package pl.jakubturek.cheatar.server.wordimporter.provision.exception;
 
 public class NoSuchDataProviderRegistered extends RuntimeException
 {

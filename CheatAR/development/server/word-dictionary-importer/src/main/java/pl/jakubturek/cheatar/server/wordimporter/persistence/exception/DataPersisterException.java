@@ -1,4 +1,4 @@
-package pl.jakubturek.cheatar.server.wordimporter.exception;
+package pl.jakubturek.cheatar.server.wordimporter.persistence.exception;
 
 public class DataPersisterException extends RuntimeException
 {

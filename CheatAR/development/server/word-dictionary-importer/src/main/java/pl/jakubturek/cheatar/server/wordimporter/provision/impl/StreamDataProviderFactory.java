@@ -1,34 +1,33 @@
 package pl.jakubturek.cheatar.server.wordimporter.provision.impl;
 
 import pl.jakubturek.cheatar.server.dal.model.Word;
-import pl.jakubturek.cheatar.server.wordimporter.exception.NoSuchDataProviderRegistered;
-import pl.jakubturek.cheatar.server.wordimporter.provision.IDataProvider;
+import pl.jakubturek.cheatar.server.wordimporter.creation.IFromStringFactory;
+import pl.jakubturek.cheatar.server.wordimporter.provision.IStreamDataProvider;
+import pl.jakubturek.cheatar.server.wordimporter.provision.exception.NoSuchDataProviderRegistered;
 import pl.jakubturek.cheatar.server.wordimporter.provision.IDataProviderFactory;
-import pl.jakubturek.cheatar.server.wordimporter.provision.providers.WordStreamDataProvider;
 
-import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class StreamDataProviderFactory implements IDataProviderFactory
 {
-    private final InputStream inputStream;
-    private Map<Class<?>, IDataProvider<?>> dataProviders = new LinkedHashMap<Class<?>, IDataProvider<?>>();
+    private final IFromStringFactory fromStringFactory;
+    private Map<Class<?>, IStreamDataProvider<?>> dataProviders = new LinkedHashMap<Class<?>, IStreamDataProvider<?>>();
 
-    public StreamDataProviderFactory(InputStream inputStream)
+    public StreamDataProviderFactory(IFromStringFactory fromStringFactory)
     {
-        this.inputStream = inputStream;
+        this.fromStringFactory = fromStringFactory;
 
         registerDataProviders();
     }
 
     private void registerDataProviders()
     {
-        dataProviders.put(Word.class, new WordStreamDataProvider(inputStream));
+        dataProviders.put(Word.class, new StreamDataProvider<Word>(fromStringFactory));
     }
 
     @Override
-    public IDataProvider createDataProvider(Class<?> dataType)
+    public IStreamDataProvider createDataProvider(Class<?> dataType)
     {
         if (dataProviders.containsKey(dataType))
         {

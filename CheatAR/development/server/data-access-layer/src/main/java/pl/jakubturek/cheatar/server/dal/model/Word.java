@@ -42,4 +42,10 @@ public class Word implements Serializable
     {
         this.hash = hash;
     }
+
+    @Override
+    public String toString()
+    {
+        return word;
+    }
 }

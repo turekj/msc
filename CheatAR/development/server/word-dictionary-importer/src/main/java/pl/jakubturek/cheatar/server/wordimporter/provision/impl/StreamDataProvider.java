@@ -1,28 +1,33 @@
 package pl.jakubturek.cheatar.server.wordimporter.provision.impl;
 
-import pl.jakubturek.cheatar.server.wordimporter.provision.IDataProvider;
+import pl.jakubturek.cheatar.server.dal.model.Word;
+import pl.jakubturek.cheatar.server.wordimporter.creation.IFromStringFactory;
+import pl.jakubturek.cheatar.server.wordimporter.provision.IStreamDataProvider;
 
 import java.io.InputStream;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.Scanner;
+import java.util.*;
 
-public abstract class StreamDataProvider<T> implements IDataProvider<T>
+public class StreamDataProvider<T> implements IStreamDataProvider<T>
 {
-    private final InputStream inputStream;
-
-    private Collection<T> data = new LinkedHashSet<T>();
+    private final IFromStringFactory fromStringFactory;
+    private List<T> data = new ArrayList<T>();
+    private InputStream inputStream;
+    private Class<? extends T> providedDataType;
     private Scanner scanner;
 
-    public StreamDataProvider(InputStream inputStream)
+    public StreamDataProvider(IFromStringFactory fromStringFactory)
     {
-        this.inputStream = inputStream;
+        this.fromStringFactory = fromStringFactory;
     }
 
     @Override
-    public Collection<T> provide()
+    public List<T> provide(Class<? extends T> providedDataType, InputStream inputStream)
     {
+        this.inputStream = inputStream;
+        this.providedDataType = providedDataType;
+
         readData();
+
         return data;
     }
 
@@ -50,7 +55,10 @@ public abstract class StreamDataProvider<T> implements IDataProvider<T>
         while (scanner.hasNextLine());
     }
 
-    protected abstract T createEntity(String message);
+    private T createEntity(String objectRepresentation)
+    {
+        return fromStringFactory.create(providedDataType, objectRepresentation);
+    }
 
     private void closeStream()
     {
