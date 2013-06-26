@@ -55,7 +55,6 @@ public class CharactersType implements CompositeUserType
         return propertyIndex >= 0 && propertyIndex < ScrabbleBoardConstants.BOARD_SIZE;
     }
 
-
     @Override
     public void setPropertyValue(Object component, int propertyIndex, Object value) throws HibernateException
     {

@@ -6,7 +6,6 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 import pl.jakubturek.cheatar.server.dal.exception.SessionFactoryInitializationFailed;
-import pl.jakubturek.cheatar.server.dal.mapping.CharactersType;
 
 public class SessionFactoryBuilder
 {
