@@ -7,7 +7,7 @@ import org.junit.runners.Suite;
 import pl.jakubturek.cheatar.server.dal.model.Word;
 import pl.jakubturek.cheatar.server.wordimporter.creation.IFromStringFactory;
 import pl.jakubturek.cheatar.server.wordimporter.creation.impl.FromStringFactory;
-import pl.jakubturek.cheatar.server.wordimporter.provision.impl.StreamDataProvider;
+import pl.jakubturek.cheatar.server.wordimporter.provision.providers.StreamDataProvider;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;

@@ -10,9 +10,9 @@ import pl.jakubturek.cheatar.server.wordimporter.creation.creators.WordFromStrin
 @RunWith(Suite.class)
 @Suite.SuiteClasses(
 {
-        WordFromStringCreatorTest.TheCreateMethodTests.class
+        WordFromStringCreatorTests.TheCreateMethodTests.class
 })
-public class WordFromStringCreatorTest
+public class WordFromStringCreatorTests
 {
     public static class TheCreateMethodTests
     {

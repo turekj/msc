@@ -5,6 +5,7 @@ import pl.jakubturek.cheatar.server.wordimporter.creation.IFromStringFactory;
 import pl.jakubturek.cheatar.server.wordimporter.provision.IDataProviderFactory;
 import pl.jakubturek.cheatar.server.wordimporter.provision.IStreamDataProvider;
 import pl.jakubturek.cheatar.server.wordimporter.provision.exception.NoSuchDataProviderRegistered;
+import pl.jakubturek.cheatar.server.wordimporter.provision.providers.StreamDataProvider;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class StreamDataProviderFactory implements IDataProviderFactory
     }
 
     @Override
-    public IStreamDataProvider createDataProvider(Class<?> dataType)
+    public IStreamDataProvider<?> createDataProvider(Class<?> dataType)
     {
         if (dataProviders.containsKey(dataType))
         {

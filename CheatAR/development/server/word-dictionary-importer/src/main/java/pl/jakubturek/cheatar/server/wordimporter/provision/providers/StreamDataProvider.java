@@ -1,4 +1,4 @@
-package pl.jakubturek.cheatar.server.wordimporter.provision.impl;
+package pl.jakubturek.cheatar.server.wordimporter.provision.providers;
 
 import pl.jakubturek.cheatar.server.wordimporter.creation.IFromStringFactory;
 import pl.jakubturek.cheatar.server.wordimporter.provision.IStreamDataProvider;

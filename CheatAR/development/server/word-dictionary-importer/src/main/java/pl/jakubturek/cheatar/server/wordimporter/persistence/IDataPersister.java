@@ -1,8 +1,8 @@
 package pl.jakubturek.cheatar.server.wordimporter.persistence;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface IDataPersister<T>
 {
-    public void persist(Collection<T> data);
+    public void persist(List<T> data);
 }

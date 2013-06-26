@@ -8,7 +8,7 @@
         <groupId>pl.jakubturek.cheatar</groupId>
         <artifactId>cheatar-parent</artifactId>
         <version>1.0</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>pl.jakubturek.cheatar.server</groupId>
