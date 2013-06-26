@@ -53,6 +53,7 @@
 
 	<modules>
 		<module>server</module>
-	</modules>
+        <module>common</module>
+    </modules>
 
 </project>
