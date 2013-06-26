@@ -1,5 +1,7 @@
 package pl.jakubturek.cheatar.server.wordimporter.creation.creators;
 
+import pl.jakubturek.cheatar.common.constants.ScrabbleBoardConstants;
+import pl.jakubturek.cheatar.server.dal.aggregation.Characters;
 import pl.jakubturek.cheatar.server.dal.model.Word;
 import pl.jakubturek.cheatar.server.wordimporter.creation.IFromStringCreator;
 
@@ -18,6 +20,7 @@ public class WordFromStringCreator implements IFromStringCreator<Word>
 
         setWord();
         setHash();
+        setCharacters();
 
         return word;
     }
@@ -37,5 +40,18 @@ public class WordFromStringCreator implements IFromStringCreator<Word>
         char[] characters = toSort.toCharArray();
         Arrays.sort(characters);
         return new String(characters);
+    }
+
+    private void setCharacters()
+    {
+        word.setCharacters(createCharacters());
+    }
+
+    private Characters createCharacters()
+    {
+        Characters characters = new Characters();
+        characters.setCharacters(Arrays.copyOf(wordRepresentation.toCharArray(), ScrabbleBoardConstants.BOARD_SIZE));
+
+        return characters;
     }
 }

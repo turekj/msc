@@ -17,6 +17,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>pl.jakubturek.cheatar.common</groupId>
+            <artifactId>constants</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>4.2.2.Final</version>
