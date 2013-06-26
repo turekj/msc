@@ -1,37 +1,17 @@
 package pl.jakubturek.cheatar.server.dal;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import pl.jakubturek.cheatar.server.dal.model.Word;
-import pl.jakubturek.cheatar.server.dal.util.SessionFactoryBuilder;
+import pl.jakubturek.cheatar.server.dal.exception.BadArgumentsException;
+import pl.jakubturek.cheatar.server.dal.util.SQLGenerator;
 
 public class EntryPoint
 {
-    private static SessionFactory sessionFactory = SessionFactoryBuilder.getSessionFactoryInstance();
-
     public static void main(String[] args)
     {
-        new EntryPoint().persist(createWord());
+        if (args.length != 1)
+        {
+            throw new BadArgumentsException("You have to specify output filename");
+        }
 
-        sessionFactory.close();
-    }
-
-    private void persist(Word word)
-    {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.save(word);
-        session.getTransaction().commit();
-    }
-
-    private static Word createWord()
-    {
-        Word word = new Word();
-
-        word.setId(1L);
-        word.setWord("krowa");
-        word.setHash("akorw");
-
-        return word;
+        new SQLGenerator().generateSQL(args[0]);
     }
 }
