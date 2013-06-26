@@ -1,17 +1,17 @@
-package pl.jakubturek.cheatar.server.dal.main;
+package pl.jakubturek.cheatar.server.dal;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import pl.jakubturek.cheatar.server.dal.model.Word;
 import pl.jakubturek.cheatar.server.dal.util.SessionFactoryBuilder;
 
-public class OrmEntryPoint
+public class EntryPoint
 {
     private static SessionFactory sessionFactory = SessionFactoryBuilder.getSessionFactoryInstance();
 
     public static void main(String[] args)
     {
-        new OrmEntryPoint().persist(createWord());
+        new EntryPoint().persist(createWord());
 
         sessionFactory.close();
     }

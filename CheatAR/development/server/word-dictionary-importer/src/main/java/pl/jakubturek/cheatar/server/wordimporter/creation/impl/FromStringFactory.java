@@ -24,6 +24,7 @@ public class FromStringFactory implements IFromStringFactory
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T> T create(Class<? extends T> dataType, String objectRepresentation)
     {
         if (creators.containsKey(dataType))
