@@ -52,7 +52,7 @@ public class CharactersType implements CompositeUserType
 
     private boolean isIndexValid(int propertyIndex)
     {
-        return propertyIndex > 0 && propertyIndex < ScrabbleBoardConstants.BOARD_SIZE;
+        return propertyIndex >= 0 && propertyIndex < ScrabbleBoardConstants.BOARD_SIZE;
     }
 
 
