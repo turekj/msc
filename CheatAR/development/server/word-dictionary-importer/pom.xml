@@ -5,21 +5,22 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>pl.jakubturek.cheatar</groupId>
-        <artifactId>cheatar-parent</artifactId>
+        <groupId>pl.jakubturek.cheatar.server</groupId>
+        <artifactId>server-parent</artifactId>
         <version>1.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>pl.jakubturek.cheatar.server</groupId>
-    <artifactId>server-parent</artifactId>
+    <artifactId>word-dictionary-importer</artifactId>
     <version>1.0</version>
-    <packaging>pom</packaging>
-    <name>CheatAR server parent</name>
+    <name>CheatAR word dictionary importer</name>
 
-	<modules>
-		<module>data-access-layer</module>
-		<module>word-dictionary-importer</module>
-	</modules>
+    <dependencies>
+        <dependency>
+            <groupId>pl.jakubturek.cheatar.server</groupId>
+            <artifactId>data-access-layer</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 
 </project>

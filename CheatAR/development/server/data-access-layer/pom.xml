@@ -11,9 +11,9 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>pl.jakubturek.cheatar.server</groupId>
     <artifactId>data-access-layer</artifactId>
     <version>1.0</version>
+    <name>CheatAR data access layer</name>
 
     <dependencies>
         <dependency>
@@ -27,5 +27,4 @@
             <version>5.1.25</version>
         </dependency>
     </dependencies>
-
 </project>

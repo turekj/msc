@@ -1,6 +1,7 @@
 package pl.jakubturek.cheatar.server.dal.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -9,7 +10,7 @@ import java.io.Serializable;
 @Table(name="words")
 public class Word implements Serializable
 {
-    @Id private Long id;
+    @Id @GeneratedValue private Long id;
     private String word;
     private String hash;
 
@@ -41,5 +42,11 @@ public class Word implements Serializable
     public void setHash(String hash)
     {
         this.hash = hash;
+    }
+
+    @Override
+    public String toString()
+    {
+        return word;
     }
 }
