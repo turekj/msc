@@ -1,0 +1,511 @@
+Content-Type: multipart/related; start=<op.mhtml.1375822277681.2ca47b3a1c2a3e6d@192.168.0.15>; boundary=----------UzvG7UuWg1q9DNtdgKplnV
+Content-Location: http://winntbg.bg.agh.edu.pl/skrypty/0005/ppframe.html
+Subject: =?utf-8?Q?Tadeusiewicz,=20Ryszard=20(1947-=20)=20-=20Rozpoznawanie=20obraz=C3=B3w?=
+MIME-Version: 1.0
+
+------------UzvG7UuWg1q9DNtdgKplnV
+Content-Disposition: inline; filename=ppframe.html
+Content-Type: text/html; charset=iso-8859-2; name=ppframe.html
+Content-ID: <op.mhtml.1375822277681.2ca47b3a1c2a3e6d@192.168.0.15>
+Content-Location: http://winntbg.bg.agh.edu.pl/skrypty/0005/ppframe.html
+Content-Transfer-Encoding: 8bit
+
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-2">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+   <title>Tadeusiewicz, Ryszard (1947- ) - Rozpoznawanie obrazów</TITLE>
+</HEAD>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--  Hide this from JavaScript-challenged browsers
+var FirstSlide = 1;
+var LastSlide = 999;
+var CurrentSlide = FirstSlide;
+var ImageWidth = 676 - 8;
+var ImageHeight = 496;
+var CurImageWidth = ImageWidth;
+var CurImageHeight = ImageHeight;
+/*      This function concerts numbers to strings               */
+function CvtNtoS(iNum)
+{
+	return ("" + iNum);
+}
+/* This function prefixes strings with the correct # of 0's      */
+function ZeroFill(iNum, iDigits)
+{     var sNum = CvtNtoS(iNum); 
+      while (sNum.length < iDigits)
+	    sNum = "0" + sNum;
+       return sNum;
+}
+/* this function handles the setting the navigation buttons.  
+   The name of navigation control is used here so change it if it is renamed  */
+function ItemClicked(iIndex, iNoteOnly)
+{       
+	var sIndex = ZeroFill(iIndex, 3);
+	var sSlideImage = "img" + sIndex + ".htm";
+	if (!iNoteOnly)                 // not active X, update image and nav btns
+		frames["SlideImage"].location.href = sSlideImage;
+		CurrentSlide = iIndex;
+}
+//      Move relative to the current slide 
+function MoveRelative(iRel)
+{
+	var newI = parseInt(CurrentSlide) + parseInt(iRel);
+	if ( (newI >= FirstSlide) && (newI <= LastSlide) )
+		ItemClicked(newI);
+}
+
+//      Set the presentation back to the start of the pres
+function StartOfPres()
+{
+	ItemClicked(FirstSlide);
+}
+
+//      Code for Outline sizing
+function OutlineExpand(bExpand)
+{
+	if (parseInt(bExpand) != 0)
+		frames["Outline"].location.href = "outlinee.htm";
+	else
+		frames["Outline"].location.href = "outlinec.htm";
+}
+//	Resize the image.  Allow Image to change +50% or -50%.  Move in +/-10% increments
+function SizeGraphic(iChange)
+{
+	if (iChange < 0)					// decrease image size
+	{
+		if ( CurImageWidth > parseInt((ImageWidth/2)) )
+		{
+			CurImageWidth = CurImageWidth - parseInt((ImageWidth/10));
+			CurImageHeight = CurImageHeight - parseInt((ImageHeight/10));
+		}
+	}
+	else								// increase image size
+	{
+		if ( CurImageWidth < parseInt((ImageWidth * 1.5)) )
+		{
+			CurImageWidth = CurImageWidth + parseInt((ImageWidth/10));
+			CurImageHeight = CurImageHeight + parseInt((ImageHeight/10));
+		}
+	}
+	WriteImage1(CurImageHeight, CurImageWidth);
+}
+//	Re-write the document for IMG001 to resize the Active X or embedded Animation Player
+function WriteImage1(sHeight, sWidth)
+{
+	var oDoc = frames("SlideImage").document;
+	var docText = "<HTML>\r\n";
+
+	docText += "<BODY";
+	docText += ' BGCOLOR="' + oDoc.bgColor + '" TEXT="' + oDoc.fgColor + '"';
+	docText += ' VCOLOR="' + oDoc.vlinkColor + '" LINK="' + oDoc.linkColor + '"';
+	docText += ">\r\n";
+	docText += '<base target="_top">\r\n';
+	docText += '<CENTER>\r\n';
+        docText += '   <OBJECT CLASSID="clsid:EFBD14F0-6BFB-11CF-9177-00805F8813FF" ';
+	docText += 'WIDTH=' + sWidth + ' HEIGHT=' + sHeight + '>\r\n';
+	docText += '   <PARAM NAME="File" VALUE="pres0.ppz">';
+	docText += '   <EMBED SRC="pres0.ppz"';
+	docText += 'WIDTH=' + sWidth + ' HEIGHT=' + sHeight + '>\r\n';
+ 	docText += '   </EMBED>\r\n';
+	docText += '   </OBJECT>\r\n';
+	docText += '</CENTER>\r\n';
+	docText += '</BODY>\r\n';
+	docText += '</HTML>';
+	// do the write
+	oDoc.close();
+	oDoc.writeln(docText);
+	oDoc.close();
+}
+ 
+//  End of hiding comment -->
+</SCRIPT>
+<script language="JavaScript1.2">
+<!--
+
+/***********************************************
+* Auto Maximize Window Script- Š Dynamic Drive (www.dynamicdrive.com)
+* This notice must stay intact for use
+* Visit http://www.dynamicdrive.com/ for this script and 100's more.
+***********************************************/
+
+top.window.moveTo(0,0);
+if (document.all) {
+top.window.resizeTo(795,screen.availHeight);
+}
+else if (document.layers||document.getElementById) {
+if (top.window.outerHeight<screen.availHeight||top.window.outerWidth<screen.availWidth){
+top.window.outerHeight = screen.availHeight;
+
+}
+}
+//-->
+</script>
+
+    <FRAMESET cols="157, 635" onLoad="ItemClicked(1,0)" frameborder="0" border=0 marginheight="0" marginwidth="0" scrolling="no">
+     	  <FRAME src="outlinee.html" MarginHeight=5 MarginWidth=4 Name="Outline"  border=0 frameborder=0>
+          <FRAME src="img001.htm" frameborder="0" border=0 MarginHeight=10 MarginWidth=5 Name="SlideImage">
+      
+	  </FRAMESET>
+
+
+
+
+<NOFRAMES>
+
+<BODY TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#0000EE" VLINK="#551A8B" ALINK="#FF0000">
+<!--  The text to be displayed when the browser does not support frames -->Twoja
+przeglšdarka nie obsługuje ramek. Spróbuj użyć programu 
+<A HREF="http://www.microsoft.com/isapi/redir.dll?PRD=ie&PLCID=0x0415&AR=home&O1=powerpoint8">Internet
+Explorer 3.0 lub nowszego</A> lub <A HREF="http://home.netscape.com/">Netscape
+Navigator 2.0 lub nowszego</A>.
+</BODY>
+</NOFRAMES>
+</HTML>
+
+------------UzvG7UuWg1q9DNtdgKplnV
+Content-Disposition: inline; filename=outlinee.html
+Content-Type: text/html; charset=iso-8859-2; name=outlinee.html
+Content-Location: http://winntbg.bg.agh.edu.pl/skrypty/0005/outlinee.html
+Content-Transfer-Encoding: 8bit
+
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-2">
+<META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (Win95; I) [Netscape]">
+<style TYPE="text/css">
+
+TD, A, A:hover{font: 11px Verdana; text-decoration: none;}
+.top {font-family: "Times"; font-size=12px; }
+.tyt {font:bold  11px Verdana;}
+.tyt2 {font: 11px Verdana; color: #800000; text-align: justify;}
+</style>
+
+<script language="JavaScript">
+
+var pages = 217;
+var offset = 0;
+
+          /*      This function concerts numbers to strings               */
+
+function CvtNtoS(iNum)
+{
+	return ("" + iNum);
+
+}
+
+          /* This function prefixes strings with the correct # of 0's      */
+
+
+function ZeroFill(iNum, iDigits)
+{     
+      var sNum = CvtNtoS(iNum); 
+      while (sNum.length < iDigits)
+	    sNum = "0" + sNum;
+       return sNum;
+}
+
+function this_page(iIndex) {
+
+     if (iIndex<1 || iIndex> pages) {
+
+     window.alert('Strona o podanym numerze nie istnieje');
+     } else {
+              iIndex = parseInt(document.forma.page.value)+offset;
+	      iIndex = ZeroFill(iIndex, 3); 
+  
+	      sSlideImage  = "img" + iIndex + ".htm"; 
+              top.SlideImage.location.href = sSlideImage;
+     }
+     return false;
+}
+
+function prev() {
+	iIndex = document.forma.page.value;
+	if(iIndex <= 1 || iIndex > pages) {
+		window.alert('Strona o podanym numerze nie istnieje');
+	} else {
+	        iIndex = parseInt(document.forma.page.value)+offset;
+		iIndex--;
+	        iIndex = ZeroFill(iIndex, 3); 
+	        sSlideImage  = "img" + iIndex + ".htm"; 
+		top.SlideImage.location.href = sSlideImage;
+		iIndex = iIndex-offset;
+		document.forma.page.value = iIndex;
+	}
+}
+
+function next() {
+	iIndex = document.forma.page.value;
+	if(iIndex >= pages || iIndex < 0)  {
+		window.alert('Strona o podanym numerze nie istnieje');
+	} else {
+	        iIndex = parseInt(document.forma.page.value)+offset;
+		iIndex++;
+	        iIndex = ZeroFill(iIndex, 3); 
+	        sSlideImage  = "img" + iIndex + ".htm"; 
+		top.SlideImage.location.href = sSlideImage;
+		iIndex = iIndex-offset;
+		document.forma.page.value = iIndex;
+		
+		
+	}
+}
+
+
+
+
+</script>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#F1DDBC" LINK="#0000EE" VLINK="#551A8B" ALINK="#FF0000">
+
+
+<hr size=1>
+<font class="tyt">
+Autor:<br>
+<font class="tyt2">Tadeusiewicz, Ryszard (1947- ).</FONT><br>
+Tytuł:<br>
+<font class="tyt2">Rozpoznawanie obrazów</FONT><br>
+Adres wydawniczy:<br>
+<font class="tyt2">Warszawa : Państ. Wydaw. Naukowe, 1991.</FONT><br>
+Seria:<br>
+<font class="tyt2">Problemy Współczesnej Nauki i Techniki. Informatyka.</FONT><br>
+Hasło dodatkowe:<br>
+<font class="tyt2">Flasiński Mariusz (1960- )</FONT><br>
+<hr size=1>
+<a href=obrazy.zip>cały tekst do pobrania</a><br>format zip (ok. 11MB)
+
+
+<hr size=1>
+
+<table border=0 CELLSPACING="0" CELLPADDING="0">
+<tr><td height=25>strona:&nbsp;</td><td align=center><i>(1-217)</i></td></tr>
+<tr valign=top>
+
+<td align=right><a HREF="javascript: ;"><IMG SRC="prev.gif" ALT="Wstecz" BORDER=0  width=30 height=22 onclick="prev()"></A>&nbsp;</TD>
+<td align=center>
+<form action="#" method="get" name="forma" id="forma" onSubmit="return this_page(document.forma.page.value)">
+<input name="page" type="text" value="1" size="3" MAXLENGTH="3" onChange="this_page(this.value)">
+<INPUT TYPE="submit" value="idź do"  onChange="this_page(this.value)">
+</form>
+</td>
+<td>&nbsp;<a HREF="javascript: ;"><IMG SRC="next.gif" ALT="Dalej" BORDER=0  width=30 height=22  onclick="next()"></A></TD>
+
+</tr>
+
+</table>
+</font>
+
+</BODY>
+</HTML>
+
+------------UzvG7UuWg1q9DNtdgKplnV
+Content-Disposition: inline; filename=prev.gif
+Content-Type: image/gif; name=prev.gif
+Content-Location: http://winntbg.bg.agh.edu.pl/skrypty/0005/prev.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhHgAWAPcAAAAAADk5OUpKSlpaWmNjY2tra3Nzc3t7e4SEhIyMjJSUlJyc
+nKWlpbW1tcbGxv//////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+/////////////////ywAAAAAHgAWAAAI/gAPJBiYAAHBggcNElQ4kGEBgQoWRFQw
+UWJFihItZqR4QIDABQxCihxJsqRIBAM8JlDAoIHLlzBjymyQgEDKjy0bONDJc+dO
+AA968lxgwKZKlkJ98gSA4IFSnweK3kwA0qWDqzqxMj3g1CdWBAWMQmz51OfWpll7
+RhVLNedVr2e5es26dirSpw3iosX6NezUqll/IjgweLDTtFfrHiXb04HeoHMdKMZp
+lW/ewnL57gTL9m5Sx4UhN57ctnLkrYff6iTtObJOppDncv7rVnNaoJYTS12swEAB
+3waAC//9Ozjx3R8REFjOvLnz58ynGhhAvbr169iveywgoLv37+DDDYsfEKC8+fPo
+06sPEBAAOw==
+
+------------UzvG7UuWg1q9DNtdgKplnV
+Content-Disposition: inline; filename=next.gif
+Content-Type: image/gif; name=next.gif
+Content-Location: http://winntbg.bg.agh.edu.pl/skrypty/0005/next.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhHgAWAPcAAAAAADk5OUpKSlpaWmNjY2tra3Nzc3t7e4SEhIyMjJSUlJyc
+nKWlpbW1tcbGxv//////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+/////////////////ywAAAAAHgAWAAAI/gAPJBiYAAHBggcNElQ4kGEBgQoWRFQw
+UWJFihItZqR4QIDABQxCihxJsqRIBAM8JlDAoIHLlzBjymyQgEDKjy0bONDJ8wGA
+nUB5Al1gwKZKlkKFPjjwM2lQBAWM4nTpoKpOB0sR/LRaFeiBojdXtgxq9QGCA1qv
+CnXwVWoCkFS5YkWLtmlXnW3DIiWrMytduzyhuoV7NahZumftVs17dOzauWcTA/UK
+ViXhuzsPS1a7U7Bex2T9Ki7MeGrhq1kBc23gubHTzFonT8Zb2TRmrKPlso76WYGB
+Ar8NBAcevDjx34MREFjOvLnz58zDGhhAvbr169iveywgoLv37+DDDYsfEKC8+fPo
+06sPEBAAOw==
+
+------------UzvG7UuWg1q9DNtdgKplnV
+Content-Disposition: inline; filename=img001.htm
+Content-Type: text/html; charset=iso-8859-2; name=img001.htm
+Content-Location: http://winntbg.bg.agh.edu.pl/skrypty/0005/img001.htm
+Content-Transfer-Encoding: 8bit
+
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-2">
+<BASE TARGET="_top">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<CENTER>
+<img src=image.gif width=595 height=20>&nbsp;<br>
+
+
+<IMG SRC="img001.gif" BORDER=0  WIDTH=600  alt="img 001">
+
+
+</CENTER>
+</BODY>
+</HTML>
+
+
+------------UzvG7UuWg1q9DNtdgKplnV
+Content-Disposition: inline; filename=image.gif
+Content-Type: image/gif; name=image.gif
+Content-Location: http://winntbg.bg.agh.edu.pl/skrypty/0005/image.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhUwIUAPcAAAAAAAAIAAAICAgAAAgICAgQCAgQEBAAABAQEBAYEBAYGBgA
+ABgYGBghGBghISEAACEhISEpISEpKSExKSkAACkpKSkxKSk5MTEAADExMTE5MTFC
+MTFCOTkAADk5OTlKOTlKQjlSQkIAAEJCQkJSQkJSSkJaSkoAAEpKSkpaSkpaUkpj
+UlIAAFJSUlJjUlJrWlJzWloAAFpaWlpzY1p7Y2MAAGNjY2N7a2OEa2OEc2sAAGtr
+a2uEc2uMc2uMe3MAAHNzc3OUe3OUhHOchHsAAHt7e3uchHulhHuljIQAAISEhISl
+jIStjIStlIwAAIyMjIytlIy1lIy1nIy9nJQAAJSUlJS9nJS9pZTGpZwAAJycnJzG
+pZzGrZzOraUAAKWlpaXOraXWta0AAK2tra3eta3eva3nvbUAALW1tbXnvbXnxrXv
+xr0AAL29vb3vzr33zr331sYAAMbGxsb31sb/1s4AAM7OztYAANbW1t4AAN7e3ucA
+AOfn5+8AAO/v7/cAAPf39/8AAP//////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+/////////////////yH5BAEAAIIALAAAAABTAhQAQAj+AAUJHEiwoMGDCBMqXMiw
+ocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKEu2QSAQQRuDAFoUOcjHBgQC
+AAwSACQwZ0GcAILC7EmUoE+COxHGnGmw5s2jC31+gTC0oE9AUIsOzCooKSACVXUG
+FWpVJk2bOB0mTSgngyAPeKwqRegVbEEgbTLIgaAHRVO0XBGubPnSKs+xcrcafOOG
+sZs1j9eokaxGjRnLasqYKcO5DJkyYUKLDgMmTBfTYLpw6bKF9RYsr7FcwWLlihUr
+U6xI0S0lSm8oUZoIb8JE+BImS5AkX3LESHMjRoZEDzIkiHXrPoL46LF9O48eOXj+
+4MiBo/wNHDdu0FA/o/2MF/BfuFhBf4WKFCZMlChBIgQJEB+AwMEHHBSowQYXJGjB
+ghNIEMGDDjQQIQMNKKBAAgkggIABBRDgoQBjhSjiiCSWaOKJKKao4oostujiiy4O
+cMCMCzxgIwUYYNBBByKIcMIJLLAQQww11KCDDj/8QEQSSyaRhBNQOkHFlFlQkUUW
+XmDphRhbinGGl2ewISYbcZQZRx1o1nHHmnfk4eYeeewhZx90/tHHH38EkmcgfPbp
+55+ABirooIQWauihiCaqKJ8pNeroo5BGKhAgCDDAU1gVBWaRpnNtNBYDVWCq1UFZ
+cdppRKZO9EUFADAABET+FRQm6UKUInCpQVqw6mpio87q66/ABivssMQWi1EVoRqr
+7LLMNuvss9BGK+201FZr7bUyPKGEDKQKBMQTBkEAAALJEsTHCABkwNW5rcoBkw0A
+VAFvub0Kooe6HlT1bbjj0quQT234xetWOxAAgbsDC8KVHh6kG5dVZJmLLgMIG+Ut
+uAWJS65DGaCRkB8I+CEIyCJvFfFWfjBgEMMOGxSyHwTwQelBGvurULbbHpSBrJim
+eu3PQKfEgBYCVaGyXHigcKtAKOAByBdceaAFIGNwhUIVgPhhQ1U+lWrQCErMlfTS
+gjT9tM9EAfJEvgkrzIcgRbQgqtVhKzGCTnocdHX+1lsjrXRBZkPt0FTu4sFUQVUQ
+4HHb9TJd990F4TG0IFpAgDFBgaMtyOSCGG1QFRXYIQgfXisW9Omop6766qy37vrr
+sMcu++y012777bjnrvvuvPfOkOb/Rgr8R6YO7+mvaCBgl+/MN2/sGCigMEa3Fxnf
+kfXBC2LH8tmfShH22Cc0xsGC4PHqQ+GnBL30B00luh3nm9648/Qvi4AddrA0VAuX
+G4SH/pgrAiBIZ5AWTG8vMEEDHgCgQADWCwVh6xb/EvI/h4RocRazyhgAoQW2ZVB+
+AwGbIOwmqoEYUBAIlMsEEVLBhgCAbAWRQai0sAPGKYxnIXycQVCgB6Mp4V7+FHSg
+QiiFPyHOryciqp8Sm7WDENVQgxXIWwyroAeswORSXFkL9brWthcqZQxRNIgMq6i5
+o3DljJPiXq+yyJOvlFAgWoQJGKVIkDFasSEdW0gFviCwD9qwLgYZAwlHUIQn1pGK
+d2RIE8diyIHsDIQK8+MSJxksOQDgYQusWFEMVxA5MIAAReCKHSpAAHg1BQUe6l9R
+uCjJ8rEKchnkJEE8CcoyBmUED2tlugAwgrclbGHqykAuB4KGDBiRD6gkgCojWb7D
+CYSWoXxI5VoVP3NVgHpvtFcwhzkQWwniK9Pr5E2iyRBLYhIAmiyauCBQTWYekZLw
+jKc8hZUBGPbOMY/1iQxlKpMGy2xmM53xTBjIMJrQgCE1qemCQrmwBYbGZguzsY1t
+cDMFKVi0N1GIAhSEs1HiIGcJy0ECEpqDBOhARzpCCEJKr6Md7fTgpS/lAQ/CUx7y
+nCc966GBe94TH/nU5z750Q8JShACEBj1AwQq0AY0cAGmLsgCE5jAgyAUoQY0gAEX
+ytCGOuQhAgQARmANq1jHStaymlVEA5DRAtb6AAq4VUc86hGQhEQkIyFJSU1ykhOe
+JKUpWelKWvJCl8QApjCFiUxkOtOZ1KSmNrkpTnLaQx8keyc87WlRmM2sZjfL2c3O
+87OgDa1oR0va0pr2tCMJCAAAOw==
+
+------------UzvG7UuWg1q9DNtdgKplnV
+Content-Disposition: inline; filename=img001.gif
+Content-Type: image/gif; name=img001.gif
+Content-Location: http://winntbg.bg.agh.edu.pl/skrypty/0005/img001.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhWAKqA7MAAAAAAAgICBAQEBwcHDk5OV5eXn9/f6CgoLW1tb29vcbGxtbW
+1ufn5+/v7/f39////ywAAAAAWAKqAwAE/vDJSau9OOvNu/9gKI5kaZ5oqq5s675w
+LM90bd94ru987//AoHBILBqPyKRyyWw6n9CodEqtWq/YrHbL7Xq/4LB4TC6bz+i0
+es1uu9/wuHxOr9vv+Lx+z+/7/4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpuc
+nZ6foKGio6SlpqeoqaqrrK2ur7CxsrO0tba3uLm6u7y9vr/AwcLDxMXGx8jJysvM
+zc7P0NHS09TV1tfY2drb3N3e3+Dh4uPk5ebn6Onq6+zt7u/w8fLz9PX29/j5+vv8
+/f7/AAMKHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8eP/iBDihxJsqTJ
+kyhTqlzJsqXLlzBjypxJs6bNmzhz6tzJs6fPn0CDCh1KtKjRo0iTKl3KtKnTp1Cj
+Sp1KtarVq1izat3KtavXr2DDih1LtqzZs2jTql3Ltq3bt3Djyp1Lt67du3jz6t3L
+t6/fv4ADCx5MuLDhw4gTK17MuLHjx5AjS55MubLly5gza97MubPnz6BDix5NurTp
+06hTq17NurXr17Bjy55Nu7bt27hz697Nu7fv38CDCx8ekcECB8TxIEhQBAGA5wAW
+JEdiADoBHNABDHEwADqC6dSzY38uYMgC6AWyGljPfn0BAgZWVYc+HkB5IeizMsgu
+IDt0Bqkw/hCAAAEcUN99HzjQgAUNNLhgBcg5IOGEyEF4ngAMVDiBgw9OwEADCQBI
+AQMKJKChTg74pyIAAdSiwHrSeVDhAe99ZwF05SHwXgEGUkBjAfEZ0N13yL2XHZAT
+GEDAkgQMsOQATvpIQAA4plchdAFoWEB28U0A3QAn5pQdkwV0R58QDabgAALLYcAA
+AgccwGaMD7wJZwUKsImAiBI0AGePEhxgpn0G0Fnnjgts+R8FCgDQXZcSJKqijRvs
+p+IAFayY3wSDHilBfyv2qKimE4yqYoVUPqeAl2NO0Ohz1/Uk3oapAgBpBYICOuIC
+DZAIZwKr9mlAAQsSIIAAAzB3wQDH/h4LAJ8PMNvstAJ0ad+xBoD6nAUF1ApdsARA
+d6t/FAwqoqYB0OmcpgB0ON+2E3ibna4XnKdprBKw+xygpor7gKn9StAvuQ+8C2t2
+mD5wgL/5+vdguM/dqtOsE0AMAL0L+4fpleym94C+CAZ6L6sjf6yvj+yuaikA+GZ8
+pgSDSmBwAdpqJ8Gr7CZJsakG24xBA/6t52nD0B0wbHYP9ruewAxrO0GICizQ8wPc
+MRxt0VQ7XaeKD7/ME8UPAO31vzkTvaLH+rLsanYDcmm2irFq3KnHJj+Xnstok9f1
+0AukmvCoNsZ8c3bMrfucjQaTDECFFkuM8sv2wls3AApUOGiP/olT0ECTzzbQN9aa
+DxrAgmKz+LjaD1jMNABG2vpA5HR/LW4B7w2Kr8JHGg7vi8P2m7e4Clgc3er2Nag7
+gA4ooLykmw5tasXPJfyA1i4jLzzrgz+nbKICxPr5cw/iTLfFPbps88oXK3CAtrFX
+MKqugwaLIwWGYw76BMhN6WjQFdRcYemxS4B1SPYdiB1gZbg73E/Sdrur7WsC2lIW
+Bbz1oOwEa3I2Atv7KoA+6WXnf2BTGI8O4C0JrCw+KzPc6qQnM00FC2eU2uADDHef
+yGmKhRWwmKEsFjjyUCBy9nsOtMKmL/hhSUJ92hTJ8AWx9NDHARBDH1DS5jOi3e5d
+7RPe/gXnNwGXGQh2p6NXqxSHP7Bdj2JOi1zqhFi32+krRjAsFehw5rO04ZACOqTA
+u3ponx+CzmISlIDFBJC/+wnvRABkFBcLtiLiDXCB6ImTt2KnxAcI0G54zI6hFvk6
+hlUyjlQrnaMy5bWd8SdzW3tO5L5jKQLgjALaGsABFqAtEYGSbA9k5MtwZACjDStO
+GrDYBacHHWVx8pIXE6R3SCm5xsHMghDS4CPflswEhlB2ktPlKEkWu9Lhy1SVm6AP
+JwBEosXuXV1KESfN5iGKUUx1nDpVJ/0TMooNCo7LVGYuzScBddqnQoZr3+l8djyz
+ecyflCOerhCKAAeY727+KYD6/owGIOEBC5XUpJPGggI2hFJgmtr0mKkCSTRCylGB
+bdQQOqlWKzDd6GVSnOE0pemwZ7qNjHWqVY9uST6R7RJHDDCf48jJn/eU8G1NqhWC
+AFeBTnUKewPzFEJV1D46CqBDNRPoTjoKz09Bp0PONFgDbYo63cmPYch8lgOjtx6j
+9YhiCK3gcwLQS4JFKqLxzA6lJsc6/j2Ap6DTnc7KloG0co1jhMWl6wZKVcWezYSa
+EqgD2KfH7AwRm1VcYzZnZlhqEixtCDIf3Dxr2clt6IOk/epHb5rKsfUMr3/NpzZ7
+ZENYaopeFzDs2Lo1IAIhzUfHCsAwBQYqKgXvWA9iFpSY/kQAJPmxWVqVSgh7Cj1N
+2eiMs9IXDkVrT30BCGwU052KKiDY1aI0k1hCQPcGEKMG7IhPQe0ln+IETEaZ6gDD
+zcAC4NRWkvapAcjZL5tGkIAEGEouqD1pNh1LHki9i0D9gVLCxjTGCihJW82lmgmb
+S7sON9cAyHGvRH8II/fRDl9hsoCGUlyv44BHBAygHb0cwIAad2hDCFhSAT5UAQ45
+aEIlVZCNNdArHr8YEzi68ZFNsc4ll6KrTo6ylKdM5Spb+cpYzrKWt8zlLnv5y2AO
+s5jHTOYym/nMaE6zmtfM5ja7+c1wjrOc50znOtv5znjOs573zOc++/nPgA60oAdN
+/uhCG/rQiE60ohfN6EY7+tGQjrSkJ03pSlv60pjOtKY3zelOe/rToA61qEdN6lKb
++tSoTrWqV83qVrv61bCOtaxnTeta2/rWuM61rnfN6177+tfADrawh03sYhv72MhO
+trKXzexmO/vZ0I62tKdN7Wpb+9rYzra2t83tbnv72+AOt7jHTe5ym/vc6E63utfN
+7na7+93wjre8503vetv73vjOt773ze9++/vfAA+4wAdO8IIb/OAIT7jCF87whjv8
+4RCPuMQnTvGKW/ziGM+4xjfO8Y57/OMgD7nIR07ykpv85ChPucpXzvKWu/zlMI+5
+zGdO85rb/OY4z7nOd87z/p77/OdAD7rQh070ohv96EhPutKXzvSmO/3pUI+61KdO
+9apb/epYz7rWt871rnv962APu9jHTvaym/3saE+72tfO9ra7/e1wj7vc5073utv9
+7njPu973zve++/3vgA+84AdP+MIb/vCIT7ziF8/4xjv+8ZCPvOQnT/nKW/7ymM+8
+5jfP+c57/vOgD73oR0/60pv+9KhPvepXz/rWu/71sI+97GdP+9rb/va4z73ud8/7
+3vv+98APvvCHT/ziG//4yE++8pfP/OY7//nQj770p0/96lv/+tjPvva3z/3ue//7
+4A+/+MdP/vKb//zoT7/618/+9rv//fCPv/znT//6/tv//vjPv/73z//++///ABiA
+AjiABFiABniACJiACriADNiADviAEBiBEjiBFFiBFniBGJiBGriBHNiBHviBIBiC
+IjiCJFiCJniCKJiCKriCLNiCLviCMBiDMjiDNFiDNniDOJiDOriDPNiDPviDQBiE
+QjiERFiERniESJiESriETNiETviEUBiFUjiFVFiFVniFWJiFWriFXNiFXviFYBiG
+YjiGZFiGZniGaJiGariGbNiGbviGcBiHcjiHdFiHdniHeJiHeriHfNiHfviHgBiI
+gjiIhFiIhniIiJiIiriIjNiIjviIkBiJkjiJlFiJlniJmJiJmriJnNiJnviJG6AY
+iqI4iqRYiqZ4iqiYiqq4iqzYiq6odREAAAA7
+
+------------UzvG7UuWg1q9DNtdgKplnV--
