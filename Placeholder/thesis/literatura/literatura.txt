@@ -1,0 +1,23 @@
+Rozpoznawanie obrazów (Tadeusiewicz Ryszard, Flasiński Mariusz)
+http://www.pbi.edu.pl/book_reader.php?p=16439
+
+Komputerowa analiza i przetwarzanie obrazów (R. Tadeusiewicz, P. Korohoda)
+komputerowa_analiza.pdf
+
+A formal picture description scheme as a basis for picture processing systems (A.C. Shaw)
+formal_picture_description.pdf
+
+The Image Processing Handbook (John C. Russ)
+Russ_The_Image_Processing_Handbook.pdf
+
+Nowoczesne metody przetwarzania obrazu (Christopher D. Watkins, Alberto Sadun, Stephen R. Marenka)
+
+Detekcja sygnałów optycznych (Z. Bielecki, A. Rogalski)
+
+Komputerowa analiza obrazu (L. Wojnar, M. Majorek)
+
+Grafika i przetwarzanie obrazów: algorytmy (T. Pavlidis)
+
+Obraz cyfrowy (M. Domański)
+
+Marker Detection for Augmented Reality Applications (Martin Hirzer)
