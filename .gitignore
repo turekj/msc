@@ -7,6 +7,7 @@ Git
 TeX
 =======
 *.tex~
+*.tex.backup
 *.toc
 *.aux
 *.log
