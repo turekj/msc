@@ -86,7 +86,8 @@ Przykład poprawnej i niepoprawnej segmentacji obrazuje Rysunek~\ref{fig:segment
 \input{figures/segmentation}
 
 \subsubsection{Analiza i rozpoznanie}
-
+Analiza i rozpoznanie obrazu polega na przeanalizowaniu wydzielonych segmentów obrazu i zidentyfikowaniu wśród nich tego zawierającego poszukiwany obiekt.
+Klasyfikacja metod rozpoznawania obrazów wyszczególnia następujące grupy metod~\cite{roz:obr}:
 \begin{itemize}
  \item metody minimalnoodległościowe,
  \item metody wzorców,
@@ -94,6 +95,12 @@ Przykład poprawnej i niepoprawnej segmentacji obrazuje Rysunek~\ref{fig:segment
  \item metody specjalne,
  \item metody probabilistyczne.
 \end{itemize}
+
+Przykład fotografii, na której rozpoznano ludzkie twarze, przestawia Rysunek~\ref{fig:face_detection}.
+
+\input{figures/face_detection}
+
+Aplikacja korzystać będzie z jednej lub kilku metod w celu podjęcia decyzji, czy (i gdzie) na obrazie z kamery urządzenia wyświetlić zapamiętany obraz.
 
 
 Dodatkowo, wyświetlany obraz powinien być odpowiednio przetworzony, tak aby użytkownik miał wrażenie, że rzeczywiświe znajduje się on na wskazanej powierzchni.
@@ -134,6 +141,8 @@ Komunikacja pomiędzy klientem a serwerem może być zrealizowana przy użyciu r
   \end{itemize}
 \end{itemize}
 
+Ponieważ komunikacja wewnątrz aplikacji odbywać się będzie według schematu żądanie-odpowiedź, strona serwerowa z powodzeniem może zostać zrealizowana jako \emph{web service}.
+W chwili obecnej najbardziej popularne platformy umożliwiające tworzenie tego typu rozwiązań to .NET Framework (Microsoft) i Java EE (Oracle).
 
 \subsection{Przechowywanie danych}
 Najpopularniejszym sposobem przechowywania danych w tego typu aplikacjach jest wykorzystanie bazy danych.
