@@ -1,3 +1,20 @@
+=======
+Git
+=======
+.gitignore~
+
+=======
+TeX
+=======
+*.tex~
+*.tex.backup
+*.toc
+*.aux
+*.log
+
+=======
+JAVA
+=======
 *.class
 
 # Package Files #
