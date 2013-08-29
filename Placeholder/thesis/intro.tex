@@ -26,14 +26,62 @@ Aplikacja porusza problemy zawierające się w kilku dziedzinach:
 
 
 \subsection{Rozpoznawanie i przetwarzanie obrazu}
+Aby rozpoznać tło, na którym powinien być wyświetlony obraz, należy wykonać następującą procedurę~\cite{graf:przet:obr}:
+\begin{enumerate}
+ \item dokonać akwizycji obrazu, tj. przetworzenia obrazu obiektu fizycznego do postaci obrazu cyfrowego;
+ \item wykonać wstępne przetwarzanie obrazu, tj. zredukować zniekształcenia powstałe podczas akwizycji;
+ \item dokonać segmentacji obrazu, tj. wydzielenia poszczególnych obiektów zawartych w obrazie;
+ \item przeprowadzić analizę uzyskanych segmentów i rozpoznać poszukiwany obiekt.
+\end{enumerate}
+
+\subsubsection{Akwizycja obrazu}
+Istnieje kilka sposobów uzyskiwania obrazów cyfrowych.
+Niektóre z nich, to~\cite{anal:przet:obr}:
+\begin{itemize}
+ \item kamera video,
+ \item cyfrowy aparat fotograficzny,
+ \item skaner,
+ \item ręczne stworzenie obrazu przy pomocy programu graficznego.
+\end{itemize}
+
+Jako że aplikacja uruchamiana będzie na urządzeniach typu smartfon, akwizycja obrazu będzie odbywać się poprzez wykorzystanie aparatu cyfrowego zamontowanego w danym urządzeniu.
+
+\subsubsection{Przetwarzanie wstępne}
+
+\subsubsection{Segmentacja}
+
+\subsubsection{Analiza i rozpoznanie}
+
+
+Dodatkowo, wyświetlany obraz powinien być odpowiednio przetworzony, tak aby użytkownik miał wrażenie, że rzeczywiświe znajduje się on na wskazanej powierzchni.
+Aby uzyskać pożądany efekt, obraz należy poddać odpowiednim przeksztaceniom geometrycznym.
+Dostępne przekształcenia to między innymi~\cite{anal:przet:obr}:
+\begin{itemize}
+ \item przesunięcia,
+ \item obroty,
+ \item skalowanie,
+ \item odbicia.
+\end{itemize}
+
+W tym przypadku wykorzystać należy obroty i skalowanie.
+
+\subsubsection{Obracanie obrazu}
+Wyświetlany obraz powinien zostać obrócony, tak aby zniwelować różnicę pomiędzy orientacją urządzenia w chwili umieszczenia, a jego orientacją w chwili wyświetlenia obrazu.
+
+
+\subsubsection{Skalowane obrazu}
+Skalowanie, czyli zmiana rozmiaru wyświetlanego obrazu~\cite{geo:tools}, powinno zostać wykonane, aby użytkownik mógł odnieść wrażenie zbliżania się do obrazu lub oddalania się od niego.
+
+Współczynnik przeskalowania obrazu powinien być ustalony na podstawie porównania rozmiarów obiektów oryginalnego tła obrazu z ich rozmiarami na obrazie odczytanym przez kamerę urządzenia - współczynnik przeskalowania wyświetlanego obrazu powinien być równy stosunkowi tych rozmiarów.
+
+\input{figures/rotation_and_scale}
 
 \subsection{Komunikacja klient-serwer}
-Komunikacja pomiędzy klientem a serwerem może być zrealizowana przy użyciu różnych protokołów:
+Komunikacja pomiędzy klientem a serwerem może być zrealizowana przy użyciu różnych protokołów, takich jak:
 \begin{itemize}
  \item UDP (User Datagram Procotol)~\cite{udp}
  \item TCP (Transmission Control Protocol)~\cite{tcp}
- \item HTTP (Hypertext Transfer Protocol)~\cite{http1,http2}, jako \emph{web service}\footnote{https://pl.wikipedia.org/wiki/Usługa\_internetowa} wykorzystujący jeden z
-  poniższych sposobów dostępu do danych:
+ \item HTTP (Hypertext Transfer Protocol)~\cite{http1,http2}, jako \emph{web service}\footnote{https://pl.wikipedia.org/wiki/Usługa\_internetowa} wykorzystujący jeden z poniższych sposobów dostępu do danych:
   \begin{itemize}
    \item SOAP (Simple Object Access Protocol)~\cite{soap}
    \item REST (Representational State Transfer)~\cite{rest}
