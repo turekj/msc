@@ -131,18 +131,40 @@ Przykład obróconego i przeskalownego obrazu widoczny jest na Rysunku~\ref{fig:
 \subsection{Komunikacja klient-serwer}
 Komunikacja pomiędzy klientem a serwerem może być zrealizowana przy użyciu różnych protokołów, takich jak:
 \begin{itemize}
- \item UDP (User Datagram Procotol)~\cite{udp}
- \item TCP (Transmission Control Protocol)~\cite{tcp}
+ \item UDP (User Datagram Procotol)~\cite{udp} - bezpołączeniowy (a więc zawodny) protokół komunikacyjny,
+ \item TCP (Transmission Control Protocol)~\cite{tcp} - połączeniowy (niezawodny) protokół komunikacyjny,
  \item HTTP (Hypertext Transfer Protocol)~\cite{http1,http2}, jako \emph{web service}\footnote{https://pl.wikipedia.org/wiki/Usługa\_internetowa} wykorzystujący jeden z poniższych sposobów dostępu do danych:
   \begin{itemize}
-   \item SOAP (Simple Object Access Protocol)~\cite{soap}
-   \item REST (Representational State Transfer)~\cite{rest}
-   \item OData (Open Data Protocol)~\cite{odata}
+   \item SOAP (Simple Object Access Protocol)~\cite{soap} - protokół wykorzystujący język XML, nie posiada ustandaryzowanego intefejsu (API),
+   \item REST (Representational State Transfer)~\cite{rest} - wzorzec definiujący ustandaryzowany interfejs dostępu do danych, wspiera przesyłanie danych w języku XML lub formacie JSON,
+   \item OData (Open Data Protocol)~\cite{odata} - protokół umożliwiający wygodne konstruowanie ustandaryzowanych zapytań o dane.
   \end{itemize}
 \end{itemize}
 
 Ponieważ komunikacja wewnątrz aplikacji odbywać się będzie według schematu żądanie-odpowiedź, strona serwerowa z powodzeniem może zostać zrealizowana jako \emph{web service}.
-W chwili obecnej najbardziej popularne platformy umożliwiające tworzenie tego typu rozwiązań to .NET Framework (Microsoft) i Java EE (Oracle).
+W chwili obecnej najbardziej popularne platformy umożliwiające tworzenie tego typu rozwiązań to .NET Framework (Microsoft)\footnote{Narzędzie Windows Communication Foundation (WCF)} i Java EE (Oracle)\footnote{Narzędzia: Java API for XML Web Services (JAX-WS) i  Java API for RESTful Web Services (JAX-RS)}.
+
+\subsubsection{.NET}
+Technologia WCF będąca częścią platformy .NET wspiera zarówno SOAP, jak i REST wraz z OData (jako rozszerzenie REST).
+
+\subsubsection{Java EE}
+Platforma Java EE posiada dwa narzędzia przeznaczone do budowy serwisów:
+\begin{itemize}
+ \item JAX-WS (Java API for XML Web Services) - wspiera serwisy wykorzystujące protokół SOAP,
+ \item JAX-RS (Java API for RESTful Web Services) - służy to tworzenia serwisów opartych na REST (ang. \emph{RESTful}).
+\end{itemize}
+
+Nie posiada ona natywnego wsparcia dla protokołu OData - istnieją jednak implementacje przygotowane przez firmy trzecie: Google\footnote{OData4J (http://code.google.com/p/odata4j/)} i Apache\footnote{Apache Olingo (http://olingo.incubator.apache.org/documentation.html)}.
 
 \subsection{Przechowywanie danych}
-Najpopularniejszym sposobem przechowywania danych w tego typu aplikacjach jest wykorzystanie bazy danych.
+Aplikacja będzie przechowywać dane róznego rodzaju.
+Będa to między innymi:
+\begin{itemize}
+ \item pliki obrazów umieszczanych przez użytkowników w wybranych miejscach,
+ \item pliki zawierające tła tych obrazów,
+ \item dane dotyczące właścicieli tych obrazów,
+ \item dane dotyczące lokalizacji i orientacji telefonu w chwili umieszczenia obrazu w wybranym przez użytkownika miejscu.
+\end{itemize}
+
+O ile pliki graficzne mogą rezydować na dysku serwera bez konieczności utrzymywania ich w uporządkowanej strukturze, o tyle pozostałe dane powinny być zgrupowane i uporządkowane.
+Najpopularniejszym sposobem przechowywania uporządkowanej struktury danych w tego typu aplikacjach jest wykorzystanie bazy danych.
