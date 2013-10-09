@@ -8,14 +8,14 @@ class StatisticsCalculator(object):
     __letter_frequency = {}
     __ngrams = {}
 
-    def __init__(self, words):
-        self.__process_words(words)
-
-    def __process_words(self, words):
+    def process_words(self, words):
         for word in words:
-            self.__increment_word_count()
-            self.__append_letter_probability_data(word)
-            self.__process_ngram_data(word)
+            self.process_word(word)
+
+    def process_word(self, word):
+        self.__increment_word_count()
+        self.__append_letter_probability_data(word)
+        self.__process_ngram_data(word)
 
     def __increment_word_count(self):
         self.__words += 1

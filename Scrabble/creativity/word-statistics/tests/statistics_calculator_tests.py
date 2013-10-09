@@ -5,16 +5,18 @@ from calculator.statistics_calculator import StatisticsCalculator
 class StatisticsCalculatorTests(TestCase):
     def test_word_counting(self):
         words = ['first', 'second', 'third']
-        calculator = StatisticsCalculator(words)
+        calculator = StatisticsCalculator()
 
+        calculator.process_words(words)
         words_count = calculator.get_words_count()
 
         self.assertEqual(3, words_count)
 
     def test_letter_probability_calculation(self):
         words = ['come', 'and', 'get', 'some']
-        calculator = StatisticsCalculator(words)
+        calculator = StatisticsCalculator()
 
+        calculator.process_words(words)
         e_probability = calculator.get_letter_probability('e')
         o_probability = calculator.get_letter_probability('o')
         g_probability = calculator.get_letter_probability('g')
@@ -25,8 +27,9 @@ class StatisticsCalculatorTests(TestCase):
 
     def test_ngram_count_calculation(self):
         words = ['come', 'and', 'get', 'some', 'or', 'go', 'home']
-        calculator = StatisticsCalculator(words)
+        calculator = StatisticsCalculator()
 
+        calculator.process_words(words)
         ome_count = calculator.get_ngram_count('ome')
         e_count = calculator.get_ngram_count('e')
         and_count = calculator.get_ngram_count('and')
@@ -39,8 +42,9 @@ class StatisticsCalculatorTests(TestCase):
 
     def test_most_probable_ngram_calculation(self):
         words = ['come', 'and', 'get', 'some', 'random', 'or', 'go', 'home']
-        calculator = StatisticsCalculator(words)
+        calculator = StatisticsCalculator()
 
+        calculator.process_words(words)
         most_probable_bigrams = calculator.get_most_probable_ngrams(2)
         most_probable_trigrams = calculator.get_most_probable_ngrams(3)
 
