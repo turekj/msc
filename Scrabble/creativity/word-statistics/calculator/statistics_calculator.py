@@ -8,6 +8,12 @@ class StatisticsCalculator(object):
     __letter_frequency = {}
     __ngrams = {}
 
+    def __init__(self):
+        self.__words = 0
+        self.__letters = 0
+        self.__letter_frequency = {}
+        self.__ngrams = {}
+
     def process_words(self, words):
         for word in words:
             self.process_word(word)
@@ -48,7 +54,10 @@ class StatisticsCalculator(object):
         if letter in self.__letter_frequency:
             letter_count = self.__letter_frequency[letter]
 
-        return letter_count / self.__letters
+        return float(letter_count) / float(self.__letters)
+
+    def get_most_frequent_letters(self):
+        return OrderedDict(sorted(self.__letter_frequency.items(), key=lambda x: x[1], reverse=True))
 
     def get_ngram_count(self, ngram):
         ngram_count = 0
@@ -61,4 +70,4 @@ class StatisticsCalculator(object):
     def get_most_probable_ngrams(self, ngram_length):
         filtered_ngrams = {x:self.__ngrams[x] for x in self.__ngrams if len(x) == ngram_length}
 
-        return OrderedDict(sorted(filtered_ngrams.items(), key=lambda x: filtered_ngrams[x]))
+        return OrderedDict(sorted(filtered_ngrams.items(), key=lambda x: x[1], reverse=True))

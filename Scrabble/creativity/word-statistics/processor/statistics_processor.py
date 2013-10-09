@@ -34,6 +34,16 @@ class StatisticsProcessor:
         self.__end = timeit.default_timer()
 
     def __print_summary(self):
-        print "Summary: "
-        print "Seconds elapsed: " + str(self.__end - self.__start)
+        print 'Summary: '
+        print 'Seconds elapsed: ' + str(self.__end - self.__start)
+        print 'Words processed: ' + str(self.calculator.get_words_count())
+        print 'Letter probability: '
+        self.__print_letter_probability_summary()
 
+    def __print_letter_probability_summary(self):
+        letter_count = self.calculator.get_most_frequent_letters()
+        print '\t' + 'Letter' + '\t=>\t' + 'Count[Probability]'
+
+        for letter in letter_count:
+            print '\t' + letter + '\t=>\t' + str(letter_count[letter]) + '[' + str(
+                self.calculator.get_letter_probability(letter)) + ']'
