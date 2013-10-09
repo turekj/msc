@@ -19,9 +19,10 @@ class StatisticsCalculator(object):
             self.process_word(word)
 
     def process_word(self, word):
+        stripped_word = word.strip()
         self.__increment_word_count()
-        self.__append_letter_probability_data(word)
-        self.__process_ngram_data(word)
+        self.__append_letter_probability_data(stripped_word)
+        self.__process_ngram_data(stripped_word)
 
     def __increment_word_count(self):
         self.__words += 1
