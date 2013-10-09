@@ -31,3 +31,9 @@ trello_settings.xml
 
 # Build files #
 target/
+
+=======
+Python
+=======
+# Build files #
+*.pyc
