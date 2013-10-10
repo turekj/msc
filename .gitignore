@@ -11,6 +11,10 @@ TeX
 *.toc
 *.aux
 *.log
+*.nav
+*.out
+*.snm
+*.synctex.gz
 
 =======
 JAVA
