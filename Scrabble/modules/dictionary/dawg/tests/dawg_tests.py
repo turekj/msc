@@ -1,6 +1,7 @@
 from unittest.case import TestCase
 from dictionary.dawg import Dawg
 from exception.empty_dictionary_exception import EmptyDictionaryException
+from exception.unsorted_words_exception import UnsortedWordsException
 from graph.dawg_node import DawgNode
 
 
@@ -37,3 +38,53 @@ class DawgTests(TestCase):
         self.assertFalse(contains_cant)
         self.assertFalse(contains_fant)
         self.assertFalse(contains_ca)
+
+    def test_add_word_throws_exception_on_adding_unsorted_words(self):
+        dawg = Dawg()
+
+        dawg.add_word('this')
+        dawg.add_word('will')
+
+        self.assertRaises(UnsortedWordsException, dawg.add_word, 'fail')
+
+    def test_add_word_method(self):
+        dawg = Dawg()
+
+        dawg.add_word('add')
+        dawg.add_word('me')
+        dawg.minimize_remaining()
+
+        root_node = dawg.root
+
+        self.assertIsNotNone(root_node.child_node)
+        first_child_of_root = dawg.root.child_node
+
+        self.assertIsNotNone(first_child_of_root.child_node)
+        first_child_of_first_child_of_root = first_child_of_root.child_node
+
+        self.assertIsNotNone(root_node.next_node)
+        next_node_of_root = dawg.root.next_node
+
+        self.assertIsNotNone(next_node_of_root.child_node)
+        first_child_of_next_node_of_root = next_node_of_root.child_node
+
+        self.assertEqual('a', root_node.letter)
+        self.assertEqual(False, root_node.end_of_word)
+
+        self.assertEqual('d', first_child_of_root.letter)
+        self.assertFalse(first_child_of_root.end_of_word)
+        self.assertIsNone(first_child_of_root.next_node)
+
+        self.assertEqual('d', first_child_of_first_child_of_root.letter)
+        self.assertTrue(first_child_of_first_child_of_root.end_of_word)
+        self.assertIsNone(first_child_of_first_child_of_root.child_node)
+        self.assertIsNone(first_child_of_first_child_of_root.next_node)
+
+        self.assertEqual('m', next_node_of_root.letter)
+        self.assertFalse(next_node_of_root.end_of_word)
+        self.assertIsNone(next_node_of_root.next_node)
+
+        self.assertEqual('e', first_child_of_next_node_of_root.letter)
+        self.assertTrue(first_child_of_next_node_of_root.end_of_word)
+        self.assertIsNone(first_child_of_next_node_of_root.child_node)
+        self.assertIsNone(first_child_of_next_node_of_root.next_node)
