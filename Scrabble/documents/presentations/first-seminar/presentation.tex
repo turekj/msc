@@ -12,7 +12,7 @@
 \usepackage{graphicx}
 \usepackage{rotating}
 \usepackage{multirow}
-\author{\texorpdfstring{Jakub Turek \newline \href{mailto:jkbturek@gmail.com}{jkbturek@gmail.com}}{Jakub Turek}}
+\author{\texorpdfstring{Jakub Turek \newline \href{mailto:jkbturek@gmail.com}{ jkbturek@gmail.com }}{Jakub Turek}}
 \title{Komputerowy gracz Scrabble}
 \institute{Wydział Elektroniki i Technik Informacyjnych}
 \begin{document}
@@ -43,10 +43,10 @@
 	\frametitle{Plansza}
 	
 	\begin{columns}[onlytextwidth]
-		\begin{column}{0.5\textwidth}
+		\begin{column}{0.55\textwidth}
 			\includegraphics[scale=0.17]{graphics/board.jpg}
 		\end{column}
-		\begin{column}{0.5\textwidth}
+		\begin{column}{0.45\textwidth}
 			\begin{itemize}
 				\item Wymiary $15 \times 15$.
 				\item Premie:
@@ -76,55 +76,57 @@
 	\frametitle{Płytki (polska wersja)}
 	
 	\begin{columns}[onlytextwidth]
-		\begin{column}{0.6\textwidth}
-			\begin{tabular}{|c|c|c||c|c|c||c|c|c|}
-				\hline
-				\multirow{16}{*}{
-					\begin{sideways}
-						Litera
-					\end{sideways}	} &
-				\multirow{16}{*}{
-					\begin{sideways}
-						Ilość płytek
-					\end{sideways}} & 
-				\multirow{16}{*}{
-					\begin{sideways}
-						Liczba punktów
-					\end{sideways}} & \textbf{A} & 9 & 1 & \textbf{M} & 3 & 2 \\
-				\cline{4-9}
-				&&& \textbf{Ą} & 1 & 5 & \textbf{N} & 5 & 1 \\
-				\cline{4-9}
-				&&& \textbf{B} & 2 & 3 & \textbf{Ń} & 1 & 7 \\			
-				\cline{4-9}
-				&&& \textbf{C} & 3 & 2 & \textbf{O} & 6 & 1 \\			
-				\cline{4-9}
-				&&& \textbf{Ć} & 1 & 6 & \textbf{Ó} & 1 & 5 \\
-				\cline{4-9}
-				&&& \textbf{D} & 3 & 2 & \textbf{P} & 3 & 2 \\	
-				\cline{4-9}
-				&&& \textbf{E} & 7 & 1 & \textbf{R} & 4 & 1 \\
-				\cline{4-9}
-				&&& \textbf{Ę} & 1 & 5 & \textbf{S} & 4 & 1 \\
-				\cline{4-9}
-				&&& \textbf{F} & 1 & 5 & \textbf{Ś} & 1 & 5 \\
-				\cline{4-9}				
-				&&& \textbf{G} & 2 & 3 & \textbf{T} & 3 & 2 \\
-				\cline{4-9}
-				&&& \textbf{H} & 2 & 3 & \textbf{U} & 2 & 3 \\
-				\cline{4-9}
-				&&& \textbf{I} & 8 & 1 & \textbf{W} & 4 & 1 \\
-				\cline{4-9}
-				&&& \textbf{J} & 2 & 3 & \textbf{Y} & 4 & 2 \\
-				\cline{4-9}
-				&&& \textbf{K} & 3 & 2 & \textbf{Z} & 5 & 1 \\
-				\cline{4-9}
-				&&& \textbf{L} & 3 & 2 & \textbf{Ź} & 1 & 9 \\
-				\cline{4-9}
-				&&& \textbf{Ł} & 2 & 3 & \textbf{Ż} & 1 & 5 \\
-				\hline
-			\end{tabular}
+		\begin{column}{0.55\textwidth}
+			\scalebox{0.8}{
+				\begin{tabular}{|c|c|c||c|c|c||c|c|c|}
+					\hline
+					\multirow{16}{*}{
+						\begin{sideways}
+							Litera
+						\end{sideways}	} &
+					\multirow{16}{*}{
+						\begin{sideways}
+							Ilość płytek
+						\end{sideways}} & 
+					\multirow{16}{*}{
+						\begin{sideways}
+							Liczba punktów
+						\end{sideways}} & \textbf{A} & 9 & 1 & \textbf{M} & 3 & 2 \\
+					\cline{4-9}
+					&&& \textbf{Ą} & 1 & 5 & \textbf{N} & 5 & 1 \\
+					\cline{4-9}
+					&&& \textbf{B} & 2 & 3 & \textbf{Ń} & 1 & 7 \\			
+					\cline{4-9}
+					&&& \textbf{C} & 3 & 2 & \textbf{O} & 6 & 1 \\			
+					\cline{4-9}
+					&&& \textbf{Ć} & 1 & 6 & \textbf{Ó} & 1 & 5 \\
+					\cline{4-9}
+					&&& \textbf{D} & 3 & 2 & \textbf{P} & 3 & 2 \\	
+					\cline{4-9}
+					&&& \textbf{E} & 7 & 1 & \textbf{R} & 4 & 1 \\
+					\cline{4-9}
+					&&& \textbf{Ę} & 1 & 5 & \textbf{S} & 4 & 1 \\
+					\cline{4-9}
+					&&& \textbf{F} & 1 & 5 & \textbf{Ś} & 1 & 5 \\
+					\cline{4-9}				
+					&&& \textbf{G} & 2 & 3 & \textbf{T} & 3 & 2 \\
+					\cline{4-9}
+					&&& \textbf{H} & 2 & 3 & \textbf{U} & 2 & 3 \\
+					\cline{4-9}
+					&&& \textbf{I} & 8 & 1 & \textbf{W} & 4 & 1 \\
+					\cline{4-9}
+					&&& \textbf{J} & 2 & 3 & \textbf{Y} & 4 & 2 \\
+					\cline{4-9}
+					&&& \textbf{K} & 3 & 2 & \textbf{Z} & 5 & 1 \\
+					\cline{4-9}
+					&&& \textbf{L} & 3 & 2 & \textbf{Ź} & 1 & 9 \\
+					\cline{4-9}
+					&&& \textbf{Ł} & 2 & 3 & \textbf{Ż} & 1 & 5 \\
+					\hline
+				\end{tabular}
+			}
 		\end{column}
-		\begin{column}{0.4\textwidth}
+		\begin{column}{0.45\textwidth}
 			\begin{itemize}
 				\item 98 płytek z~literami.
 				\item Każda litera ma przyporządkowaną punktację.
@@ -137,7 +139,34 @@
 \end{frame}
 
 \begin{frame}
-	\title{Reguły}
+	\frametitle{Reguły}
+	
+	\begin{itemize}
+		\item Na stojaku 7 wylosowanych płytek.
+		\item Naprzemienne ruchy.
+		\item Prawidłowy ruch:
+			\begin{itemize}
+				\item Płytki wyłożone w~jednym wierszu (lub kolumnie) w~sposób ciągły.
+				\item Wykorzystanie przynajmniej jednej litery znajdującej się już na planszy.
+				\item Tworzy poprawny wyraz czytany od lewej do prawej (lub od góry do dołu).
+				\item Wszystkie płytki przylegające tworzą poprawne wyrazy w~układzie krzyżówkowym.
+			\end{itemize}
+		\item Koniec gry - pierwszy gracz, który nie ma płytek na stojaku.
+		\item Wygrywa gracz z~największą liczbą punktów.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dopuszczalne słowa}
+	
+	Dopuszczalne jest wykorzystanie wszystkich słów znajdujących się w~dowolnym słowniku języka polskiego (wraz z~poprawnymi odmianami) z~wyłączeniem:
+	
+	\begin{itemize}
+		\item nazw własnych (wyrazów pisanych z~wielkiej litery),
+		\item skrótów,
+		\item przedrostków, przyrostków,
+		\item wyrazów wymagających użycia apostrofu lub łącznika.
+	\end{itemize}
 \end{frame}
 
 \end{document}
