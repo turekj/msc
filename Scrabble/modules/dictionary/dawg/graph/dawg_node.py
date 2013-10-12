@@ -34,4 +34,4 @@ class DawgNode(object):
         return str(self) == str(other)
 
     def __hash__(self):
-        return str(self).__hash__()
+        return repr(self).__hash__()
