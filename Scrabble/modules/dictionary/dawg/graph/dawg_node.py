@@ -2,25 +2,26 @@
 class DawgNode(object):
     NodeId = 0
 
-    def __init__(self, letter=None, child_node=None, next_node=None, end_of_word=False):
+    def __init__(self, edges=None, end_of_word=False):
         self.id = DawgNode.NodeId
-        DawgNode.NodeId += 1
-        self.letter = letter
-        self.child_node = child_node
-        self.next_node = next_node
         self.end_of_word = end_of_word
+
+        if edges is None:
+            self.edges = []
+        else:
+            self.edges = edges
+
+        self._increment_node_id()
+
+    def _increment_node_id(self):
+        DawgNode.NodeId += 1
 
     def __str__(self):
         string_value = ''
 
-        if self.child_node is not None:
-            string_value += str(self.child_node.id) + '/'
-
-        if self.next_node is not None:
-            string_value += str(self.next_node.id) + '/'
-
-        if self.letter is not None:
-            string_value += str(self.letter) + '/'
+        for edge in self.edges:
+            string_value += edge.letter + '/'
+            string_value += str(edge.child_node.id) + '/'
 
         if self.end_of_word:
             string_value += '1'
