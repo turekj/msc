@@ -8,6 +8,10 @@ class StatisticsProcessor:
     calculator = StatisticsCalculator()
     __read_words = 0
 
+    def __init__(self):
+        self.__start = None
+        self.__end = None
+
     def process_file(self, filename_to_read, filename_to_write):
         try:
             with open(filename_to_write, 'w') as log_file:
