@@ -1,6 +1,6 @@
 \documentclass[10pt,a4paper]{beamer}
 \usetheme{Malmoe}
-\definecolor{UniGreen}{RGB}{0,150,0}
+\definecolor{UniGreen}{RGB}{0,100,200}
 \setbeamercolor{title}{fg=UniGreen}
 \setbeamercolor{frametitle}{fg=UniGreen}
 \setbeamercolor{structure}{fg=UniGreen}
@@ -15,6 +15,8 @@
 \usepackage{array}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
 \author{\texorpdfstring{Jakub Turek \newline \href{mailto:jkbturek@gmail.com}{ jkbturek@gmail.com }}{Jakub Turek}}
 \title{Wykorzystanie sztucznej inteligencji w grze Scrabble}
 \institute{Wydział Elektroniki i Technik Informacyjnych}
@@ -46,7 +48,7 @@
 		\item Lata 80. - Hasbro.
 		\item Lata 80. - teleturniej \emph{Scrabble}.
 		\item Obecnie - 121 krajów, 29 różnych języków.
-		\item Do chwili obecnje - 150 milionów sprzedanych egzemplarzy.
+		\item Do chwili obecnej - 150 milionów sprzedanych egzemplarzy.
 	\end{itemize}
 \end{frame}
 
@@ -228,7 +230,152 @@
 			\hline
 		\end{tabular}
 	}
+\end{frame}
+
+\begin{frame}
+
+	\begin{center}
+		\LARGE{Dalsze rozważania przeprowadzane będą dla słownika alternatywnego.}
+	\end{center}
+
+\end{frame}
+
+\subsection{Statystyka}
+
+\begin{frame}
+	\frametitle{Statystyczny opis słownika}
 	
+	Na podstawie statystycznego opisu słownika można wyprowadzić szereg użytecznych heurystyk:
+	
+	\begin{itemize}
+		\item Częstotliwość występowania liter.
+		\item Najbardziej prawdopodobne n-gramy.
+		\item Najlepsze otwarcia.
+		\item Najlepsze kombinacje liter.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Prawdopodobieństwo występowania liter}
+			
+		\begin{tikzpicture}
+			\begin{axis}[	ytick={0, 0.01, ..., 0.1}, 
+					yticklabel style={/pgf/number format/fixed},
+					bar width=2mm,
+					symbolic x coords={a,i,o,e,n,y,z,w,r,c,m,s,k,p,t,u,l,d,el,j,b,g,on,h,es,zet,een,f,uu,en,ci,ziet},
+					xticklabels={a,i,o,e,n,y,z,w,r,c,m,s,k,p,t,u,l,d,ł,j,b,g,ą,h,ś,ż,ę,f,ó,ń,ć,ź},
+					xticklabel style={text height=1.5ex},
+					xtick=data,
+					legend entries={Prawdopodobieństwo dla słownika,Prawdopodobieństwo w Scrabble},
+					height=.9\textheight,
+					width=\textwidth	]
+					
+    			\addplot[ybar,fill=blue, area legend] coordinates {
+        			(a,0.0937997771175)
+        			(i,0.0894002903657)
+        			(o,0.0796720098207)
+        			(e,0.0765123987403)
+        			(n,0.0683027202572)
+        			(y,0.0497071483395)
+        			(z,0.0466694841626)
+        			(w,0.0453746978807)
+        			(r,0.0440417929225)
+        			(c,0.0409715964269)
+        			(m,0.0387468458849)
+        			(s,0.0322800452968)
+        			(k,0.0316402758911)
+        			(p,0.029784849318)
+        			(t,0.0273647734205)
+        			(u,0.0271062565005)
+        			(l,0.023888810187)
+        			(d,0.0219487338635)
+        			(el,0.0210803509823)
+        			(j,0.0195483416618)
+        			(b,0.0192369186479)
+        			(g,0.0132131819509)
+        			(on,0.0128586125387)
+        			(h,0.0115084555932)
+        			(es,0.0096922978289)
+        			(zet,0.0064777761380)
+        			(een,0.0064627258330)
+        			(f,0.0044409243818)
+        			(uu,0.0035346199898)
+        			(en,0.0027972207673)
+        			(ci, 0.0011952505312)
+        			(ziet,0.0007161382021)
+    			};
+    			
+    			\addplot[ybar,fill=red, area legend] coordinates {
+        			(a,0.09)
+        			(i,0.08)
+        			(o,0.06)
+        			(e,0.07)
+        			(n,0.05)
+        			(y,0.04)
+        			(z,0.05)
+        			(w,0.04)
+        			(r,0.04)
+        			(c,0.03)
+        			(m,0.03)
+        			(s,0.04)
+        			(k,0.03)
+        			(p,0.03)
+        			(t,0.03)
+        			(u,0.02)
+        			(l,0.03)
+        			(d,0.03)
+        			(el,0.02)
+        			(j,0.02)
+        			(b,0.02)
+        			(g,0.02)
+        			(on,0.01)
+        			(h,0.02)
+        			(es,0.01)
+        			(zet,0.01)
+        			(een,0.01)
+        			(f,0.01)
+        			(uu,0.01)
+        			(en,0.01)
+        			(ci, 0.01)
+        			(ziet,0.01)
+    			};
+    			\addplot[forget plot,ybar,fill=blue] coordinates {
+        			(a,0)
+        			(i,0)
+        			(o,0)
+        			(e,0)
+        			(n,0)
+        			(y,0)
+        			(z,0.0466694841626)
+        			(w,0)
+        			(r,0)
+        			(c,0)
+        			(m,0)
+        			(s,0.0322800452968)
+        			(k,0)
+        			(p,0.029784849318)
+        			(t,0.0273647734205)
+        			(u,0)
+        			(l,0.023888810187)
+        			(d,0.0219487338635)
+        			(el,0)
+        			(j,0.0195483416618)
+        			(b,0.0192369186479)
+        			(g,0.0132131819509)
+        			(on,0)
+        			(h,0.0115084555932)
+        			(es,0.0096922978289)
+        			(zet,0.0064777761380)
+        			(een,0.0064627258330)
+        			(f,0.0044409243818)
+        			(uu,0.0035346199898)
+        			(en,0.0027972207673)
+        			(ci, 0.0011952505312)
+        			(ziet,0.0007161382021)
+    			};
+			\end{axis}
+		\end{tikzpicture}
+		
 \end{frame}
 
 \end{document}
