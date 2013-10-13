@@ -270,7 +270,7 @@
 					height=.9\textheight,
 					width=\textwidth	]
 					
-    			\addplot[ybar,fill=blue, area legend] coordinates {
+    			\addplot[ybar,fill=UniGreen, area legend] coordinates {
         			(a,0.0937997771175)
         			(i,0.0894002903657)
         			(o,0.0796720098207)
@@ -305,7 +305,7 @@
         			(ziet,0.0007161382021)
     			};
     			
-    			\addplot[ybar,fill=red, area legend] coordinates {
+    			\addplot[ybar,fill=lightgray, area legend] coordinates {
         			(a,0.09)
         			(i,0.08)
         			(o,0.06)
@@ -339,7 +339,7 @@
         			(ci, 0.01)
         			(ziet,0.01)
     			};
-    			\addplot[forget plot,ybar,fill=blue] coordinates {
+    			\addplot[forget plot,ybar,fill=UniGreen] coordinates {
         			(a,0)
         			(i,0)
         			(o,0)
@@ -375,7 +375,167 @@
     			};
 			\end{axis}
 		\end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Prawdopodobieństwo występowania bigramów}
+	
+	\begin{columns}
+		\begin{column}{.5\textwidth}
+			\begin{block}{N-gram}
+				Sekwencja składająca się z n~liter, znaków lub wyrazów.
+			\end{block}
+			
+		\begin{itemize}
+			\item Unigram.
+			\item Bigram.
+			\item Trigram.
+			\item 4-gram.
+			\item ...
+			\item N-gram.
+		\end{itemize}
 		
+		\end{column}
+		
+		\begin{column}{.5\textwidth}
+			\begin{tabular}{|c|c|}
+				\hline
+				Bigram	&	Wystąpienia	\\
+				\hline
+				ni		&	1 077 436	\\
+				ie		&	1 028 249	\\
+				ow	&	645 018		\\
+				an		&	507 205		\\
+				wa	&	484 295		\\
+				za		&	313 370		\\
+				po		&	301 636		\\
+				ch		&	296 749		\\
+				ał		&	294 734		\\
+				ia		&	284 247		\\
+				\hline
+			\end{tabular}
+
+		\end{column}
+
+	\end{columns}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Prawdopodobieństwo występowania n-gramów}
+	
+	\begin{columns}
+		\begin{column}{.3\textwidth}
+			\scalebox{.8}{
+				\begin{tabular}{|c|c|}
+					\hline
+					Trigram	&	Wystąpienia	\\
+					\hline
+					nie	&	635 196	\\
+					owa	&	307 277	\\
+					ani	&	195 186	\\
+					wan	&	180 460	\\
+					cie	&	148 513	\\
+					nia	&	142 201	\\
+					jąc	&	131 792	\\
+					prz	&	130 283	\\
+					wał	&	126 134	\\
+					rze	&	116 370	\\
+					\hline
+				\end{tabular}
+			}
+
+		\end{column}
+		
+		\begin{column}{.3\textwidth}
+			\scalebox{.8}{
+				\begin{tabular}{|c|c|}
+					\hline
+					4-gram	&	Wystąpienia	\\
+					\hline
+					owan	&	127 626	\\
+					ował		&	88 130		\\
+					wani		&	78 095		\\
+					niep		&	77 449		\\
+					prze		&	73 230		\\
+					ując		&	67 062		\\
+					ania		&	61 398		\\
+					ając		&	59 499		\\
+					ście		&	56 462		\\
+					łaby		&	55 380		\\
+					\hline
+				\end{tabular}
+			}
+
+		\end{column}
+		
+		\begin{column}{.3\textwidth}
+			\scalebox{.8}{
+				\begin{tabular}{|c|c|}
+					\hline
+					5-gram	&	Wystąpienia	\\
+					\hline
+					owani	&	54 991	\\
+					niepo	&	40 329	\\
+					ałaby	&	37 581	\\
+					yście		&	33 161	\\
+					owała	&	28 175	\\
+					niewy	&	26 193	\\
+					owane	&	25 555	\\
+					wania	&	25 551	\\
+					owany	&	25 542	\\
+					ałyby	&	25 282	\\
+					\hline
+				\end{tabular}
+			}
+
+		\end{column}
+
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Prawdopodobieństwo występowania n-gramów (2)}
+	
+	\begin{columns}
+		\begin{column}{.5\textwidth}
+				\begin{tabular}{|c|c|}
+					\hline
+					6-gram	&	Wystąpienia	\\
+					\hline
+					owania	&	17 609	\\
+					wałaby	&	17 161	\\
+					byście	&	16 821	\\
+					liście		&	15 910	\\
+					aniami	&	15 585	\\
+					aniach	&	15 585	\\
+					łyście	&	15 405	\\
+					owanie	&	14 674	\\
+					owałby	&	14 437	\\
+					nieprz	&	14 328	\\
+					\hline
+				\end{tabular}
+		\end{column}
+		
+		\begin{column}{.5\textwidth}
+				\begin{tabular}{|c|c|}
+					\hline
+					7-gram	&	Wystąpienia	\\
+					\hline
+					owałaby	&	12 401		\\
+					libyśmy		&	12 267		\\
+					łybyśmy	&	12 094		\\
+					ałyście		&	9 902		\\
+					aliście		&	9 304		\\
+					ibyście		&	8 445		\\
+					libyści		&	8 443		\\
+					ybyście		&	8 317		\\
+					łybyści		&	8 314		\\
+					nieprze		&	8 111		\\
+					\hline
+				\end{tabular}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \end{document}
