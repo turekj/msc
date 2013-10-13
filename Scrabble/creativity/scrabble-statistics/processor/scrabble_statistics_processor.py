@@ -41,7 +41,7 @@ class ScrabbleStatisticsProcessor(object):
         print 'Time elapsed: ' + str(self._end_time - self._start_time)
 
         for (word, (points, starting_point)) in sorted_openings.items():
-            if i == 10:
+            if i == 20:
                 break
 
             print str(i + 1) + '. ' + word + ' = ' + str(points) + ' starting at: ' + str(starting_point)

@@ -1,5 +1,9 @@
 \documentclass[10pt,a4paper]{beamer}
 \usetheme{Malmoe}
+\definecolor{Board}{RGB}{60,145,143}
+\definecolor{DoubleWordBonus}{RGB}{239,174,154}
+\definecolor{DoubleLetterBonus}{RGB}{141,201,240}
+\definecolor{Tile}{RGB}{247,225,190}
 \definecolor{UniGreen}{RGB}{0,100,200}
 \setbeamercolor{title}{fg=UniGreen}
 \setbeamercolor{frametitle}{fg=UniGreen}
@@ -537,5 +541,168 @@
 		\end{column}
 	\end{columns}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Najlepsze otwarcia}
+	
+	\begin{tikzpicture}
+		\tikzstyle{every node}=[draw, shape=rectangle, rounded corners = 1pt, minimum width = 15pt, minimum height = 15pt, align=center, text height = 7pt];
+		\node [fill=Board] at (0, 0) { };
+		\node [fill=Board] at (.6, 0) { };
+		\node [fill=DoubleLetterBonus] at (1.2, 0) {x2};
+		\node [fill=Board] at (1.8, 0) { };
+		\node [fill=Board] at (2.4, 0) { };
+		\node [fill=Board] at (3, 0) { };
+		\node [fill=DoubleWordBonus] at (3.6, 0) { };
+		\node [fill=Board] at (4.2, 0) { };
+		\node [fill=Board] at (4.8, 0) { };
+		\node [fill=Board] at (5.4, 0) { };
+		\node [fill=DoubleLetterBonus] at (6, 0) {x2};
+		\node [fill=Board] at (6.6, 0) { };
+		\node [fill=Board] at (7.2, 0) { };		
+		\node [shape=star, star points=8, rounded corners = 0pt, fill=black, text height = 0pt] at (3.6, 0) {};
+		\node [fill=Tile] at (0, -.6) {P};
+		\node [fill=Tile] at (.6, -.6) {Ó};
+		\node [fill=Tile] at (1.2, -.6) {Ź};
+		\node [fill=Tile] at (1.8, -.6) {N};
+		\node [fill=Tile] at (2.4, -.6) {O};
+		\node [fill=Tile] at (3, -.6) {Ś};
+		\node [fill=Tile] at (3.6, -.6) {Ć};
+		\node [fill=Board] at (4.2, -.6) { };
+		\node [fill=Board] at (4.8, -.6) { };
+		\node [fill=Board] at (5.4, -.6) { };
+		\node [fill=DoubleLetterBonus] at (6, -.6) {x2};
+		\node [fill=Board] at (6.6, -.6) { };
+		\node [fill=Board] at (7.2, -.6) { };	
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -.6) {126 punktów};
+		\node [fill=Board] at (0, -1.2) { };
+		\node [fill=Board] at (.6, -1.2) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -1.2) {x2};
+		\node [fill=Board] at (1.8, -1.2) { };
+		\node [fill=Board] at (2.4, -1.2) { };
+		\node [fill=Board] at (3, -1.2) { };
+		\node [fill=Tile] at (3.6, -1.2) {B};
+		\node [fill=Tile] at (4.2, -1.2) {Ł};
+		\node [fill=Tile] at (4.8, -1.2) {Ą};
+		\node [fill=Tile] at (5.4, -1.2) {D};
+		\node [fill=Tile] at (6, -1.2) {Ź};
+		\node [fill=Tile] at (6.6, -1.2) {Ż};
+		\node [fill=Tile] at (7.2, -1.2) {E};
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -1.2) {124 punkty};
+		\node [fill=Board] at (0, -1.8) { };
+		\node [fill=Board] at (.6, -1.8) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -1.8) {x2};
+		\node [fill=Board] at (1.8, -1.8) { };
+		\node [fill=Board] at (2.4, -1.8) { };
+		\node [fill=Board] at (3, -1.8) { };
+		\node [fill=Tile] at (3.6, -1.8) {U};
+		\node [fill=Tile] at (4.2, -1.8) {B};
+		\node [fill=Tile] at (4.8, -1.8) {O};
+		\node [fill=Tile] at (5.4, -1.8) {D};
+		\node [fill=Tile] at (6, -1.8) {Ź};
+		\node [fill=Tile] at (6.6, -1.8) {Ż};
+		\node [fill=Tile] at (7.2, -1.8) {E};		
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -1.8) {124 punkty};
+		\node [fill=Board] at (0, -2.4) { };
+		\node [fill=Board] at (.6, -2.4) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -2.4) {x2};
+		\node [fill=Board] at (1.8, -2.4) { };
+		\node [fill=Board] at (2.4, -2.4) { };
+		\node [fill=Board] at (3, -2.4) { };
+		\node [fill=Tile] at (3.6, -2.4) {P};
+		\node [fill=Tile] at (4.2, -2.4) {Ó};
+		\node [fill=Tile] at (4.8, -2.4) {J};
+		\node [fill=Tile] at (5.4, -2.4) {D};
+		\node [fill=Tile] at (6, -2.4) {Ź};
+		\node [fill=Tile] at (6.6, -2.4) {K};
+		\node [fill=Tile] at (7.2, -2.4) {Ę};		
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -2.4) {124 punkty};
+		\node [fill=Board] at (0, -3) { };
+		\node [fill=Board] at (.6, -3) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -3) {x2};
+		\node [fill=Board] at (1.8, -3) { };
+		\node [fill=Board] at (2.4, -3) { };
+		\node [fill=Board] at (3, -3) { };
+		\node [fill=Tile] at (3.6, -3) {G};
+		\node [fill=Tile] at (4.2, -3) {Ł};
+		\node [fill=Tile] at (4.8, -3) {Ó};
+		\node [fill=Tile] at (5.4, -3) {D};
+		\node [fill=Tile] at (6, -3) {Ź};
+		\node [fill=Tile] at (6.6, -3) {Ż};
+		\node [fill=Tile] at (7.2, -3) {E};		
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -3) {124 punkty};
+		\node [fill=Board] at (0, -3.6) { };
+		\node [fill=Board] at (.6, -3.6) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -3.6) {x2};
+		\node [fill=Board] at (1.8, -3.6) { };
+		\node [fill=Board] at (2.4, -3.6) { };
+		\node [fill=Board] at (3, -3.6) { };
+		\node [fill=Tile] at (3.6, -3.6) {U};
+		\node [fill=Tile] at (4.2, -3.6) {B};
+		\node [fill=Tile] at (4.8, -3.6) {Ą};
+		\node [fill=Tile] at (5.4, -3.6) {D};
+		\node [fill=Tile] at (6, -3.6) {Ź};
+		\node [fill=Tile] at (6.6, -3.6) {Ż};
+		\node [fill=Tile] at (7.2, -3.6) {E};		
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -3.6) {124 punkty};
+		\node [fill=Board] at (0, -4.2) { };
+		\node [fill=Board] at (.6, -4.2) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -4.2) {x2};
+		\node [fill=Board] at (1.8, -4.2) { };
+		\node [fill=Board] at (2.4, -4.2) { };
+		\node [fill=Board] at (3, -4.2) { };
+		\node [fill=Tile] at (3.6, -4.2) {U};
+		\node [fill=Tile] at (4.2, -4.2) {G};
+		\node [fill=Tile] at (4.8, -4.2) {Ó};
+		\node [fill=Tile] at (5.4, -4.2) {D};
+		\node [fill=Tile] at (6, -4.2) {Ź};
+		\node [fill=Tile] at (6.6, -4.2) {Ż};
+		\node [fill=Tile] at (7.2, -4.2) {E};		
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -4.2) {124 punkty};
+		\node [fill=Board] at (0, -4.8) { };
+		\node [fill=Board] at (.6, -4.8) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -4.8) {x2};
+		\node [fill=Board] at (1.8, -4.8) { };
+		\node [fill=Board] at (2.4, -4.8) { };
+		\node [fill=Board] at (3, -4.8) { };
+		\node [fill=Tile] at (3.6, -4.8) {B};
+		\node [fill=Tile] at (4.2, -4.8) {L};
+		\node [fill=Tile] at (4.8, -4.8) {U};
+		\node [fill=Tile] at (5.4, -4.8) {Ź};
+		\node [fill=Tile] at (6, -4.8) {Ń};
+		\node [fill=Tile] at (6.6, -4.8) {Ż};
+		\node [fill=Tile] at (7.2, -4.8) {E};		
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -4.8) {124 punkty};
+		\node [fill=Board] at (0, -5.4) { };
+		\node [fill=Board] at (.6, -5.4) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -5.4) {x2};
+		\node [fill=Board] at (1.8, -5.4) { };
+		\node [fill=Board] at (2.4, -5.4) { };
+		\node [fill=Board] at (3, -5.4) { };
+		\node [fill=Tile] at (3.6, -5.4) {P};
+		\node [fill=Tile] at (4.2, -5.4) {Ó};
+		\node [fill=Tile] at (4.8, -5.4) {J};
+		\node [fill=Tile] at (5.4, -5.4) {D};
+		\node [fill=Tile] at (6, -5.4) {Ź};
+		\node [fill=Tile] at (6.6, -5.4) {K};
+		\node [fill=Tile] at (7.2, -5.4) {Ą};		
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -5.4) {124 punkty};
+		\node [fill=Board] at (0, -6) { };
+		\node [fill=Board] at (.6, -6) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -6) {x2};
+		\node [fill=Board] at (1.8, -6) { };
+		\node [fill=Board] at (2.4, -6) { };
+		\node [fill=Tile] at (3, -6) {U};
+		\node [fill=Tile] at (3.6, -6) {G};
+		\node [fill=Tile] at (4.2, -6) {R};
+		\node [fill=Tile] at (4.8, -6) {Z};
+		\node [fill=Tile] at (5.4, -6) {Ą};
+		\node [fill=Tile] at (6, -6) {Ź};
+		\node [fill=Tile] at (6.6, -6) {Ć};
+		\node [fill=Board] at (7.2, -6) { };		
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -6) {124 punkty};
+	\end{tikzpicture}
+\end{frame}
+
 
 \end{document}
