@@ -12,8 +12,11 @@
 \usepackage{graphicx}
 \usepackage{rotating}
 \usepackage{multirow}
+\usepackage{array}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
 \author{\texorpdfstring{Jakub Turek \newline \href{mailto:jkbturek@gmail.com}{ jkbturek@gmail.com }}{Jakub Turek}}
-\title{Komputerowy gracz Scrabble}
+\title{Wykorzystanie sztucznej inteligencji w grze Scrabble}
 \institute{Wydział Elektroniki i Technik Informacyjnych}
 \begin{document}
 
@@ -24,16 +27,26 @@
 \section{Wstęp}
 
 \begin{frame}
+	\begin{block}{Scrabble}
+		\textbf{Gra słowna polegająca na układaniu na określonej planszy wyrazów z~losowanych liter.}
+		
+		\vspace{10mm}
+		
+		\emph{Wielki słownik ortograficzny - PWN 2003, 2006, 2008 - E. Polański}
+	\end{block}
+\end{frame}
+
+\begin{frame}
 	\frametitle{Historia Scrabble}
 	
 	\begin{itemize}
 		\item 1938 r. - gra \emph{Lexiko}, Alfred Mosher Butts.
-		\item \emph{Criss-Crossword} - udoskonalona wersja \emph{Lexiko}.
+		\item Lata 40. - \emph{Criss-Crossword} - udoskonalona wersja \emph{Lexiko}.
 		\item 1948 r. - James Burnot, \emph{Scrabble}.
 		\item Lata 80. - Hasbro.
-		\item ,,Bohater'' teleturnieju \emph{Scrabble}.
-		\item 121 krajów, 29 różnych języków.
-		\item 150 milionów sprzedanych egzemplarzy.
+		\item Lata 80. - teleturniej \emph{Scrabble}.
+		\item Obecnie - 121 krajów, 29 różnych języków.
+		\item Do chwili obecnje - 150 milionów sprzedanych egzemplarzy.
 	\end{itemize}
 \end{frame}
 
@@ -167,6 +180,55 @@
 		\item przedrostków, przyrostków,
 		\item wyrazów wymagających użycia apostrofu lub łącznika.
 	\end{itemize}
+\end{frame}
+
+\section{Słowniki}
+\subsection{Polskie słowniki wyrazów do gier}
+
+\begin{frame}[fragile]
+	\frametitle{Słownik wyrazów do gier}
+	
+	\textbf{Słownik wyrazów do gier} to lista wszystkich słów, wraz ze wszystkimi poprawnymi odmianami, dopuszczalnych do wykorzystania w~grach słownych. 
+	
+	\begin{tikzpicture}
+		\tikzstyle{every node}=[draw, shape=ellipse, text width=3.5cm, align=center];
+		\node (alternative) at (2.75, -2) {Alternatywny słownik wyrazów do gier};
+        \node (pfs) at (-2.75, -2) {Oficjalny Słownik Polskiego Scrabblisty};
+		\node (dictionaries) at (0, 0) {Polskie słowniki wyrazów do gier};
+		\draw[->] (dictionaries) -- (pfs);
+		\draw[->] (dictionaries) -- (alternative);
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Porównanie OSPS i~słownika alternatywnego}
+	
+	\scalebox{0.75}{
+		\begin{tabular}{|l|c|c|}
+			\cline{2-3}
+			\multicolumn{1}{c|}{} & \textbf{OSPS} & \textbf{Słownik alternatywny} \\
+			\hline
+			\multirow{2}{*}{Wydawca} & Polska Federacja Scrabble, & \multirow{2}{*}{Serwis z~grami online Kurnik} \\
+			& Polskie Wydawnictwo Naukowe & \\
+			\hline
+			Przeznaczenie & Gry turniejowe & Gra ,,Literaki'' \\
+			\hline
+			Liczba słów & 2 477 212 & 2 703 830 \\
+			\hline
+			\multirow{3}{*}{Źródło} & Zamknięta lista słowników języka & Otwarta lista słowników języka \\
+			& polskiego, ortograficznych, wyrazów & polskiego, ortograficznych, \\
+			& obcych wydawnictwa PWN & wyrazów obcych \\
+			\hline
+			\multirow{6}{*}{Przykładowe różnice} & \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} basfu}  & \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} aeolipile} \\
+			& \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} gral} & \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} donowi} \\
+			& \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} meru} & \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} feroce} \\
+			& \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} noblów} & \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} geez} \\
+			& \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} późńmyż} & \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} tyiyn} \\
+			& \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} szwed} & \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} żad} \\
+			\hline
+		\end{tabular}
+	}
+	
 \end{frame}
 
 \end{document}
