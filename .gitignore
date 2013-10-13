@@ -15,6 +15,7 @@ TeX
 *.out
 *.snm
 *.synctex.gz
+*.vrb
 
 =======
 JAVA
