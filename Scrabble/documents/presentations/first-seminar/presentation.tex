@@ -758,6 +758,205 @@
 	\end{columns}
 \end{frame}
 
+\section{Algorytmy i~struktury danych}
+\subsection{Wyznaczanie możliwych ruchów}
 
+\begin{frame}
+	\frametitle{Wyznaczanie wszystkich legalnych ruchów}
+	
+	\begin{columns}
+		\begin{column}{.5\textwidth}
+		
+			\begin{itemize}
+				\item Algorytm opisany w~pracy \emph{The World's Fastest Scrabble Program} A.~W.~Appela i~G.~J.~Jacobsona.
+				\item Algorytm z~nawrotami.
+				\item Bazuje na skompresowanej, grafowej odmianie drzewa \emph{trie} o~nazwie \textbf{DAWG} (ang. \textbf{D}irected \textbf{A}cyclic \textbf{W}ord \textbf{G}raph).
+			\end{itemize}
+			
+		\end{column}
+		
+		\begin{column}{.5\textwidth}
+			\begin{tikzpicture}
+				\tikzstyle{every node}=[draw, shape=circle, minimum width = 15pt, minimum height = 15pt, text height = 0pt];
+				\node [fill=UniGreen] (root) at (0,0) {};
+				\node (n01) at (-1.3,-1) {};
+				\node (n02) at (0, -1) {};
+				\node (n03) at (1.3, -1) {};
+				\node [draw=none] (t01) at (-0.8, -0.5) {F};
+				\node [draw=none] (t02) at (0.15, -0.6) {K};
+				\node [draw=none] (t01) at (0.9, -0.5) {N};
+				\draw[->] (root) -- (n01);
+				\draw[->] (root) -- (n02);
+				\draw[->] (root) -- (n03);
+				\node (n11) at (-1.5, -2) {};
+				\node (n12) at (0, -2) {};
+				\node (n13) at (1.5, -2) {};
+				\node [draw=none] (t11) at (-1.6, -1.55) {L};
+				\node [draw=none] (t12) at (0.2, -1.6) {W};
+				\node [draw=none] (t13) at (1.65, -1.55) {A};
+				\draw[->] (n01) -- (n11);
+				\draw[->] (n02) -- (n12);
+				\draw[->] (n03) -- (n13);
+				\node (n21) at (-1.7, -3) {};
+				\node (n22) at (-0.7, -3) {};
+				\node (n23) at (0.7, -3) {};
+				\node (n24) at (1.7, -3) {};
+				\node [draw=none] (t21) at (-1.8, -2.6) {O};
+				\node [draw=none] (t22) at (-0.55, -2.55) {A};
+				\node [draw=none] (t23) at (0.6, -2.55) {O};
+				\node [draw=none] (t23) at (1.8, -2.6) {R};
+				\draw[->] (n11) -- (n21);
+				\draw[->] (n12) -- (n22);
+				\draw[->] (n12) -- (n23);
+				\draw[->] (n13) -- (n24);
+				\node (n31) at (-1.9, -4) {};
+				\node (n32) at (-0.9, -4) {};
+				\node (n33) at (0.9, -4) {};
+				\node (n34) at (1.9, -4) {};
+				\node [draw=none] (t31) at (-2.0, -3.55) {T};
+				\node [draw=none] (t32) at (-1.0, -3.55) {R};
+				\node [draw=none] (t33) at (1.0, -3.55) {T};
+				\node [draw=none] (t33) at (2.0, -3.55) {T};
+				\draw[->] (n21) -- (n31);
+				\draw[->] (n22) -- (n32);
+				\draw[->] (n23) -- (n33);
+				\draw[->] (n24) -- (n34);
+				\node [draw=none] (t41) at (-2.2, -4.55) {A};
+				\node [draw=none] (t42) at (-1.2, -4.55) {T};
+				\node [draw=none] (t43) at (1.2, -4.55) {A};
+				\node [draw=none] (t43) at (2.2, -4.55) {A};
+				\node [fill=black] (n41) at (-2.1, -5) {};
+				\node (n42) at (-1.1, -5) {};
+				\node [fill=black] (n43) at (1.1, -5) {};
+				\node [fill=black] (n44) at (2.1, -5) {};
+				\draw[->] (n31) -- (n41);
+				\draw[->] (n32) -- (n42);
+				\draw[->] (n33) -- (n43);
+				\draw[->] (n34) -- (n44);
+				\node [fill=black] (n52) at (-1.3, -6) {};
+				\node [draw=none] (t32) at (-1.4, -5.55) {A};
+				\draw[->] (n42) -- (n52);
+			\end{tikzpicture}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Trie vs DAWG}
+	
+	\begin{columns}
+	\begin{column}{.55\textwidth}
+			\begin{tikzpicture}
+				\tikzstyle{every node}=[draw, shape=circle, minimum width = 15pt, minimum height = 15pt, text height = 0pt];
+				\node [fill=UniGreen] (root) at (0,0) {};
+				\node (n01) at (-1.3,-1) {};
+				\node (n02) at (0, -1) {};
+				\node (n03) at (1.3, -1) {};
+				\node [draw=none] (t01) at (-0.8, -0.5) {F};
+				\node [draw=none] (t02) at (0.15, -0.6) {K};
+				\node [draw=none] (t01) at (0.9, -0.5) {N};
+				\draw[->] (root) -- (n01);
+				\draw[->] (root) -- (n02);
+				\draw[->] (root) -- (n03);
+				\node (n11) at (-1.5, -2) {};
+				\node (n12) at (0, -2) {};
+				\node (n13) at (1.5, -2) {};
+				\node [draw=none] (t11) at (-1.6, -1.55) {L};
+				\node [draw=none] (t12) at (0.2, -1.6) {W};
+				\node [draw=none] (t13) at (1.65, -1.55) {A};
+				\draw[->] (n01) -- (n11);
+				\draw[->] (n02) -- (n12);
+				\draw[->] (n03) -- (n13);
+				\node (n21) at (-1.7, -3) {};
+				\node (n22) at (-0.7, -3) {};
+				\node (n23) at (0.7, -3) {};
+				\node (n24) at (1.7, -3) {};
+				\node [draw=none] (t21) at (-1.8, -2.6) {O};
+				\node [draw=none] (t22) at (-0.55, -2.55) {A};
+				\node [draw=none] (t23) at (0.6, -2.55) {O};
+				\node [draw=none] (t23) at (1.8, -2.6) {R};
+				\draw[->] (n11) -- (n21);
+				\draw[->] (n12) -- (n22);
+				\draw[->] (n12) -- (n23);
+				\draw[->] (n13) -- (n24);
+				\node (n31) at (-1.9, -4) {};
+				\node (n32) at (-0.9, -4) {};
+				\node (n33) at (0.9, -4) {};
+				\node (n34) at (1.9, -4) {};
+				\node [draw=none] (t31) at (-2.0, -3.55) {T};
+				\node [draw=none] (t32) at (-1.0, -3.55) {R};
+				\node [draw=none] (t33) at (1.0, -3.55) {T};
+				\node [draw=none] (t33) at (2.0, -3.55) {T};
+				\draw[->] (n21) -- (n31);
+				\draw[->] (n22) -- (n32);
+				\draw[->] (n23) -- (n33);
+				\draw[->] (n24) -- (n34);
+				\node [draw=none] (t41) at (-2.2, -4.55) {A};
+				\node [draw=none] (t42) at (-1.2, -4.55) {T};
+				\node [draw=none] (t43) at (1.2, -4.55) {A};
+				\node [draw=none] (t43) at (2.2, -4.55) {A};
+				\node [fill=black] (n41) at (-2.1, -5) {};
+				\node (n42) at (-1.1, -5) {};
+				\node [fill=black] (n43) at (1.1, -5) {};
+				\node [fill=black] (n44) at (2.1, -5) {};
+				\draw[->] (n31) -- (n41);
+				\draw[->] (n32) -- (n42);
+				\draw[->] (n33) -- (n43);
+				\draw[->] (n34) -- (n44);
+				\node [fill=black] (n52) at (-1.3, -6) {};
+				\node [draw=none] (t32) at (-1.4, -5.55) {A};
+				\draw[->] (n42) -- (n52);
+				\node [draw=none, color=red, text width=60pt, text height=20pt] (label) at (2, -5.5) {20W 19K};
+			\end{tikzpicture}
+		\end{column}
+		\begin{column}{.5\textwidth}
+			\begin{tikzpicture}
+				\tikzstyle{every node}=[draw, shape=circle, minimum width = 15pt, minimum height = 15pt, text height = 0pt];
+				\node [fill=UniGreen] (root) at (0,0) {};
+				\node (n01) at (-1.3,-1) {};
+				\node (n02) at (0, -1) {};
+				\node (n03) at (1.3, -1) {};
+				\node [draw=none] (t01) at (-0.8, -0.5) {F};
+				\node [draw=none] (t02) at (-0.15, -0.6) {K};
+				\node [draw=none] (t01) at (0.9, -0.5) {N};
+				\draw[->] (root) -- (n01);
+				\draw[->] (root) -- (n02);
+				\draw[->] (root) -- (n03);
+				\node (n11) at (-1.5, -2) {};
+				\node (n12) at (0, -2) {};
+				\node [draw=none] (t11) at (-1.6, -1.55) {L};
+				\node [draw=none] (t12) at (-0.2, -1.6) {W};
+				\node [draw=none] (t23) at (0.6, -1.7) {A};
+				\draw[->] (n01) -- (n11);
+				\draw[->] (n02) -- (n12);
+				\node (n21) at (-1.7, -3) {};
+				\node (n22) at (0, -3) {};
+				\node [draw=none] (t21) at (-1.8, -2.6) {O};
+				\node [draw=none] (t22) at (-0.8, -2.35) {O};
+				\node [draw=none] (t23) at (-0.2, -2.6) {A};
+				\draw[->] (n11) -- (n21);
+				\draw[->, color=UniGreen] (n12) -- (n21);
+				\draw[->] (n12) -- (n22);
+				\draw[->, color=UniGreen] (n03) -- (n22);
+				\node (n31) at (-1.9, -4) {};
+				\node (n32) at (0, -4) {};
+				\node [draw=none] (t31) at (-2.0, -3.55) {T};
+				\node [draw=none] (t32) at (-0.2, -3.6) {R};
+				\draw[->] (n21) -- (n31);
+				\draw[->] (n22) -- (n32);
+				\node [fill=black] (n41) at (-2.1, -5) {};
+				\node (n42) at (0, -5) {};
+				\node [draw=none] (t41) at (-2.2, -4.55) {A};
+				\node [draw=none] (t42) at (-0.2, -4.6) {T};
+				\draw[->] (n31) -- (n41);
+				\draw[->] (n32) -- (n42);
+				\node [fill=black] (n51) at (0, -6) {};
+				\node [draw=none] (t51) at (-0.2, -5.6) {A};
+				\draw[->] (n42) -- (n51);
+				\node [draw=none, color=green, text width=60pt, text height=20pt] (label) at (-1.2, -5.5) {13W 14K};
+			\end{tikzpicture}
+		\end{column}
+	\end{columns}
+\end{frame}
 
 \end{document}
