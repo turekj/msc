@@ -1,0 +1,1430 @@
+\documentclass[10pt,a4paper]{beamer}
+\usetheme{Malmoe}
+\definecolor{Board}{RGB}{60,145,143}
+\definecolor{DoubleWordBonus}{RGB}{239,174,154}
+\definecolor{DoubleLetterBonus}{RGB}{141,201,240}
+\definecolor{TripleLetterBonus}{RGB}{54,156,219}
+\definecolor{Tile}{RGB}{247,225,190}
+\definecolor{UniGreen}{RGB}{0,100,200}
+\setbeamercolor{title}{fg=UniGreen}
+\setbeamercolor{frametitle}{fg=UniGreen}
+\setbeamercolor{structure}{fg=UniGreen}
+\usepackage[utf8]{inputenc}
+\usepackage[MeX]{polski}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
+\author{\texorpdfstring{Jakub Turek \newline \href{mailto:jkbturek@gmail.com}{ jkbturek@gmail.com }}{Jakub Turek}}
+\title{Wykorzystanie sztucznej inteligencji w grze Scrabble}
+\institute{Wydział Elektroniki i Technik Informacyjnych}
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\section{Wstęp}
+
+\begin{frame}
+	\begin{block}{Scrabble}
+		\textbf{Gra słowna polegająca na układaniu na określonej planszy wyrazów z~losowanych liter.}
+		
+		\vspace{10mm}
+		
+		\emph{Wielki słownik ortograficzny - PWN 2003, 2006, 2008 - E. Polański}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Historia Scrabble}
+	
+	\begin{itemize}
+		\item 1938 r. - gra \emph{Lexiko}, Alfred Mosher Butts.
+		\item Lata 40. - \emph{Criss-Crossword} - udoskonalona wersja \emph{Lexiko}.
+		\item 1948 r. - James Burnot, \emph{Scrabble}.
+		\item Lata 80. - Hasbro.
+		\item Lata 80. - teleturniej \emph{Scrabble}.
+		\item Obecnie - 121 krajów, 29 różnych języków.
+		\item Do chwili obecnej - 150 milionów sprzedanych egzemplarzy.
+	\end{itemize}
+\end{frame}
+
+\subsection{Zasady}
+
+\begin{frame}
+	\frametitle{Plansza}
+	
+	\begin{columns}[onlytextwidth]
+		\begin{column}{0.55\textwidth}
+			\includegraphics[scale=0.17]{graphics/board.jpg}
+		\end{column}
+		\begin{column}{0.45\textwidth}
+			\begin{itemize}
+				\item Wymiary $15 \times 15$.
+				\item Premie:
+					\begin{itemize}
+						\item literowe:
+							\begin{itemize}
+								\item podwójna,
+								\item potrójna.
+							\end{itemize}
+						\item słowne:
+							\begin{itemize}
+								\item podwójna,
+								\item potrójna.
+							\end{itemize}
+					\end{itemize}
+				\item Środek planszy:
+					\begin{itemize}
+						\item pierwszy wyraz musi przechodzić przez pole,
+						\item podwójna premia słowna.
+					\end{itemize}
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Płytki (polska wersja)}
+	
+	\begin{columns}[onlytextwidth]
+		\begin{column}{0.55\textwidth}
+			\scalebox{0.8}{
+				\begin{tabular}{|c|c|c||c|c|c||c|c|c|}
+					\hline
+					\multirow{16}{*}{
+						\begin{sideways}
+							Litera
+						\end{sideways}	} &
+					\multirow{16}{*}{
+						\begin{sideways}
+							Ilość płytek
+						\end{sideways}} & 
+					\multirow{16}{*}{
+						\begin{sideways}
+							Liczba punktów
+						\end{sideways}} & \textbf{A} & 9 & 1 & \textbf{M} & 3 & 2 \\
+					\cline{4-9}
+					&&& \textbf{Ą} & 1 & 5 & \textbf{N} & 5 & 1 \\
+					\cline{4-9}
+					&&& \textbf{B} & 2 & 3 & \textbf{Ń} & 1 & 7 \\			
+					\cline{4-9}
+					&&& \textbf{C} & 3 & 2 & \textbf{O} & 6 & 1 \\			
+					\cline{4-9}
+					&&& \textbf{Ć} & 1 & 6 & \textbf{Ó} & 1 & 5 \\
+					\cline{4-9}
+					&&& \textbf{D} & 3 & 2 & \textbf{P} & 3 & 2 \\	
+					\cline{4-9}
+					&&& \textbf{E} & 7 & 1 & \textbf{R} & 4 & 1 \\
+					\cline{4-9}
+					&&& \textbf{Ę} & 1 & 5 & \textbf{S} & 4 & 1 \\
+					\cline{4-9}
+					&&& \textbf{F} & 1 & 5 & \textbf{Ś} & 1 & 5 \\
+					\cline{4-9}				
+					&&& \textbf{G} & 2 & 3 & \textbf{T} & 3 & 2 \\
+					\cline{4-9}
+					&&& \textbf{H} & 2 & 3 & \textbf{U} & 2 & 3 \\
+					\cline{4-9}
+					&&& \textbf{I} & 8 & 1 & \textbf{W} & 4 & 1 \\
+					\cline{4-9}
+					&&& \textbf{J} & 2 & 3 & \textbf{Y} & 4 & 2 \\
+					\cline{4-9}
+					&&& \textbf{K} & 3 & 2 & \textbf{Z} & 5 & 1 \\
+					\cline{4-9}
+					&&& \textbf{L} & 3 & 2 & \textbf{Ź} & 1 & 9 \\
+					\cline{4-9}
+					&&& \textbf{Ł} & 2 & 3 & \textbf{Ż} & 1 & 5 \\
+					\hline
+				\end{tabular}
+			}
+		\end{column}
+		\begin{column}{0.45\textwidth}
+			\begin{itemize}
+				\item 98 płytek z~literami.
+				\item Każda litera ma przyporządkowaną punktację.
+				\item Ilość płytek proporcjonalna do częstotliwości występowania litery.
+				\item Punktacja odwrotnie proporcjonalna do częstotliwości występowania litery.
+				\item 2 \emph{blanki}.
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Reguły}
+	
+	\begin{itemize}
+		\item Na stojaku 7 wylosowanych płytek.
+		\item Naprzemienne ruchy.
+		\item Prawidłowy ruch:
+			\begin{itemize}
+				\item Płytki wyłożone w~jednym wierszu (lub kolumnie) w~sposób ciągły.
+				\item Wykorzystanie przynajmniej jednej litery znajdującej się już na planszy.
+				\item Tworzy poprawny wyraz czytany od lewej do prawej (lub od góry do dołu).
+				\item Wszystkie płytki przylegające tworzą poprawne wyrazy w~układzie krzyżówkowym.
+			\end{itemize}
+		\item Koniec gry - pierwszy gracz, który nie ma płytek na stojaku.
+		\item Wygrywa gracz z~największą liczbą punktów.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Dopuszczalne słowa}
+	
+	Dopuszczalne jest wykorzystanie wszystkich słów znajdujących się w~dowolnym słowniku języka polskiego (wraz z~poprawnymi odmianami) z~wyłączeniem:
+	
+	\begin{itemize}
+		\item nazw własnych (wyrazów pisanych z~wielkiej litery),
+		\item skrótów,
+		\item przedrostków, przyrostków,
+		\item wyrazów wymagających użycia apostrofu lub łącznika.
+	\end{itemize}
+\end{frame}
+
+\section{Słowniki}
+\subsection{Polskie słowniki wyrazów do gier}
+
+\begin{frame}[fragile]
+	\frametitle{Słownik wyrazów do gier}
+	
+	\textbf{Słownik wyrazów do gier} to lista wszystkich słów, wraz ze wszystkimi poprawnymi odmianami, dopuszczalnych do wykorzystania w~grach słownych. 
+	
+	\begin{tikzpicture}
+		\tikzstyle{every node}=[draw, shape=ellipse, text width=3.5cm, align=center];
+		\node (alternative) at (2.75, -2) {Alternatywny słownik wyrazów do gier};
+        \node (pfs) at (-2.75, -2) {Oficjalny Słownik Polskiego Scrabblisty};
+		\node (dictionaries) at (0, 0) {Polskie słowniki wyrazów do gier};
+		\draw[->] (dictionaries) -- (pfs);
+		\draw[->] (dictionaries) -- (alternative);
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Porównanie OSPS i~słownika alternatywnego}
+	
+	\scalebox{0.75}{
+		\begin{tabular}{|l|c|c|}
+			\cline{2-3}
+			\multicolumn{1}{c|}{} & \textbf{OSPS} & \textbf{Słownik alternatywny} \\
+			\hline
+			\multirow{2}{*}{Wydawca} & Polska Federacja Scrabble, & \multirow{2}{*}{Serwis z~grami online Kurnik} \\
+			& Polskie Wydawnictwo Naukowe & \\
+			\hline
+			Przeznaczenie & Gry turniejowe & Gra ,,Literaki'' \\
+			\hline
+			Liczba słów & 2 477 212 & 2 703 830 \\
+			\hline
+			\multirow{3}{*}{Źródło} & Zamknięta lista słowników języka & Otwarta lista słowników języka \\
+			& polskiego, ortograficznych, wyrazów & polskiego, ortograficznych, \\
+			& obcych wydawnictwa PWN & wyrazów obcych \\
+			\hline
+			\multirow{6}{*}{Przykładowe różnice} & \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} basfu}  & \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} aeolipile} \\
+			& \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} gral} & \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} donowi} \\
+			& \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} meru} & \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} feroce} \\
+			& \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} noblów} & \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} geez} \\
+			& \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} późńmyż} & \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} tyiyn} \\
+			& \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} szwed} & \multicolumn{1}{l|}{\textcolor{UniGreen}{$\blacktriangleright$} żad} \\
+			\hline
+		\end{tabular}
+	}
+\end{frame}
+
+\begin{frame}
+
+	\begin{center}
+		\LARGE{Dalsze rozważania przeprowadzane będą dla słownika alternatywnego.}
+	\end{center}
+
+\end{frame}
+
+\subsection{Statystyka}
+
+\begin{frame}
+	\frametitle{Statystyczny opis słownika}
+	
+	Na podstawie statystycznego opisu słownika można wyprowadzić szereg użytecznych heurystyk:
+	
+	\begin{itemize}
+		\item Częstotliwość występowania liter.
+		\item Najbardziej prawdopodobne n-gramy.
+		\item Najlepsze otwarcia.
+		\item Najlepsze kombinacje liter.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Prawdopodobieństwo występowania liter}
+			
+		\begin{tikzpicture}
+			\begin{axis}[	ytick={0, 0.01, ..., 0.1}, 
+					yticklabel style={/pgf/number format/fixed},
+					bar width=2mm,
+					symbolic x coords={a,i,o,e,n,y,z,w,r,c,m,s,k,p,t,u,l,d,el,j,b,g,on,h,es,zet,een,f,uu,en,ci,ziet},
+					xticklabels={a,i,o,e,n,y,z,w,r,c,m,s,k,p,t,u,l,d,ł,j,b,g,ą,h,ś,ż,ę,f,ó,ń,ć,ź},
+					xticklabel style={text height=1.5ex},
+					xtick=data,
+					legend entries={Prawdopodobieństwo dla słownika,Prawdopodobieństwo w Scrabble},
+					height=.9\textheight,
+					width=\textwidth	]
+					
+    			\addplot[ybar,fill=UniGreen, area legend] coordinates {
+        			(a,0.0937997771175)
+        			(i,0.0894002903657)
+        			(o,0.0796720098207)
+        			(e,0.0765123987403)
+        			(n,0.0683027202572)
+        			(y,0.0497071483395)
+        			(z,0.0466694841626)
+        			(w,0.0453746978807)
+        			(r,0.0440417929225)
+        			(c,0.0409715964269)
+        			(m,0.0387468458849)
+        			(s,0.0322800452968)
+        			(k,0.0316402758911)
+        			(p,0.029784849318)
+        			(t,0.0273647734205)
+        			(u,0.0271062565005)
+        			(l,0.023888810187)
+        			(d,0.0219487338635)
+        			(el,0.0210803509823)
+        			(j,0.0195483416618)
+        			(b,0.0192369186479)
+        			(g,0.0132131819509)
+        			(on,0.0128586125387)
+        			(h,0.0115084555932)
+        			(es,0.0096922978289)
+        			(zet,0.0064777761380)
+        			(een,0.0064627258330)
+        			(f,0.0044409243818)
+        			(uu,0.0035346199898)
+        			(en,0.0027972207673)
+        			(ci, 0.0011952505312)
+        			(ziet,0.0007161382021)
+    			};
+    			
+    			\addplot[ybar,fill=lightgray, area legend] coordinates {
+        			(a,0.09)
+        			(i,0.08)
+        			(o,0.06)
+        			(e,0.07)
+        			(n,0.05)
+        			(y,0.04)
+        			(z,0.05)
+        			(w,0.04)
+        			(r,0.04)
+        			(c,0.03)
+        			(m,0.03)
+        			(s,0.04)
+        			(k,0.03)
+        			(p,0.03)
+        			(t,0.03)
+        			(u,0.02)
+        			(l,0.03)
+        			(d,0.03)
+        			(el,0.02)
+        			(j,0.02)
+        			(b,0.02)
+        			(g,0.02)
+        			(on,0.01)
+        			(h,0.02)
+        			(es,0.01)
+        			(zet,0.01)
+        			(een,0.01)
+        			(f,0.01)
+        			(uu,0.01)
+        			(en,0.01)
+        			(ci, 0.01)
+        			(ziet,0.01)
+    			};
+    			\addplot[forget plot,ybar,fill=UniGreen] coordinates {
+        			(a,0)
+        			(i,0)
+        			(o,0)
+        			(e,0)
+        			(n,0)
+        			(y,0)
+        			(z,0.0466694841626)
+        			(w,0)
+        			(r,0)
+        			(c,0)
+        			(m,0)
+        			(s,0.0322800452968)
+        			(k,0)
+        			(p,0.029784849318)
+        			(t,0.0273647734205)
+        			(u,0)
+        			(l,0.023888810187)
+        			(d,0.0219487338635)
+        			(el,0)
+        			(j,0.0195483416618)
+        			(b,0.0192369186479)
+        			(g,0.0132131819509)
+        			(on,0)
+        			(h,0.0115084555932)
+        			(es,0.0096922978289)
+        			(zet,0.0064777761380)
+        			(een,0.0064627258330)
+        			(f,0.0044409243818)
+        			(uu,0.0035346199898)
+        			(en,0.0027972207673)
+        			(ci, 0.0011952505312)
+        			(ziet,0.0007161382021)
+    			};
+			\end{axis}
+		\end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Prawdopodobieństwo występowania bigramów}
+	
+	\begin{columns}
+		\begin{column}{.5\textwidth}
+			\begin{block}{N-gram}
+				Sekwencja składająca się z n~liter, znaków lub wyrazów.
+			\end{block}
+			
+		\begin{itemize}
+			\item Unigram.
+			\item Bigram.
+			\item Trigram.
+			\item 4-gram.
+			\item ...
+			\item N-gram.
+		\end{itemize}
+		
+		\end{column}
+		
+		\begin{column}{.5\textwidth}
+			\begin{tabular}{|c|c|}
+				\hline
+				Bigram	&	Wystąpienia	\\
+				\hline
+				ni		&	1 077 436	\\
+				ie		&	1 028 249	\\
+				ow	&	645 018		\\
+				an		&	507 205		\\
+				wa	&	484 295		\\
+				za		&	313 370		\\
+				po		&	301 636		\\
+				ch		&	296 749		\\
+				ał		&	294 734		\\
+				ia		&	284 247		\\
+				\hline
+			\end{tabular}
+
+		\end{column}
+
+	\end{columns}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Prawdopodobieństwo występowania n-gramów}
+	
+	\begin{columns}
+		\begin{column}{.3\textwidth}
+			\scalebox{.8}{
+				\begin{tabular}{|c|c|}
+					\hline
+					Trigram	&	Wystąpienia	\\
+					\hline
+					nie	&	635 196	\\
+					owa	&	307 277	\\
+					ani	&	195 186	\\
+					wan	&	180 460	\\
+					cie	&	148 513	\\
+					nia	&	142 201	\\
+					jąc	&	131 792	\\
+					prz	&	130 283	\\
+					wał	&	126 134	\\
+					rze	&	116 370	\\
+					\hline
+				\end{tabular}
+			}
+
+		\end{column}
+		
+		\begin{column}{.3\textwidth}
+			\scalebox{.8}{
+				\begin{tabular}{|c|c|}
+					\hline
+					4-gram	&	Wystąpienia	\\
+					\hline
+					owan	&	127 626	\\
+					ował		&	88 130		\\
+					wani		&	78 095		\\
+					niep		&	77 449		\\
+					prze		&	73 230		\\
+					ując		&	67 062		\\
+					ania		&	61 398		\\
+					ając		&	59 499		\\
+					ście		&	56 462		\\
+					łaby		&	55 380		\\
+					\hline
+				\end{tabular}
+			}
+
+		\end{column}
+		
+		\begin{column}{.3\textwidth}
+			\scalebox{.8}{
+				\begin{tabular}{|c|c|}
+					\hline
+					5-gram	&	Wystąpienia	\\
+					\hline
+					owani	&	54 991	\\
+					niepo	&	40 329	\\
+					ałaby	&	37 581	\\
+					yście		&	33 161	\\
+					owała	&	28 175	\\
+					niewy	&	26 193	\\
+					owane	&	25 555	\\
+					wania	&	25 551	\\
+					owany	&	25 542	\\
+					ałyby	&	25 282	\\
+					\hline
+				\end{tabular}
+			}
+
+		\end{column}
+
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Prawdopodobieństwo występowania n-gramów (2)}
+	
+	\begin{columns}
+		\begin{column}{.5\textwidth}
+				\begin{tabular}{|c|c|}
+					\hline
+					6-gram	&	Wystąpienia	\\
+					\hline
+					owania	&	17 609	\\
+					wałaby	&	17 161	\\
+					byście	&	16 821	\\
+					liście		&	15 910	\\
+					aniami	&	15 585	\\
+					aniach	&	15 585	\\
+					łyście	&	15 405	\\
+					owanie	&	14 674	\\
+					owałby	&	14 437	\\
+					nieprz	&	14 328	\\
+					\hline
+				\end{tabular}
+		\end{column}
+		
+		\begin{column}{.5\textwidth}
+				\begin{tabular}{|c|c|}
+					\hline
+					7-gram	&	Wystąpienia	\\
+					\hline
+					owałaby	&	12 401		\\
+					libyśmy		&	12 267		\\
+					łybyśmy	&	12 094		\\
+					ałyście		&	9 902		\\
+					aliście		&	9 304		\\
+					ibyście		&	8 445		\\
+					libyści		&	8 443		\\
+					ybyście		&	8 317		\\
+					łybyści		&	8 314		\\
+					nieprze		&	8 111		\\
+					\hline
+				\end{tabular}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Najlepsze otwarcia}
+	
+	\begin{tikzpicture}
+		\tikzstyle{every node}=[draw, shape=rectangle, rounded corners = 1pt, minimum width = 15pt, minimum height = 15pt, align=center, text height = 7pt];
+		\node [fill=Board] at (0, 0) { };
+		\node [fill=Board] at (.6, 0) { };
+		\node [fill=DoubleLetterBonus] at (1.2, 0) {x2};
+		\node [fill=Board] at (1.8, 0) { };
+		\node [fill=Board] at (2.4, 0) { };
+		\node [fill=Board] at (3, 0) { };
+		\node [fill=DoubleWordBonus] at (3.6, 0) { };
+		\node [fill=Board] at (4.2, 0) { };
+		\node [fill=Board] at (4.8, 0) { };
+		\node [fill=Board] at (5.4, 0) { };
+		\node [fill=DoubleLetterBonus] at (6, 0) {x2};
+		\node [fill=Board] at (6.6, 0) { };
+		\node [fill=Board] at (7.2, 0) { };		
+		\node [shape=star, star points=8, rounded corners = 0pt, fill=black, text height = 0pt] at (3.6, 0) {};
+		\node [fill=Tile] at (0, -.6) {P};
+		\node [fill=Tile] at (.6, -.6) {Ó};
+		\node [fill=Tile] at (1.2, -.6) {Ź};
+		\node [fill=Tile] at (1.8, -.6) {N};
+		\node [fill=Tile] at (2.4, -.6) {O};
+		\node [fill=Tile] at (3, -.6) {Ś};
+		\node [fill=Tile] at (3.6, -.6) {Ć};
+		\node [fill=Board] at (4.2, -.6) { };
+		\node [fill=Board] at (4.8, -.6) { };
+		\node [fill=Board] at (5.4, -.6) { };
+		\node [fill=DoubleLetterBonus] at (6, -.6) {x2};
+		\node [fill=Board] at (6.6, -.6) { };
+		\node [fill=Board] at (7.2, -.6) { };	
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -.6) {126 punktów};
+		\node [fill=Board] at (0, -1.2) { };
+		\node [fill=Board] at (.6, -1.2) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -1.2) {x2};
+		\node [fill=Board] at (1.8, -1.2) { };
+		\node [fill=Board] at (2.4, -1.2) { };
+		\node [fill=Board] at (3, -1.2) { };
+		\node [fill=Tile] at (3.6, -1.2) {B};
+		\node [fill=Tile] at (4.2, -1.2) {Ł};
+		\node [fill=Tile] at (4.8, -1.2) {Ą};
+		\node [fill=Tile] at (5.4, -1.2) {D};
+		\node [fill=Tile] at (6, -1.2) {Ź};
+		\node [fill=Tile] at (6.6, -1.2) {Ż};
+		\node [fill=Tile] at (7.2, -1.2) {E};
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -1.2) {124 punkty};
+		\node [fill=Board] at (0, -1.8) { };
+		\node [fill=Board] at (.6, -1.8) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -1.8) {x2};
+		\node [fill=Board] at (1.8, -1.8) { };
+		\node [fill=Board] at (2.4, -1.8) { };
+		\node [fill=Board] at (3, -1.8) { };
+		\node [fill=Tile] at (3.6, -1.8) {U};
+		\node [fill=Tile] at (4.2, -1.8) {B};
+		\node [fill=Tile] at (4.8, -1.8) {O};
+		\node [fill=Tile] at (5.4, -1.8) {D};
+		\node [fill=Tile] at (6, -1.8) {Ź};
+		\node [fill=Tile] at (6.6, -1.8) {Ż};
+		\node [fill=Tile] at (7.2, -1.8) {E};		
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -1.8) {124 punkty};
+		\node [fill=Board] at (0, -2.4) { };
+		\node [fill=Board] at (.6, -2.4) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -2.4) {x2};
+		\node [fill=Board] at (1.8, -2.4) { };
+		\node [fill=Board] at (2.4, -2.4) { };
+		\node [fill=Board] at (3, -2.4) { };
+		\node [fill=Tile] at (3.6, -2.4) {P};
+		\node [fill=Tile] at (4.2, -2.4) {Ó};
+		\node [fill=Tile] at (4.8, -2.4) {J};
+		\node [fill=Tile] at (5.4, -2.4) {D};
+		\node [fill=Tile] at (6, -2.4) {Ź};
+		\node [fill=Tile] at (6.6, -2.4) {K};
+		\node [fill=Tile] at (7.2, -2.4) {Ę};		
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -2.4) {124 punkty};
+		\node [fill=Board] at (0, -3) { };
+		\node [fill=Board] at (.6, -3) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -3) {x2};
+		\node [fill=Board] at (1.8, -3) { };
+		\node [fill=Board] at (2.4, -3) { };
+		\node [fill=Board] at (3, -3) { };
+		\node [fill=Tile] at (3.6, -3) {G};
+		\node [fill=Tile] at (4.2, -3) {Ł};
+		\node [fill=Tile] at (4.8, -3) {Ó};
+		\node [fill=Tile] at (5.4, -3) {D};
+		\node [fill=Tile] at (6, -3) {Ź};
+		\node [fill=Tile] at (6.6, -3) {Ż};
+		\node [fill=Tile] at (7.2, -3) {E};		
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -3) {124 punkty};
+		\node [fill=Board] at (0, -3.6) { };
+		\node [fill=Board] at (.6, -3.6) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -3.6) {x2};
+		\node [fill=Board] at (1.8, -3.6) { };
+		\node [fill=Board] at (2.4, -3.6) { };
+		\node [fill=Board] at (3, -3.6) { };
+		\node [fill=Tile] at (3.6, -3.6) {U};
+		\node [fill=Tile] at (4.2, -3.6) {B};
+		\node [fill=Tile] at (4.8, -3.6) {Ą};
+		\node [fill=Tile] at (5.4, -3.6) {D};
+		\node [fill=Tile] at (6, -3.6) {Ź};
+		\node [fill=Tile] at (6.6, -3.6) {Ż};
+		\node [fill=Tile] at (7.2, -3.6) {E};		
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -3.6) {124 punkty};
+		\node [fill=Board] at (0, -4.2) { };
+		\node [fill=Board] at (.6, -4.2) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -4.2) {x2};
+		\node [fill=Board] at (1.8, -4.2) { };
+		\node [fill=Board] at (2.4, -4.2) { };
+		\node [fill=Board] at (3, -4.2) { };
+		\node [fill=Tile] at (3.6, -4.2) {U};
+		\node [fill=Tile] at (4.2, -4.2) {G};
+		\node [fill=Tile] at (4.8, -4.2) {Ó};
+		\node [fill=Tile] at (5.4, -4.2) {D};
+		\node [fill=Tile] at (6, -4.2) {Ź};
+		\node [fill=Tile] at (6.6, -4.2) {Ż};
+		\node [fill=Tile] at (7.2, -4.2) {E};		
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -4.2) {124 punkty};
+		\node [fill=Board] at (0, -4.8) { };
+		\node [fill=Board] at (.6, -4.8) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -4.8) {x2};
+		\node [fill=Board] at (1.8, -4.8) { };
+		\node [fill=Board] at (2.4, -4.8) { };
+		\node [fill=Board] at (3, -4.8) { };
+		\node [fill=Tile] at (3.6, -4.8) {B};
+		\node [fill=Tile] at (4.2, -4.8) {L};
+		\node [fill=Tile] at (4.8, -4.8) {U};
+		\node [fill=Tile] at (5.4, -4.8) {Ź};
+		\node [fill=Tile] at (6, -4.8) {Ń};
+		\node [fill=Tile] at (6.6, -4.8) {Ż};
+		\node [fill=Tile] at (7.2, -4.8) {E};		
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -4.8) {124 punkty};
+		\node [fill=Board] at (0, -5.4) { };
+		\node [fill=Board] at (.6, -5.4) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -5.4) {x2};
+		\node [fill=Board] at (1.8, -5.4) { };
+		\node [fill=Board] at (2.4, -5.4) { };
+		\node [fill=Board] at (3, -5.4) { };
+		\node [fill=Tile] at (3.6, -5.4) {P};
+		\node [fill=Tile] at (4.2, -5.4) {Ó};
+		\node [fill=Tile] at (4.8, -5.4) {J};
+		\node [fill=Tile] at (5.4, -5.4) {D};
+		\node [fill=Tile] at (6, -5.4) {Ź};
+		\node [fill=Tile] at (6.6, -5.4) {K};
+		\node [fill=Tile] at (7.2, -5.4) {Ą};		
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -5.4) {124 punkty};
+		\node [fill=Board] at (0, -6) { };
+		\node [fill=Board] at (.6, -6) { };
+		\node [fill=DoubleLetterBonus] at (1.2, -6) {x2};
+		\node [fill=Board] at (1.8, -6) { };
+		\node [fill=Board] at (2.4, -6) { };
+		\node [fill=Tile] at (3, -6) {U};
+		\node [fill=Tile] at (3.6, -6) {G};
+		\node [fill=Tile] at (4.2, -6) {R};
+		\node [fill=Tile] at (4.8, -6) {Z};
+		\node [fill=Tile] at (5.4, -6) {Ą};
+		\node [fill=Tile] at (6, -6) {Ź};
+		\node [fill=Tile] at (6.6, -6) {Ć};
+		\node [fill=Board] at (7.2, -6) { };		
+		\node [draw=none, fill=none, align=left, text width=55pt] at (8.6, -6) {124 punkty};
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Najlepsze kombinacje liter}
+	
+		Najlepsze kombinacje liter to zawartość stojaka, która umożliwia ułożenie (niezależnie) jak największej ilości słów.
+	
+		\vspace{1em}
+	
+		\begin{columns}
+		\begin{column}{.5\textwidth}
+			\scalebox{.8}{
+				\begin{tabular}{|c|c|}
+					\hline
+					6 liter	&	Kombinacje	\\
+					\hline
+					e, m, n, o, r, t	&	10 wyrazów	\\
+					a, i, k, l, n, o		&	10 wyrazów	\\
+					a, e, i, l, m, n	&	10 wyrazów	\\
+					e, i, k, m, o, s	&	9 wyrazów	\\
+					a, i, k, m, n, o	&	9 wyrazów	\\
+					a, i, l, m, o, s	&	9 wyrazów	\\
+					a, i, k, o, t, w	&	9 wyrazów	\\
+					a, i, k, n, t, u		&	9 wyrazów	\\
+					a, e, k, l, s, z		&	9 wyrazów	\\
+					a, e, i, k, m, r	&	9 wyrazów	\\
+					\hline
+				\end{tabular}
+			}
+
+		\end{column}
+		
+		\begin{column}{.5\textwidth}
+			\scalebox{.8}{
+				\begin{tabular}{|c|c|}
+					\hline
+					7 liter	&	Kombinacje	\\
+					\hline
+					e, i, k, l, n, o, w	&	12 wyrazów	\\
+					a, e, i, k, p, r, s	&	12 wyrazów	\\
+					a, e, i, k, l, n, p	&	12 wyrazów	\\
+					a, e, k, n, r, t, y	&	11 wyrazów	\\
+					a, i, k, m, o, p, s&	11 wyrazów	\\
+					a, i, k, m, o, r, w&	11 wyrazów	\\
+					a, a, i, k, l, m, s	&	10 wyrazów	\\
+					a, i, k, m, o, s, t&	10 wyrazów	\\
+					a, i, k, l, n, o, w	&	10 wyrazów	\\
+					a, i, k, l, m, n, o&	10 wyrazów	\\
+					\hline
+				\end{tabular}
+			}
+
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\section{Algorytmy i~struktury danych}
+\subsection{Wyznaczanie możliwych ruchów}
+
+\begin{frame}
+	\frametitle{Wyznaczanie wszystkich legalnych ruchów}
+	
+	\begin{columns}
+		\begin{column}{.5\textwidth}
+		
+			\begin{itemize}
+				\item Algorytm opisany w~pracy \emph{The World's Fastest Scrabble Program} A.~W.~Appela i~G.~J.~Jacobsona.
+				\item Algorytm z~nawrotami.
+				\item Bazuje na skompresowanej, grafowej odmianie drzewa \emph{trie} o~nazwie \textbf{DAWG} (ang. \textbf{D}irected \textbf{A}cyclic \textbf{W}ord \textbf{G}raph).
+			\end{itemize}
+			
+		\end{column}
+		
+		\begin{column}{.5\textwidth}
+			\begin{tikzpicture}
+				\tikzstyle{every node}=[draw, shape=circle, minimum width = 15pt, minimum height = 15pt, text height = 0pt];
+				\node [fill=UniGreen] (root) at (0,0) {};
+				\node (n01) at (-1.3,-1) {};
+				\node (n02) at (0, -1) {};
+				\node (n03) at (1.3, -1) {};
+				\node [draw=none] (t01) at (-0.8, -0.5) {F};
+				\node [draw=none] (t02) at (0.15, -0.6) {K};
+				\node [draw=none] (t01) at (0.9, -0.5) {N};
+				\draw[->] (root) -- (n01);
+				\draw[->] (root) -- (n02);
+				\draw[->] (root) -- (n03);
+				\node (n11) at (-1.5, -2) {};
+				\node (n12) at (0, -2) {};
+				\node (n13) at (1.5, -2) {};
+				\node [draw=none] (t11) at (-1.6, -1.55) {L};
+				\node [draw=none] (t12) at (0.2, -1.6) {W};
+				\node [draw=none] (t13) at (1.65, -1.55) {A};
+				\draw[->] (n01) -- (n11);
+				\draw[->] (n02) -- (n12);
+				\draw[->] (n03) -- (n13);
+				\node (n21) at (-1.7, -3) {};
+				\node (n22) at (-0.7, -3) {};
+				\node (n23) at (0.7, -3) {};
+				\node (n24) at (1.7, -3) {};
+				\node [draw=none] (t21) at (-1.8, -2.6) {O};
+				\node [draw=none] (t22) at (-0.55, -2.55) {A};
+				\node [draw=none] (t23) at (0.6, -2.55) {O};
+				\node [draw=none] (t23) at (1.8, -2.6) {R};
+				\draw[->] (n11) -- (n21);
+				\draw[->] (n12) -- (n22);
+				\draw[->] (n12) -- (n23);
+				\draw[->] (n13) -- (n24);
+				\node (n31) at (-1.9, -4) {};
+				\node (n32) at (-0.9, -4) {};
+				\node (n33) at (0.9, -4) {};
+				\node (n34) at (1.9, -4) {};
+				\node [draw=none] (t31) at (-2.0, -3.55) {T};
+				\node [draw=none] (t32) at (-1.0, -3.55) {R};
+				\node [draw=none] (t33) at (1.0, -3.55) {T};
+				\node [draw=none] (t33) at (2.0, -3.55) {T};
+				\draw[->] (n21) -- (n31);
+				\draw[->] (n22) -- (n32);
+				\draw[->] (n23) -- (n33);
+				\draw[->] (n24) -- (n34);
+				\node [draw=none] (t41) at (-2.2, -4.55) {A};
+				\node [draw=none] (t42) at (-1.2, -4.55) {T};
+				\node [draw=none] (t43) at (1.2, -4.55) {A};
+				\node [draw=none] (t43) at (2.2, -4.55) {A};
+				\node [fill=black] (n41) at (-2.1, -5) {};
+				\node (n42) at (-1.1, -5) {};
+				\node [fill=black] (n43) at (1.1, -5) {};
+				\node [fill=black] (n44) at (2.1, -5) {};
+				\draw[->] (n31) -- (n41);
+				\draw[->] (n32) -- (n42);
+				\draw[->] (n33) -- (n43);
+				\draw[->] (n34) -- (n44);
+				\node [fill=black] (n52) at (-1.3, -6) {};
+				\node [draw=none] (t32) at (-1.4, -5.55) {A};
+				\draw[->] (n42) -- (n52);
+			\end{tikzpicture}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Trie vs DAWG}
+	
+	\begin{columns}
+	\begin{column}{.55\textwidth}
+			\begin{tikzpicture}
+				\tikzstyle{every node}=[draw, shape=circle, minimum width = 15pt, minimum height = 15pt, text height = 0pt];
+				\node [fill=UniGreen] (root) at (0,0) {};
+				\node (n01) at (-1.3,-1) {};
+				\node (n02) at (0, -1) {};
+				\node (n03) at (1.3, -1) {};
+				\node [draw=none] (t01) at (-0.8, -0.5) {F};
+				\node [draw=none] (t02) at (0.15, -0.6) {K};
+				\node [draw=none] (t01) at (0.9, -0.5) {N};
+				\draw[->] (root) -- (n01);
+				\draw[->] (root) -- (n02);
+				\draw[->] (root) -- (n03);
+				\node (n11) at (-1.5, -2) {};
+				\node (n12) at (0, -2) {};
+				\node (n13) at (1.5, -2) {};
+				\node [draw=none] (t11) at (-1.6, -1.55) {L};
+				\node [draw=none] (t12) at (0.2, -1.6) {W};
+				\node [draw=none] (t13) at (1.65, -1.55) {A};
+				\draw[->] (n01) -- (n11);
+				\draw[->] (n02) -- (n12);
+				\draw[->] (n03) -- (n13);
+				\node (n21) at (-1.7, -3) {};
+				\node (n22) at (-0.7, -3) {};
+				\node (n23) at (0.7, -3) {};
+				\node (n24) at (1.7, -3) {};
+				\node [draw=none] (t21) at (-1.8, -2.6) {O};
+				\node [draw=none] (t22) at (-0.55, -2.55) {A};
+				\node [draw=none] (t23) at (0.6, -2.55) {O};
+				\node [draw=none] (t23) at (1.8, -2.6) {R};
+				\draw[->] (n11) -- (n21);
+				\draw[->] (n12) -- (n22);
+				\draw[->] (n12) -- (n23);
+				\draw[->] (n13) -- (n24);
+				\node (n31) at (-1.9, -4) {};
+				\node (n32) at (-0.9, -4) {};
+				\node (n33) at (0.9, -4) {};
+				\node (n34) at (1.9, -4) {};
+				\node [draw=none] (t31) at (-2.0, -3.55) {T};
+				\node [draw=none] (t32) at (-1.0, -3.55) {R};
+				\node [draw=none] (t33) at (1.0, -3.55) {T};
+				\node [draw=none] (t33) at (2.0, -3.55) {T};
+				\draw[->] (n21) -- (n31);
+				\draw[->] (n22) -- (n32);
+				\draw[->] (n23) -- (n33);
+				\draw[->] (n24) -- (n34);
+				\node [draw=none] (t41) at (-2.2, -4.55) {A};
+				\node [draw=none] (t42) at (-1.2, -4.55) {T};
+				\node [draw=none] (t43) at (1.2, -4.55) {A};
+				\node [draw=none] (t43) at (2.2, -4.55) {A};
+				\node [fill=black] (n41) at (-2.1, -5) {};
+				\node (n42) at (-1.1, -5) {};
+				\node [fill=black] (n43) at (1.1, -5) {};
+				\node [fill=black] (n44) at (2.1, -5) {};
+				\draw[->] (n31) -- (n41);
+				\draw[->] (n32) -- (n42);
+				\draw[->] (n33) -- (n43);
+				\draw[->] (n34) -- (n44);
+				\node [fill=black] (n52) at (-1.3, -6) {};
+				\node [draw=none] (t32) at (-1.4, -5.55) {A};
+				\draw[->] (n42) -- (n52);
+				\node [draw=none, color=red, text width=60pt, text height=20pt] (label) at (2, -5.5) {20W 19K};
+			\end{tikzpicture}
+		\end{column}
+		\begin{column}{.5\textwidth}
+			\begin{tikzpicture}
+				\tikzstyle{every node}=[draw, shape=circle, minimum width = 15pt, minimum height = 15pt, text height = 0pt];
+				\node [fill=UniGreen] (root) at (0,0) {};
+				\node (n01) at (-1.3,-1) {};
+				\node (n02) at (0, -1) {};
+				\node (n03) at (1.3, -1) {};
+				\node [draw=none] (t01) at (-0.8, -0.5) {F};
+				\node [draw=none] (t02) at (-0.15, -0.6) {K};
+				\node [draw=none] (t01) at (0.9, -0.5) {N};
+				\draw[->] (root) -- (n01);
+				\draw[->] (root) -- (n02);
+				\draw[->] (root) -- (n03);
+				\node (n11) at (-1.5, -2) {};
+				\node (n12) at (0, -2) {};
+				\node [draw=none] (t11) at (-1.6, -1.55) {L};
+				\node [draw=none] (t12) at (-0.2, -1.6) {W};
+				\node [draw=none] (t23) at (0.6, -1.7) {A};
+				\draw[->] (n01) -- (n11);
+				\draw[->] (n02) -- (n12);
+				\node (n21) at (-1.7, -3) {};
+				\node (n22) at (0, -3) {};
+				\node [draw=none] (t21) at (-1.8, -2.6) {O};
+				\node [draw=none] (t22) at (-0.8, -2.35) {O};
+				\node [draw=none] (t23) at (-0.2, -2.6) {A};
+				\draw[->] (n11) -- (n21);
+				\draw[->, color=UniGreen, thick] (n12) -- (n21);
+				\draw[->] (n12) -- (n22);
+				\draw[->, color=UniGreen, thick] (n03) -- (n22);
+				\node (n31) at (-1.9, -4) {};
+				\node (n32) at (0, -4) {};
+				\node [draw=none] (t31) at (-2.0, -3.55) {T};
+				\node [draw=none] (t32) at (-0.2, -3.6) {R};
+				\draw[->] (n21) -- (n31);
+				\draw[->] (n22) -- (n32);
+				\node [fill=black] (n41) at (-2.1, -5) {};
+				\node (n42) at (0, -5) {};
+				\node [draw=none] (t41) at (-2.2, -4.55) {A};
+				\node [draw=none] (t42) at (-0.2, -4.6) {T};
+				\draw[->] (n31) -- (n41);
+				\draw[->] (n32) -- (n42);
+				\node [fill=black] (n51) at (0, -6) {};
+				\node [draw=none] (t51) at (-0.2, -5.6) {A};
+				\draw[->] (n42) -- (n51);
+				\node [draw=none, color=green, text width=60pt, text height=20pt] (label) at (-1.2, -5.5) {13W 14K};
+			\end{tikzpicture}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Algorytm Appela-Jacobsona (1)}
+	
+	\begin{enumerate}
+		\item Redukcja złożoności problemu do jednego wymiaru:
+			\begin{itemize}
+				\item rozpatrywanie ruchów wyłącznie poziomo,
+				\item ograniczenie zbioru wyłącznie do jednego wiersza.
+			\end{itemize}
+		
+		Rozumowanie należy powtórzyć dla wszystkich wierszy, a~następnie transponować planszę i~zastosować do ruchów w~pionie.
+	\end{enumerate}
+	
+	\begin{center}
+		\scalebox{0.9}{
+			\begin{tikzpicture}
+			\tikzstyle{every node}=[draw, shape=rectangle, rounded corners = 1pt, minimum width = 15pt, minimum height = 15pt, align=center, text height = 7pt];
+			\node [fill=Board] at (-0.6, 0) {};
+			\node [fill=DoubleWordBonus] at (0, 0) {2x};
+			\node [fill=Board] at (0.6, 0) {};
+			\node [fill=Board] at (1.2, 0) {};
+			\node [fill=Board] at (1.8, 0) {};
+			\node [fill=Board] at (2.4, 0) {};
+			\node [fill=Board] at (3.0, 0) {};
+			\node [fill=DoubleWordBonus] at (3.6, 0) {2x};
+			\node [fill=Board] at (4.2, 0) {};
+			\node [fill=Board] at (-.6, -.6) {};
+			\node [fill=Board] at (0, -.6) {};
+			\node [fill=TripleLetterBonus] at (0.6, -.6) {3x};
+			\node [fill=Board] at (1.2, -.6) {};
+			\node [fill=Board] at (1.8, -.6) {};
+			\node [fill=Tile] at (2.4, -.6) {B};
+			\node [fill=TripleLetterBonus] at (3.0, -.6) {3x};
+			\node [fill=Board] at (3.6, -.6) {};
+			\node [fill=Board] at (4.2, -.6) {};
+			\node [fill=Board] at (-.6, -1.2) {};
+			\node [fill=Board] at (0, -1.2) {};
+			\node [fill=Board] at (0.6, -1.2) {};
+			\node [fill=Tile] at (1.2, -1.2) {R};
+			\node [fill=Board] at (1.8, -1.2) {};
+			\node [fill=Tile] at (2.4, -1.2) {L};
+			\node [fill=Board] at (3.0, -1.2) {};
+			\node [fill=Board] at (3.6, -1.2) {};
+			\node [fill=Board] at (4.2, -1.2) {};
+			\node [fill=DoubleLetterBonus] at (-.6, -1.8) {2x};
+			\node [fill=Tile] at (0, -1.8) {G};
+			\node [fill=Tile] at (.6, -1.8) {R};
+			\node [fill=Tile] at (1.2, -1.8) {A};
+			\node [fill=Tile] at (1.8, -1.8) {N};
+			\node [fill=Tile] at (2.4, -1.8) {A};
+			\node [fill=Tile] at (3.0, -1.8) {T};
+			\node [fill=Board] at (3.6, -1.8) {};
+			\node [fill=DoubleLetterBonus] at (4.2, -1.8) {2x};
+			\node [fill=Board] at (-.6, -2.4) {};
+			\node [fill=Board] at (0, -2.4) {};
+			\node [fill=Board] at (0.6, -2.4) {};
+			\node [fill=Tile] at (1.2, -2.4) {P};
+			\node [fill=Board] at (1.8, -2.4) {};
+			\node [fill=Tile] at (2.4, -2.4) {T};
+			\node [fill=Tile] at (3.0, -2.4) {E};
+			\node [fill=Board] at (3.6, -2.4) {};
+			\node [fill=Board] at (4.2, -2.4) {};
+			\node [fill=Board] at (-.6, -3.0) {};
+			\node [fill=Board] at (0, -3.0) {};
+			\node [fill=TripleLetterBonus] at (0.6, -3.0) {3x};
+			\node [fill=Board] at (1.2, -3.0) {};
+			\node [fill=Board] at (1.8, -3.0) {};
+			\node [fill=Board] at (2.4, -3.0) {};
+			\node [fill=Tile] at (3.0, -3.0) {Ś};
+			\node [fill=Board] at (3.6, -3.0) {};
+			\node [fill=Board] at (4.2, -3.0) {};
+			\node [fill=Board] at (-.6, -3.6) {};
+			\node [fill=DoubleWordBonus] at (0, -3.6) {2x};
+			\node [fill=Board] at (0.6, -3.6) {};
+			\node [fill=Board] at (1.2, -3.6) {};
+			\node [fill=Board] at (1.8, -3.6) {};
+			\node [fill=Board] at (2.4, -3.6) {};
+			\node [fill=Tile] at (3.0, -3.6) {Ć};
+			\node [fill=DoubleWordBonus] at (3.6, -3.6) {2x};
+			\node [fill=Board] at (4.2, -3.6) {};
+			\node [draw, thick, shape = rectangle, rounded corners = 5pt, color = red, fill = none, minimum height = 17 pt, minimum width = 160 pt] at (1.8, -2.4) {};
+		\end{tikzpicture}
+	}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Algorytm Appela-Jacobsona (2)}
+	
+	\begin{enumerate}
+		\setcounter{enumi}{1}
+		\item Ograniczenie zbioru znaków możliwych do wstawienia w~miejsce pustych płytek:
+			\begin{itemize}
+				\item ruch w~danym kierunku może skutkować tworzeniem nowych słów w~kierunku przeciwnym,
+				\item słowa utworzone w~kierunku przeciwnym powstają zawsze poprzez dodanie jednego znaku.
+			\end{itemize}
+	\end{enumerate}
+
+	\begin{center}
+		\scalebox{0.9}{
+			\begin{tikzpicture}
+			\tikzstyle{every node}=[draw, shape=rectangle, rounded corners = 1pt, minimum width = 15pt, minimum height = 15pt, align=center, text height = 7pt];
+			\node [fill=Board] at (-0.6, 0) {};
+			\node [fill=DoubleWordBonus] at (0, 0) {2x};
+			\node [fill=Board] at (0.6, 0) {};
+			\node [fill=Board] at (1.2, 0) {};
+			\node [fill=Board] at (1.8, 0) {};
+			\node [fill=Board] at (2.4, 0) {};
+			\node [fill=Board] at (3.0, 0) {};
+			\node [fill=DoubleWordBonus] at (3.6, 0) {2x};
+			\node [fill=Board] at (4.2, 0) {};
+			\node [fill=Board] at (-.6, -.6) {};
+			\node [fill=Board] at (0, -.6) {};
+			\node [fill=TripleLetterBonus] at (0.6, -.6) {3x};
+			\node [fill=Board] at (1.2, -.6) {};
+			\node [fill=Board] at (1.8, -.6) {};
+			\node [fill=Tile] at (2.4, -.6) {B};
+			\node [fill=TripleLetterBonus] at (3.0, -.6) {3x};
+			\node [fill=Board] at (3.6, -.6) {};
+			\node [fill=Board] at (4.2, -.6) {};
+			\node [fill=Board] at (-.6, -1.2) {};
+			\node [fill=Board] at (0, -1.2) {};
+			\node [fill=Board] at (0.6, -1.2) {};
+			\node [fill=Tile] at (1.2, -1.2) {R};
+			\node [fill=Board] at (1.8, -1.2) {};
+			\node [fill=Tile] at (2.4, -1.2) {L};
+			\node [fill=Board] at (3.0, -1.2) {};
+			\node [fill=Board] at (3.6, -1.2) {};
+			\node [fill=Board] at (4.2, -1.2) {};
+			\node [fill=DoubleLetterBonus] at (-.6, -1.8) {2x};
+			\node [fill=Tile] at (0, -1.8) {G};
+			\node [fill=Tile] at (.6, -1.8) {R};
+			\node [fill=Tile] at (1.2, -1.8) {A};
+			\node [fill=Tile] at (1.8, -1.8) {N};
+			\node [fill=Tile] at (2.4, -1.8) {A};
+			\node [fill=Tile] at (3.0, -1.8) {T};
+			\node [fill=Board] at (3.6, -1.8) {};
+			\node [fill=DoubleLetterBonus] at (4.2, -1.8) {2x};
+			\node [fill=Board] at (-.6, -2.4) {};
+			\node [fill=Board] (below_g_node) at (0, -2.4) {};
+			\node [fill=Board] (below_r_node) at (0.6, -2.4) {};
+			\node [fill=Tile] at (1.2, -2.4) {P};
+			\node [fill=Board] at (1.8, -2.4) {};
+			\node [fill=Tile] at (2.4, -2.4) {T};
+			\node [fill=Tile] at (3.0, -2.4) {E};
+			\node [fill=Board] at (3.6, -2.4) {};
+			\node [fill=Board] at (4.2, -2.4) {};
+			\node [fill=Board] at (-.6, -3.0) {};
+			\node [fill=Board] at (0, -3.0) {};
+			\node [fill=TripleLetterBonus] at (0.6, -3.0) {3x};
+			\node [fill=Board] at (1.2, -3.0) {};
+			\node [fill=Board] at (1.8, -3.0) {};
+			\node [fill=Board] at (2.4, -3.0) {};
+			\node [fill=Tile] at (3.0, -3.0) {Ś};
+			\node [fill=Board] at (3.6, -3.0) {};
+			\node [fill=Board] at (4.2, -3.0) {};
+			\node [fill=Board] at (-.6, -3.6) {};
+			\node [fill=DoubleWordBonus] at (0, -3.6) {2x};
+			\node [fill=Board] at (0.6, -3.6) {};
+			\node [fill=Board] at (1.2, -3.6) {};
+			\node [fill=Board] at (1.8, -3.6) {};
+			\node [fill=Board] at (2.4, -3.6) {};
+			\node [fill=Tile] at (3.0, -3.6) {Ć};
+			\node [fill=DoubleWordBonus] at (3.6, -3.6) {2x};
+			\node [fill=Board] at (4.2, -3.6) {};
+			\node [draw=none, minimum width=0pt, minimum height=0pt] (below_g_node_cover) at (0, -2.4) {};
+			\node [draw=none, minimum width=0pt, minimum height=0pt] (below_r_node_cover) at (0.6, -2.4) {};
+			\node [draw=none, minimum width=0pt, minimum height=0pt] (below_n_node_cover) at (1.8, -2.4) {};
+			\node [draw, rectangle, color=UniGreen] (below_g_possibilities) at (-2.7, -1.7) {Ę, O, U};
+			\node [draw, rectangle, color=UniGreen] (below_r_possibilities) at (-2, -3.5) {E, O};
+			\node [draw, rectangle, color=UniGreen] (below_n_possibilities) at (6, -.4) {A, I, O, U, Y};
+			\draw[->, color=UniGreen] (below_g_possibilities) -- (below_g_node_cover);
+			\draw[->, color=UniGreen] (below_r_possibilities) -- (below_r_node_cover);
+			\draw[->, color=UniGreen] (below_n_possibilities) -- (below_n_node_cover);
+		\end{tikzpicture}
+	}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Algorytm Appela-Jacobsona (3)}
+	
+	\begin{enumerate}
+		\setcounter{enumi}{2}
+		\item Wyznaczenie kotwic (ang. \emph{anchors}):
+			\begin{itemize}
+				\item kotwica to najbardziej wysunięta na lewo płytka nowego słowa, która jest przyległa do płytki istniejącego już na planszy słowa,
+				\item kotwicą może być każde puste miejsce przyległe do płytki znajdującej się na planszy.
+			\end{itemize}
+	\end{enumerate}
+
+	\begin{center}
+		\scalebox{0.9}{
+			\begin{tikzpicture}
+			\tikzstyle{every node}=[draw, shape=rectangle, rounded corners = 1pt, minimum width = 15pt, minimum height = 15pt, align=center, text height = 7pt];
+			\node [fill=Board] at (-0.6, 0) {};
+			\node [fill=DoubleWordBonus] at (0, 0) {2x};
+			\node [fill=Board] at (0.6, 0) {};
+			\node [fill=Board] at (1.2, 0) {};
+			\node [fill=Board] at (1.8, 0) {};
+			\node [fill=Board] at (2.4, 0) {};
+			\node [fill=Board] at (3.0, 0) {};
+			\node [fill=DoubleWordBonus] at (3.6, 0) {2x};
+			\node [fill=Board] at (4.2, 0) {};
+			\node [fill=Board] at (-.6, -.6) {};
+			\node [fill=Board] at (0, -.6) {};
+			\node [fill=TripleLetterBonus] at (0.6, -.6) {3x};
+			\node [fill=Board] at (1.2, -.6) {};
+			\node [fill=Board] at (1.8, -.6) {};
+			\node [fill=Tile] at (2.4, -.6) {B};
+			\node [fill=TripleLetterBonus] at (3.0, -.6) {3x};
+			\node [fill=Board] at (3.6, -.6) {};
+			\node [fill=Board] at (4.2, -.6) {};
+			\node [fill=Board] at (-.6, -1.2) {};
+			\node [fill=Board] at (0, -1.2) {};
+			\node [fill=Board] at (0.6, -1.2) {};
+			\node [fill=Tile] at (1.2, -1.2) {R};
+			\node [fill=Board] at (1.8, -1.2) {};
+			\node [fill=Tile] at (2.4, -1.2) {L};
+			\node [fill=Board] at (3.0, -1.2) {};
+			\node [fill=Board] at (3.6, -1.2) {};
+			\node [fill=Board] at (4.2, -1.2) {};
+			\node [fill=DoubleLetterBonus] at (-.6, -1.8) {2x};
+			\node [fill=Tile] at (0, -1.8) {G};
+			\node [fill=Tile] at (.6, -1.8) {R};
+			\node [fill=Tile] at (1.2, -1.8) {A};
+			\node [fill=Tile] at (1.8, -1.8) {N};
+			\node [fill=Tile] at (2.4, -1.8) {A};
+			\node [fill=Tile] at (3.0, -1.8) {T};
+			\node [fill=Board] at (3.6, -1.8) {};
+			\node [fill=DoubleLetterBonus] at (4.2, -1.8) {2x};
+			\node [fill=Board] at (-.6, -2.4) {};
+			\node [fill=red] at (0, -2.4) {};
+			\node [fill=red] at (0.6, -2.4) {};
+			\node [fill=Tile] at (1.2, -2.4) {P};
+			\node [fill=red] at (1.8, -2.4) {};
+			\node [fill=Tile] at (2.4, -2.4) {T};
+			\node [fill=Tile] at (3.0, -2.4) {E};
+			\node [fill=red] at (3.6, -2.4) {};
+			\node [fill=Board] at (4.2, -2.4) {};
+			\node [fill=Board] at (-.6, -3.0) {};
+			\node [fill=Board] at (0, -3.0) {};
+			\node [fill=TripleLetterBonus] at (0.6, -3.0) {3x};
+			\node [fill=Board] at (1.2, -3.0) {};
+			\node [fill=Board] at (1.8, -3.0) {};
+			\node [fill=Board] at (2.4, -3.0) {};
+			\node [fill=Tile] at (3.0, -3.0) {Ś};
+			\node [fill=Board] at (3.6, -3.0) {};
+			\node [fill=Board] at (4.2, -3.0) {};
+			\node [fill=Board] at (-.6, -3.6) {};
+			\node [fill=DoubleWordBonus] at (0, -3.6) {2x};
+			\node [fill=Board] at (0.6, -3.6) {};
+			\node [fill=Board] at (1.2, -3.6) {};
+			\node [fill=Board] at (1.8, -3.6) {};
+			\node [fill=Board] at (2.4, -3.6) {};
+			\node [fill=Tile] at (3.0, -3.6) {Ć};
+			\node [fill=DoubleWordBonus] at (3.6, -3.6) {2x};
+			\node [fill=Board] at (4.2, -3.6) {};
+			\node [draw=none, color=red] at (5.3, -2.4) {4 kotwice};
+		\end{tikzpicture}
+	}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Algorytm Appela-Jacobsona (4)}
+	
+	\begin{enumerate}
+		\setcounter{enumi}{3}
+		\item Rozwinięcie słów, wychodząc od wyznaczonych kotwic, z~uwzględnieniem ograniczeń.
+		
+		\begin{columns}[t]
+			\begin{column}{.5\textwidth}
+				\begin{block}{Lewa strona}
+					\begin{itemize}
+						\item Obejmuje wszystkie płytki na lewo od kotwicy.
+						\item Może:
+							\begin{itemize}
+								\item Składać się wyłącznie z~płytek już znajdujących się na planszy - przypadek trywialny.
+								\item Składać się wyłącznie z~płytek znajdujących się na stojaku. Wymaga wyznaczenia wszystkich możliwych kombinacji płytek.
+								\item Być pusta.
+							\end{itemize}
+					\end{itemize}
+				\end{block}
+			\end{column}
+			\begin{column}{.5\textwidth}
+				\begin{block}{Prawa strona}
+					\begin{itemize}
+						\item Obejmuje kotwicę oraz wszystkie płytki na prawo od niej.
+						\item Wyznaczana poprzez dopełnianie lewej strony wyrazami ze słownika.
+						\item Poszczególne litery muszą być dostępne na stojaku, a~także spełniać ograniczenia wyznaczone dla poszczególnych pól planszy.
+					\end{itemize}
+				\end{block}
+			\end{column}
+		\end{columns}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Algorytm Appela-Jacobsona - wydajność}
+	
+	Potencjalnym problemem wydajnościowym jest wyznaczanie wszystkich możliwych kombinacji prefiksów:
+	
+	\begin{itemize}
+		\item W~pesymistycznym przypadku kotwica może być skrajnie prawą płytką wyrazu.
+		\item Dla określonych liter na stojaku może istnieć do $6! = 720$ lewostronnych kombinacji do zbadania.
+		\item W~przypadku, gdy na stojaku znajdują się dwa \emph{blanki}, liczba kombinacji rośnie do $\frac{4! \times 32^{2}}{2} = 12288$.
+		\item Nadmiarowość obliczeń - duża część badanych kombinacji może nie istnieć (lub nie posiadać rozwinięć) w~słowniku. 
+	\end{itemize}
+
+\end{frame}
+
+\subsection{Przyspieszone wyszukiwanie}
+
+\begin{frame}
+	\frametitle{GADDAG}
+	
+	\begin{itemize}
+		\item S.~A.~Gordon, \emph{A~Faster Scrabble Move Generation Algorithm}.
+		\item Struktura nastawiona na szybkie prefiksowanie wyrazów.
+	\end{itemize}
+
+	\vspace{1em}
+	
+	\begin{tikzpicture}
+		\tikzstyle{every node}=[draw, shape=circle, minimum width = 15pt, minimum height = 15pt, text height = 7pt, text width = 7pt, align = center];
+		\node [fill=UniGreen] (root) at (0,0) {};
+		\node (n01) at (1.25, 1.5) {N};
+		\node (n02) at (1.25, 0.5) {A};
+		\node (n03) at (1.25, -0.5) {R};
+		\node (n04) at (1.25, -1.5) {T};
+		\node (n11) at (2.5, 2) {$\gg$};
+		\node (n12) at (2.5, 1) {N};
+		\node (n13) at (2.5, 0) {T};
+		\node (n14) at (2.5, -1) {A};
+		\node (n15) at (2.5, -2) {R};
+		\node (n21) at (3.75, 2) {A};
+		\node (n22) at (3.75, 1) {$\gg$};
+		\node (n23) at (3.75, 0) {R};
+		\node (n24) at (3.75, -1) {N};
+		\node (n25) at (3.75, -2) {A};
+		\node (n31) at (5, 2) {R};
+		\node (n32) at (5, 1) {R};
+		\node (n33) at (5, 0) {A};
+		\node (n34) at (5, -1) {$\gg$};
+		\node (n35) at (5, -2) {N};
+		\node (n41) at (6.25, 2) {T};
+		\node (n42) at (6.25, 1) {T};
+		\node (n43) at (6.25, 0) {N};
+		\node (n44) at (6.25, -1) {T};
+		\node (n45) at (6.25, -2) {$\gg$};
+		\node (n51) at (7.5, 2) {A};
+		\node (n52) at (7.5, 1) {A};
+		\node (n53) at (7.5, 0) {$\gg$};
+		\node (n54) at (7.5, -1) {A};
+		\node (n55) at (7.5, -2) {A};
+		\node [fill=black] (n61) at (8.75, 2) {};
+		\node [fill=black] (n62) at (8.75, 1) {};
+		\node [fill=black] (n63) at (8.75, 0) {};
+		\node [fill=black] (n64) at (8.75, -1) {};
+		\node [fill=black] (n65) at (8.75, -2) {};
+		\draw[->] (root) -- (n01);
+		\draw[->] (root) -- (n02);
+		\draw[->] (root) -- (n03);
+		\draw[->] (root) -- (n04);
+		\draw[->] (n01) -- (n11);
+		\draw[->] (n02) -- (n12);
+		\draw[->] (n02) -- (n13);
+		\draw[->] (n03) -- (n14);
+		\draw[->] (n04) -- (n15);
+		\draw[->] (n11) -- (n21);
+		\draw[->] (n12) -- (n22);
+		\draw[->] (n13) -- (n23);
+		\draw[->] (n14) -- (n24);
+		\draw[->] (n15) -- (n25);
+		\draw[->] (n21) -- (n31);
+		\draw[->] (n22) -- (n32);
+		\draw[->] (n23) -- (n33);
+		\draw[->] (n24) -- (n34);
+		\draw[->] (n25) -- (n35);
+		\draw[->] (n31) -- (n41);
+		\draw[->] (n32) -- (n42);
+		\draw[->] (n33) -- (n43);
+		\draw[->] (n34) -- (n44);
+		\draw[->] (n35) -- (n45);
+		\draw[->] (n41) -- (n51);
+		\draw[->] (n42) -- (n52);
+		\draw[->] (n43) -- (n53);
+		\draw[->] (n44) -- (n54);
+		\draw[->] (n45) -- (n55);
+		\draw[->] (n51) -- (n61);
+		\draw[->] (n52) -- (n62);
+		\draw[->] (n53) -- (n63);
+		\draw[->] (n54) -- (n64);
+		\draw[->] (n55) -- (n65);
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+	\frametitle{GADDAG - wady}
+	
+	\begin{itemize}
+	 \item Duża złożoność pamięciowa.
+	 \item Można próbować minimalizować graf po węzłach zawierających $\gg$.
+	\end{itemize}
+	
+	\vspace{1em}
+	
+	\begin{tikzpicture}
+		\tikzstyle{every node}=[draw, shape=circle, minimum width = 15pt, minimum height = 15pt, text height = 7pt, text width = 7pt, align = center];
+		\node [fill=UniGreen] (root) at (0,0) {};
+		\node (n01) at (1.25, 2) {N};
+		\node (n02) at (1.25, 1) {A};
+		\node (n03) at (1.25, 0) {R};
+		\node (n04) at (1.25, -1) {T};
+		\node (n11) at (2.5, 2) {$\gg$};
+		\node (n12) at (2.5, 1) {N};
+		\node (n13) at (2.5, -2) {T};
+		\node (n14) at (2.5, 0) {A};
+		\node (n15) at (2.5, -1) {R};
+		\node (n21) at (3.75, 2) {A};
+		\node (n22) at (3.75, 1) {$\gg$};
+		\node (n23) at (3.75, -2) {R};
+		\node (n24) at (3.75, 0) {N};
+		\node (n25) at (3.75, -1) {A};
+		\node (n32) at (5, 1) {R};
+		\node (n33) at (5, -2) {A};
+		\node (n34) at (5, 0) {$\gg$};
+		\node (n35) at (5, -1) {N};
+		\node (n43) at (6.25, -2) {N};
+		\node (n44) at (6.25, 0) {T};
+		\node (n45) at (6.25, -1) {$\gg$};
+		\node (n53) at (7.5, -2) {$\gg$};
+		\node (n55) at (7.5, -1) {A};
+		\node [fill=black] (n63) at (8.75, -2) {};
+		\draw[->] (root) -- (n01);
+		\draw[->] (root) -- (n02);
+		\draw[->] (root) -- (n03);
+		\draw[->] (root) -- (n04);
+		\draw[->] (n01) -- (n11);
+		\draw[->] (n02) -- (n12);
+		\draw[->] (n02) -- (1.875, 0.25) -- (1.875, -1.25) -- (n13);
+		\draw[->] (n03) -- (n14);
+		\draw[->] (n04) -- (n15);
+		\draw[->] (n11) -- (n21);
+		\draw[->] (n12) -- (n22);
+		\draw[->] (n13) -- (n23);
+		\draw[->] (n14) -- (n24);
+		\draw[->] (n15) -- (n25);
+		\draw[->] (n22) -- (n32);
+		\draw[->] (n23) -- (n33);
+		\draw[->] (n24) -- (n34);
+		\draw[->] (n25) -- (n35);
+		\draw[->] (n33) -- (n43);
+		\draw[->] (n34) -- (n44);
+		\draw[->] (n35) -- (n45);
+		\draw[->] (n43) -- (n53);
+		\draw[->] (n45) -- (n55);
+		\draw[->] (n53) -- (n63);
+		\draw[->, color=UniGreen, thick] (n21) -- (n32);
+		\draw[->, color=UniGreen, thick] (n32) -- (n44);
+		\draw[->, color=UniGreen, thick] (n44) -- (n55);
+		\draw[->, color=UniGreen, thick] (n55) -- (n63);
+		\end{tikzpicture}
+\end{frame}
+
+
+\end{document}
