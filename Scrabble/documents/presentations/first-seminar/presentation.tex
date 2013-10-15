@@ -1139,6 +1139,139 @@
 	\end{center}
 \end{frame}
 
+\begin{frame}
+	\frametitle{Algorytm Appela-Jacobsona (3)}
+	
+	\begin{enumerate}
+		\setcounter{enumi}{2}
+		\item Wyznaczenie kotwic (ang. \emph{anchors}):
+			\begin{itemize}
+				\item kotwica to najbardziej wysunięta na lewo płytka nowego słowa, która jest przyległa do płytki istniejącego już na planszy słowa,
+				\item kotwicą może być każde puste miejsce przyległe do płytki znajdującej się na planszy.
+			\end{itemize}
+	\end{enumerate}
+
+	\begin{center}
+		\scalebox{0.9}{
+			\begin{tikzpicture}
+			\tikzstyle{every node}=[draw, shape=rectangle, rounded corners = 1pt, minimum width = 15pt, minimum height = 15pt, align=center, text height = 7pt];
+			\node [fill=Board] at (-0.6, 0) {};
+			\node [fill=DoubleWordBonus] at (0, 0) {2x};
+			\node [fill=Board] at (0.6, 0) {};
+			\node [fill=Board] at (1.2, 0) {};
+			\node [fill=Board] at (1.8, 0) {};
+			\node [fill=Board] at (2.4, 0) {};
+			\node [fill=Board] at (3.0, 0) {};
+			\node [fill=DoubleWordBonus] at (3.6, 0) {2x};
+			\node [fill=Board] at (4.2, 0) {};
+			\node [fill=Board] at (-.6, -.6) {};
+			\node [fill=Board] at (0, -.6) {};
+			\node [fill=TripleLetterBonus] at (0.6, -.6) {3x};
+			\node [fill=Board] at (1.2, -.6) {};
+			\node [fill=Board] at (1.8, -.6) {};
+			\node [fill=Tile] at (2.4, -.6) {B};
+			\node [fill=TripleLetterBonus] at (3.0, -.6) {3x};
+			\node [fill=Board] at (3.6, -.6) {};
+			\node [fill=Board] at (4.2, -.6) {};
+			\node [fill=Board] at (-.6, -1.2) {};
+			\node [fill=Board] at (0, -1.2) {};
+			\node [fill=Board] at (0.6, -1.2) {};
+			\node [fill=Tile] at (1.2, -1.2) {R};
+			\node [fill=Board] at (1.8, -1.2) {};
+			\node [fill=Tile] at (2.4, -1.2) {L};
+			\node [fill=Board] at (3.0, -1.2) {};
+			\node [fill=Board] at (3.6, -1.2) {};
+			\node [fill=Board] at (4.2, -1.2) {};
+			\node [fill=DoubleLetterBonus] at (-.6, -1.8) {2x};
+			\node [fill=Tile] at (0, -1.8) {G};
+			\node [fill=Tile] at (.6, -1.8) {R};
+			\node [fill=Tile] at (1.2, -1.8) {A};
+			\node [fill=Tile] at (1.8, -1.8) {N};
+			\node [fill=Tile] at (2.4, -1.8) {A};
+			\node [fill=Tile] at (3.0, -1.8) {T};
+			\node [fill=Board] at (3.6, -1.8) {};
+			\node [fill=DoubleLetterBonus] at (4.2, -1.8) {2x};
+			\node [fill=Board] at (-.6, -2.4) {};
+			\node [fill=red] at (0, -2.4) {};
+			\node [fill=red] at (0.6, -2.4) {};
+			\node [fill=Tile] at (1.2, -2.4) {P};
+			\node [fill=red] at (1.8, -2.4) {};
+			\node [fill=Tile] at (2.4, -2.4) {T};
+			\node [fill=Tile] at (3.0, -2.4) {E};
+			\node [fill=red] at (3.6, -2.4) {};
+			\node [fill=Board] at (4.2, -2.4) {};
+			\node [fill=Board] at (-.6, -3.0) {};
+			\node [fill=Board] at (0, -3.0) {};
+			\node [fill=TripleLetterBonus] at (0.6, -3.0) {3x};
+			\node [fill=Board] at (1.2, -3.0) {};
+			\node [fill=Board] at (1.8, -3.0) {};
+			\node [fill=Board] at (2.4, -3.0) {};
+			\node [fill=Tile] at (3.0, -3.0) {Ś};
+			\node [fill=Board] at (3.6, -3.0) {};
+			\node [fill=Board] at (4.2, -3.0) {};
+			\node [fill=Board] at (-.6, -3.6) {};
+			\node [fill=DoubleWordBonus] at (0, -3.6) {2x};
+			\node [fill=Board] at (0.6, -3.6) {};
+			\node [fill=Board] at (1.2, -3.6) {};
+			\node [fill=Board] at (1.8, -3.6) {};
+			\node [fill=Board] at (2.4, -3.6) {};
+			\node [fill=Tile] at (3.0, -3.6) {Ć};
+			\node [fill=DoubleWordBonus] at (3.6, -3.6) {2x};
+			\node [fill=Board] at (4.2, -3.6) {};
+			\node [draw=none, color=red] at (5.3, -2.4) {4 kotwice};
+		\end{tikzpicture}
+	}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Algorytm Appela-Jacobsona (4)}
+	
+	\begin{enumerate}
+		\setcounter{enumi}{3}
+		\item Rozwinięcie słów, wychodząc od wyznaczonych kotwic, z~uwzględnieniem ograniczeń.
+		
+		\begin{columns}[t]
+			\begin{column}{.5\textwidth}
+				\begin{block}{Lewa strona}
+					\begin{itemize}
+						\item Obejmuje wszystkie płytki na lewo od kotwicy.
+						\item Może:
+							\begin{itemize}
+								\item Składać się wyłącznie z~płytek już znajdujących się na planszy - przypadek trywialny.
+								\item Składać się wyłącznie z~płytek znajdujących się na stojaku. Wymaga wyznaczenia wszystkich możliwych kombinacji płytek.
+								\item Być pusta.
+							\end{itemize}
+					\end{itemize}
+				\end{block}
+			\end{column}
+			\begin{column}{.5\textwidth}
+				\begin{block}{Prawa strona}
+					\begin{itemize}
+						\item Obejmuje kotwicę oraz wszystkie płytki na prawo od niej.
+						\item Wyznaczana poprzez dopełnianie lewej strony wyrazami ze słownika.
+						\item Poszczególne litery muszą być dostępne na stojaku, a~także spełniać ograniczenia wyznaczone dla poszczególnych pól planszy.
+					\end{itemize}
+				\end{block}
+			\end{column}
+		\end{columns}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Algorytm Appela-Jacobsona - wydajność}
+	
+	Potencjalnym problemem wydajnościowym jest wyznaczanie wszystkich możliwych kombinacji prefiksów:
+	
+	\begin{itemize}
+		\item W~pesymistycznym przypadku kotwica może być skrajnie prawą płytką wyrazu.
+		\item Dla określonych liter na stojaku może istnieć do $6! = 720$ lewostronnych kombinacji do zbadania.
+		\item W~przypadku, gdy na stojaku znajdują się dwa \emph{blanki}, liczba kombinacji rośnie do $\frac{4! \times 32^{2}}{2} = 12288$.
+		\item Nadmiarowość obliczeń - duża część badanych kombinacji może nie istnieć (lub nie posiadać rozwinięć) w~słowniku. 
+	\end{itemize}
+
+\end{frame}
+
 \subsection{Przyspieszone wyszukiwanie}
 
 \begin{frame}
