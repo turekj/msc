@@ -3,6 +3,7 @@
 \definecolor{Board}{RGB}{60,145,143}
 \definecolor{DoubleWordBonus}{RGB}{239,174,154}
 \definecolor{DoubleLetterBonus}{RGB}{141,201,240}
+\definecolor{TripleLetterBonus}{RGB}{54,156,219}
 \definecolor{Tile}{RGB}{247,225,190}
 \definecolor{UniGreen}{RGB}{0,100,200}
 \setbeamercolor{title}{fg=UniGreen}
@@ -957,6 +958,185 @@
 			\end{tikzpicture}
 		\end{column}
 	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Algorytm Appela-Jacobsona (1)}
+	
+	\begin{enumerate}
+		\item Redukcja złożoności problemu do jednego wymiaru:
+			\begin{itemize}
+				\item rozpatrywanie ruchów wyłącznie poziomo,
+				\item ograniczenie zbioru wyłącznie do jednego wiersza.
+			\end{itemize}
+		
+		Rozumowanie należy powtórzyć dla wszystkich wierszy, a~następnie transponować planszę i~zastosować do ruchów w~pionie.
+	\end{enumerate}
+	
+	\begin{center}
+		\scalebox{0.9}{
+			\begin{tikzpicture}
+			\tikzstyle{every node}=[draw, shape=rectangle, rounded corners = 1pt, minimum width = 15pt, minimum height = 15pt, align=center, text height = 7pt];
+			\node [fill=Board] at (-0.6, 0) {};
+			\node [fill=DoubleWordBonus] at (0, 0) {2x};
+			\node [fill=Board] at (0.6, 0) {};
+			\node [fill=Board] at (1.2, 0) {};
+			\node [fill=Board] at (1.8, 0) {};
+			\node [fill=Board] at (2.4, 0) {};
+			\node [fill=Board] at (3.0, 0) {};
+			\node [fill=DoubleWordBonus] at (3.6, 0) {2x};
+			\node [fill=Board] at (4.2, 0) {};
+			\node [fill=Board] at (-.6, -.6) {};
+			\node [fill=Board] at (0, -.6) {};
+			\node [fill=TripleLetterBonus] at (0.6, -.6) {3x};
+			\node [fill=Board] at (1.2, -.6) {};
+			\node [fill=Board] at (1.8, -.6) {};
+			\node [fill=Tile] at (2.4, -.6) {B};
+			\node [fill=TripleLetterBonus] at (3.0, -.6) {3x};
+			\node [fill=Board] at (3.6, -.6) {};
+			\node [fill=Board] at (4.2, -.6) {};
+			\node [fill=Board] at (-.6, -1.2) {};
+			\node [fill=Board] at (0, -1.2) {};
+			\node [fill=Board] at (0.6, -1.2) {};
+			\node [fill=Tile] at (1.2, -1.2) {R};
+			\node [fill=Board] at (1.8, -1.2) {};
+			\node [fill=Tile] at (2.4, -1.2) {L};
+			\node [fill=Board] at (3.0, -1.2) {};
+			\node [fill=Board] at (3.6, -1.2) {};
+			\node [fill=Board] at (4.2, -1.2) {};
+			\node [fill=DoubleLetterBonus] at (-.6, -1.8) {2x};
+			\node [fill=Tile] at (0, -1.8) {G};
+			\node [fill=Tile] at (.6, -1.8) {R};
+			\node [fill=Tile] at (1.2, -1.8) {A};
+			\node [fill=Tile] at (1.8, -1.8) {N};
+			\node [fill=Tile] at (2.4, -1.8) {A};
+			\node [fill=Tile] at (3.0, -1.8) {T};
+			\node [fill=Board] at (3.6, -1.8) {};
+			\node [fill=DoubleLetterBonus] at (4.2, -1.8) {2x};
+			\node [fill=Board] at (-.6, -2.4) {};
+			\node [fill=Board] at (0, -2.4) {};
+			\node [fill=Board] at (0.6, -2.4) {};
+			\node [fill=Tile] at (1.2, -2.4) {P};
+			\node [fill=Board] at (1.8, -2.4) {};
+			\node [fill=Tile] at (2.4, -2.4) {T};
+			\node [fill=Tile] at (3.0, -2.4) {E};
+			\node [fill=Board] at (3.6, -2.4) {};
+			\node [fill=Board] at (4.2, -2.4) {};
+			\node [fill=Board] at (-.6, -3.0) {};
+			\node [fill=Board] at (0, -3.0) {};
+			\node [fill=TripleLetterBonus] at (0.6, -3.0) {3x};
+			\node [fill=Board] at (1.2, -3.0) {};
+			\node [fill=Board] at (1.8, -3.0) {};
+			\node [fill=Board] at (2.4, -3.0) {};
+			\node [fill=Tile] at (3.0, -3.0) {Ś};
+			\node [fill=Board] at (3.6, -3.0) {};
+			\node [fill=Board] at (4.2, -3.0) {};
+			\node [fill=Board] at (-.6, -3.6) {};
+			\node [fill=DoubleWordBonus] at (0, -3.6) {2x};
+			\node [fill=Board] at (0.6, -3.6) {};
+			\node [fill=Board] at (1.2, -3.6) {};
+			\node [fill=Board] at (1.8, -3.6) {};
+			\node [fill=Board] at (2.4, -3.6) {};
+			\node [fill=Tile] at (3.0, -3.6) {Ć};
+			\node [fill=DoubleWordBonus] at (3.6, -3.6) {2x};
+			\node [fill=Board] at (4.2, -3.6) {};
+			\node [draw, thick, shape = rectangle, rounded corners = 5pt, color = red, fill = none, minimum height = 17 pt, minimum width = 160 pt] at (1.8, -2.4) {};
+		\end{tikzpicture}
+	}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Algorytm Appela-Jacobsona (2)}
+	
+	\begin{enumerate}
+		\setcounter{enumi}{1}
+		\item Ograniczenie zbioru znaków możliwych do wstawienia w~miejsce pustych płytek:
+			\begin{itemize}
+				\item ruch w~danym kierunku może skutkować tworzeniem nowych słów w~kierunku przeciwnym,
+				\item słowa utworzone w~kierunku przeciwnym powstają zawsze poprzez dodanie jednego znaku.
+			\end{itemize}
+	\end{enumerate}
+
+	\begin{center}
+		\scalebox{0.9}{
+			\begin{tikzpicture}
+			\tikzstyle{every node}=[draw, shape=rectangle, rounded corners = 1pt, minimum width = 15pt, minimum height = 15pt, align=center, text height = 7pt];
+			\node [fill=Board] at (-0.6, 0) {};
+			\node [fill=DoubleWordBonus] at (0, 0) {2x};
+			\node [fill=Board] at (0.6, 0) {};
+			\node [fill=Board] at (1.2, 0) {};
+			\node [fill=Board] at (1.8, 0) {};
+			\node [fill=Board] at (2.4, 0) {};
+			\node [fill=Board] at (3.0, 0) {};
+			\node [fill=DoubleWordBonus] at (3.6, 0) {2x};
+			\node [fill=Board] at (4.2, 0) {};
+			\node [fill=Board] at (-.6, -.6) {};
+			\node [fill=Board] at (0, -.6) {};
+			\node [fill=TripleLetterBonus] at (0.6, -.6) {3x};
+			\node [fill=Board] at (1.2, -.6) {};
+			\node [fill=Board] at (1.8, -.6) {};
+			\node [fill=Tile] at (2.4, -.6) {B};
+			\node [fill=TripleLetterBonus] at (3.0, -.6) {3x};
+			\node [fill=Board] at (3.6, -.6) {};
+			\node [fill=Board] at (4.2, -.6) {};
+			\node [fill=Board] at (-.6, -1.2) {};
+			\node [fill=Board] at (0, -1.2) {};
+			\node [fill=Board] at (0.6, -1.2) {};
+			\node [fill=Tile] at (1.2, -1.2) {R};
+			\node [fill=Board] at (1.8, -1.2) {};
+			\node [fill=Tile] at (2.4, -1.2) {L};
+			\node [fill=Board] at (3.0, -1.2) {};
+			\node [fill=Board] at (3.6, -1.2) {};
+			\node [fill=Board] at (4.2, -1.2) {};
+			\node [fill=DoubleLetterBonus] at (-.6, -1.8) {2x};
+			\node [fill=Tile] at (0, -1.8) {G};
+			\node [fill=Tile] at (.6, -1.8) {R};
+			\node [fill=Tile] at (1.2, -1.8) {A};
+			\node [fill=Tile] at (1.8, -1.8) {N};
+			\node [fill=Tile] at (2.4, -1.8) {A};
+			\node [fill=Tile] at (3.0, -1.8) {T};
+			\node [fill=Board] at (3.6, -1.8) {};
+			\node [fill=DoubleLetterBonus] at (4.2, -1.8) {2x};
+			\node [fill=Board] at (-.6, -2.4) {};
+			\node [fill=Board] (below_g_node) at (0, -2.4) {};
+			\node [fill=Board] (below_r_node) at (0.6, -2.4) {};
+			\node [fill=Tile] at (1.2, -2.4) {P};
+			\node [fill=Board] at (1.8, -2.4) {};
+			\node [fill=Tile] at (2.4, -2.4) {T};
+			\node [fill=Tile] at (3.0, -2.4) {E};
+			\node [fill=Board] at (3.6, -2.4) {};
+			\node [fill=Board] at (4.2, -2.4) {};
+			\node [fill=Board] at (-.6, -3.0) {};
+			\node [fill=Board] at (0, -3.0) {};
+			\node [fill=TripleLetterBonus] at (0.6, -3.0) {3x};
+			\node [fill=Board] at (1.2, -3.0) {};
+			\node [fill=Board] at (1.8, -3.0) {};
+			\node [fill=Board] at (2.4, -3.0) {};
+			\node [fill=Tile] at (3.0, -3.0) {Ś};
+			\node [fill=Board] at (3.6, -3.0) {};
+			\node [fill=Board] at (4.2, -3.0) {};
+			\node [fill=Board] at (-.6, -3.6) {};
+			\node [fill=DoubleWordBonus] at (0, -3.6) {2x};
+			\node [fill=Board] at (0.6, -3.6) {};
+			\node [fill=Board] at (1.2, -3.6) {};
+			\node [fill=Board] at (1.8, -3.6) {};
+			\node [fill=Board] at (2.4, -3.6) {};
+			\node [fill=Tile] at (3.0, -3.6) {Ć};
+			\node [fill=DoubleWordBonus] at (3.6, -3.6) {2x};
+			\node [fill=Board] at (4.2, -3.6) {};
+			\node [draw=none, minimum width=0pt, minimum height=0pt] (below_g_node_cover) at (0, -2.4) {};
+			\node [draw=none, minimum width=0pt, minimum height=0pt] (below_r_node_cover) at (0.6, -2.4) {};
+			\node [draw=none, minimum width=0pt, minimum height=0pt] (below_n_node_cover) at (1.8, -2.4) {};
+			\node [draw, rectangle, color=UniGreen] (below_g_possibilities) at (-2.7, -1.7) {Ę, O, U};
+			\node [draw, rectangle, color=UniGreen] (below_r_possibilities) at (-2, -3.5) {E, O};
+			\node [draw, rectangle, color=UniGreen] (below_n_possibilities) at (6, -.4) {A, I, O, U, Y};
+			\draw[->, color=UniGreen] (below_g_possibilities) -- (below_g_node_cover);
+			\draw[->, color=UniGreen] (below_r_possibilities) -- (below_r_node_cover);
+			\draw[->, color=UniGreen] (below_n_possibilities) -- (below_n_node_cover);
+		\end{tikzpicture}
+	}
+	\end{center}
 \end{frame}
 
 \subsection{Przyspieszone wyszukiwanie}
