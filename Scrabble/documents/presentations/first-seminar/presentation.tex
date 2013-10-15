@@ -935,9 +935,9 @@
 				\node [draw=none] (t22) at (-0.8, -2.35) {O};
 				\node [draw=none] (t23) at (-0.2, -2.6) {A};
 				\draw[->] (n11) -- (n21);
-				\draw[->, color=UniGreen] (n12) -- (n21);
+				\draw[->, color=UniGreen, thick] (n12) -- (n21);
 				\draw[->] (n12) -- (n22);
-				\draw[->, color=UniGreen] (n03) -- (n22);
+				\draw[->, color=UniGreen, thick] (n03) -- (n22);
 				\node (n31) at (-1.9, -4) {};
 				\node (n32) at (0, -4) {};
 				\node [draw=none] (t31) at (-2.0, -3.55) {T};
@@ -1043,8 +1043,74 @@
 		\draw[->] (n54) -- (n64);
 		\draw[->] (n55) -- (n65);
 	\end{tikzpicture}
+\end{frame}
 
+\begin{frame}
+	\frametitle{GADDAG - wady}
 	
+	\begin{itemize}
+	 \item Duża złożoność pamięciowa.
+	 \item Można próbować minimalizować graf po węzłach zawierających $\gg$.
+	\end{itemize}
+	
+	\vspace{1em}
+	
+	\begin{tikzpicture}
+		\tikzstyle{every node}=[draw, shape=circle, minimum width = 15pt, minimum height = 15pt, text height = 7pt, text width = 7pt, align = center];
+		\node [fill=UniGreen] (root) at (0,0) {};
+		\node (n01) at (1.25, 2) {N};
+		\node (n02) at (1.25, 1) {A};
+		\node (n03) at (1.25, 0) {R};
+		\node (n04) at (1.25, -1) {T};
+		\node (n11) at (2.5, 2) {$\gg$};
+		\node (n12) at (2.5, 1) {N};
+		\node (n13) at (2.5, -2) {T};
+		\node (n14) at (2.5, 0) {A};
+		\node (n15) at (2.5, -1) {R};
+		\node (n21) at (3.75, 2) {A};
+		\node (n22) at (3.75, 1) {$\gg$};
+		\node (n23) at (3.75, -2) {R};
+		\node (n24) at (3.75, 0) {N};
+		\node (n25) at (3.75, -1) {A};
+		\node (n32) at (5, 1) {R};
+		\node (n33) at (5, -2) {A};
+		\node (n34) at (5, 0) {$\gg$};
+		\node (n35) at (5, -1) {N};
+		\node (n43) at (6.25, -2) {N};
+		\node (n44) at (6.25, 0) {T};
+		\node (n45) at (6.25, -1) {$\gg$};
+		\node (n53) at (7.5, -2) {$\gg$};
+		\node (n55) at (7.5, -1) {A};
+		\node [fill=black] (n63) at (8.75, -2) {};
+		\draw[->] (root) -- (n01);
+		\draw[->] (root) -- (n02);
+		\draw[->] (root) -- (n03);
+		\draw[->] (root) -- (n04);
+		\draw[->] (n01) -- (n11);
+		\draw[->] (n02) -- (n12);
+		\draw[->] (n02) -- (1.875, 0.25) -- (1.875, -1.25) -- (n13);
+		\draw[->] (n03) -- (n14);
+		\draw[->] (n04) -- (n15);
+		\draw[->] (n11) -- (n21);
+		\draw[->] (n12) -- (n22);
+		\draw[->] (n13) -- (n23);
+		\draw[->] (n14) -- (n24);
+		\draw[->] (n15) -- (n25);
+		\draw[->] (n22) -- (n32);
+		\draw[->] (n23) -- (n33);
+		\draw[->] (n24) -- (n34);
+		\draw[->] (n25) -- (n35);
+		\draw[->] (n33) -- (n43);
+		\draw[->] (n34) -- (n44);
+		\draw[->] (n35) -- (n45);
+		\draw[->] (n43) -- (n53);
+		\draw[->] (n45) -- (n55);
+		\draw[->] (n53) -- (n63);
+		\draw[->, color=UniGreen, thick] (n21) -- (n32);
+		\draw[->, color=UniGreen, thick] (n32) -- (n44);
+		\draw[->, color=UniGreen, thick] (n44) -- (n55);
+		\draw[->, color=UniGreen, thick] (n55) -- (n63);
+		\end{tikzpicture}
 \end{frame}
 
 
