@@ -19,7 +19,7 @@
 \usepackage{multirow}
 \usepackage{array}
 \usepackage{tikz}
-\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{calc,shapes,shapes.multipart, arrows}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.8}
 \author{\texorpdfstring{Jakub Turek \newline \href{mailto:jkbturek@gmail.com}{ jkbturek@gmail.com }}{Jakub Turek}}
@@ -1461,4 +1461,74 @@
 		,,It's still better to be a human than to be a computer'' - David Boys
 	\end{center}
 \end{frame}
+
+\subsection{Strategia}
+
+\begin{frame}
+	\frametitle{Fazy gry}
+	
+	\begin{enumerate}
+		\item \textbf{MEG} - mid-game:
+			\begin{itemize}
+				\item Trwa od momentu rozpoczęcia gry, aż do osiągnięcia fazy pre-endgame.
+			\end{itemize}
+		\item \textbf{PEG} - pre-endgame.
+			\begin{itemize}
+				\item Dzieli się na dwa etapy - PEG-1 oraz PEG-2.
+				\item Występuje, gdy do pobrania pozostają odpowiednio jedna lub dwie płytki.
+				\item Przez PEG przechodzi ponad połowa gier.
+			\end{itemize}
+		\item \textbf{EG} - endgame.
+			\begin{itemize}
+				\item Rozpoczyna się, gdy pobrane zostaną wszystkie płytki.
+				\item Wiadomo jakimi literami dysponuje przeciwnik.
+			\end{itemize}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Mid-game (Quackle)}
+	
+	\begin{center}
+		\scalebox{0.57}{
+			\begin{tikzpicture}[node distance=2cm]
+				\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=UniGreen!50]
+				\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=Tile]
+				\tikzstyle{arrow} = [thick,->,>=stealth]
+				
+				\node (rack) [io] {Stojak};
+				\node (board) [io, right of=rack, xshift=2cm] {Plansza};
+				\coordinate (rackboard) at ($(rack)!0.5!(board)$);
+				\node (movegen) [process, below of= rackboard] {Generacja ruchu};
+				\node (staticeval) [process, below of=movegen] {Statyczne oszacowanie};
+				\coordinate (movegenstaticeval) at ($(movegen)!0.5!(staticeval)$);
+				\node (possmoves) [io, right of=movegenstaticeval, xshift=5cm] {Wszystkie możliwe ruchy};
+				\node (simulation) [process, below of=staticeval] {Symulacja};
+				\node (bestmoves) [io, below of=possmoves] {23 najlepsze ruchy};
+				\node (hypsequences) [io, below of=bestmoves, text width=5cm] {Hipotetyczna sytuacja 2 ruchy w~przód};
+				\node (winpercestimation) [process, below of=simulation, text width=4cm] {Oszacowanie prawdopodobieństwa wygranej};
+				\node (end) [process, draw=none, fill=none, below of=winpercestimation] { };
+				\coordinate (staticevalsimulation) at ($(staticeval)!0.5!(simulation)$);
+				\node (tilesleft) [io, left of=staticevalsimulation,xshift=-3cm] {Pozostałe płytki};
+				\node (score) [io, below of=tilesleft] {Wynik};
+				\coordinate (winpercestimationend) at ($(winpercestimation)!0.5!(end)$);
+				\node (chosenmoves) [io, below of=hypsequences,text width=5cm] {10 wybranych, posortowanych ruchów};
+				\draw [arrow] (movegen) -- (staticeval);
+				\draw [arrow] (staticeval) -- (simulation);
+				\draw [arrow] (simulation) -- (winpercestimation);
+				\draw [arrow] (rack) -- (movegen);
+				\draw [arrow] (board) -- (movegen);
+				\draw [arrow] (winpercestimation) -- (end);
+				\draw [arrow] (tilesleft) -- (winpercestimation);
+				\draw [arrow] (score) -- (winpercestimation);
+				\draw [arrow] ($(movegen)!0.5!(staticeval)$) -- (possmoves);
+				\draw [arrow] ($(staticeval)!0.5!(simulation)$) -- (bestmoves);
+				\draw [arrow] ($(simulation)!0.5!(winpercestimation)$) -- (hypsequences);
+				\draw [arrow] ($(winpercestimation)!0.5!(end)$) -- (chosenmoves);
+			\end{tikzpicture}
+			}
+	\end{center}
+\end{frame}
+
+
 \end{document}
