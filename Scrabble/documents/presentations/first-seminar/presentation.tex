@@ -1468,7 +1468,7 @@
 	\frametitle{Fazy gry}
 	
 	\begin{enumerate}
-		\item \textbf{MEG} - mid-game:
+		\item \textbf{MG} - mid-game:
 			\begin{itemize}
 				\item Trwa od momentu rozpoczęcia gry, aż do osiągnięcia fazy pre-endgame.
 			\end{itemize}
@@ -1493,7 +1493,7 @@
 		\scalebox{0.57}{
 			\begin{tikzpicture}[node distance=2cm]
 				\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=UniGreen!50]
-				\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=Tile]
+				\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=red!50]
 				\tikzstyle{arrow} = [thick,->,>=stealth]
 				
 				\node (rack) [io] {Stojak};
@@ -1530,5 +1530,53 @@
 	\end{center}
 \end{frame}
 
+\subsection{Przeszukiwanie przestrzeni stanów}
+
+\begin{frame}
+	\frametitle{(Pre-)Endgame}
+
+	\begin{columns}
+		\begin{column}{.5\textwidth}
+			\begin{itemize}
+				\item W~fazach PEG, EG możliwe jest zastosowanie wyszukiwania wyczerpującego przestrzeni stanów.
+				\item Algorytmy przeszukiwania $\alpha - \beta$, $A^{*}$, $B^{*}$.
+				\item Obliczenia progresywne - przeszukiwanie rozpoczynane w~miejscu, w~którym można podjąć szybką i~pewną decyzję.
+			\end{itemize}
+		\end{column}
+		\begin{column}{.5\textwidth}
+			\begin{tikzpicture}
+				\tikzstyle{state} = [draw, shape=circle, minimum width=15pt, minimum height=15pt]
+				\node (s0) [state, fill=UniGreen] at (0,0) {};
+				\node (s1) [state] at (2,2) {};
+				\node (s2) [state] at (2,0) {};
+				\node (s3) [state] at (2, -2) {};
+				\node (s4) [state] at (4,3.5) {};
+				\node (s5) [state] at (4,2.5) {};
+				\node (s6) [state] at (4,1.5) {};
+				\node (s7) [state] at (4,0.5) {};
+				\node (s8) [state] at (4,-0.5) {};
+				\node (s9) [state] at (4,-1.5) {};
+				\node (s10) [state] at (4,-2.5) {};
+				\draw (s0) -- node[above, sloped, font=\scriptsize] {Zagranie 1} (s1);
+				\draw (s0) -- node[above, sloped, font=\scriptsize, near end, xshift=-8pt] {Zagranie 2} (s2);
+				\draw (s0) -- node[above, sloped, font=\scriptsize] {Zagranie 3} (s3);
+				\draw (s1) -- node[above, sloped, font=\tiny] {Odpowiedź 1} (s4);
+				\draw (s1) -- node[xshift=-6pt, below, near end, sloped, font=\tiny] {Odpowiedź 2} (s5);
+				\draw (s1) -- node[below, sloped, font=\tiny] {Odpowiedź 3} (s6);
+				\draw (s2) -- node[above, sloped, font=\tiny] {Odpowiedź 1} (s7);
+				\draw (s2) -- node[below, sloped, font=\tiny] {Odpowiedź 2} (s8);
+				\draw (s3) -- node[above, sloped, font=\tiny] {Odpowiedź 1} (s9);
+				\draw (s3) -- node[below, sloped, font=\tiny] {Odpowiedź 2} (s10);
+				\draw [red, thick] plot [smooth cycle] coordinates {(-0.5, -0.5) (-0.5, 0.5) (2, 0.5) (4.5, 1.05) (4.76, -1.15) (2.3, -0.65)};
+			\end{tikzpicture}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\begin{center}
+		\LARGE{\textbf{Dziękuję za uwagę!}}
+	\end{center}
+\end{frame}
 
 \end{document}
