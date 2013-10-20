@@ -1,0 +1,29 @@
+Założenia aplikacji (temat magisterki)
+- co to jest rzeczywiste położenie (marker)
+- co to jest wirtualny obraz
+- jak bedzie wyswietlane
+
+Marker wirtualny
+- co to jest
+- gdzie sie korzysta (AR, przyklady apek)
+- algorytm rozpoznawania
+
+Marker rzeczywisty
+- co moze nim byc (cos o twarzach?)
+- co sie da rozpoznac a co nie (http://www.kooaba.com/en/how_it_works) i dlaczego?
+- przyklady apek (google glass)
+- algorytm rozpoznawania?
+
+Projekt aplikacji
+- jak bedzie dzialac
+- co bedzie wykorzystane
+
+OpenCV dla Androida
+- od kiedy, ktora wersja, dla ktorego API lvl
+- skad sciagnac, jak instalowac
+- prosty przyklad kodu
+
+Rozpoznawanie obrazow
+- etapy
+- metody i ich klasyfikacja
+- przykladowe algorytmy (np. wykrywanie krawedzi)
