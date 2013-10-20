@@ -4,6 +4,7 @@ import org.opencv.android.*;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.core.*;
+import org.opencv.imgproc.*;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -89,6 +90,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2
 	@Override
 	public Mat onCameraFrame(CvCameraViewFrame inputFrame)
 	{
-		return inputFrame.rgba();
+		Mat matrix = inputFrame.gray();
+		Imgproc.Canny(matrix, matrix, 50.0, 200.0);
+		
+		return matrix;
 	}
 }
