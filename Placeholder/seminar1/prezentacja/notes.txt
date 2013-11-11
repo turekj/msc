@@ -27,3 +27,9 @@ Rozpoznawanie obrazow
 - etapy
 - metody i ich klasyfikacja
 - przykladowe algorytmy (np. wykrywanie krawedzi)
+
+Algorytmy w rozpoznawaniu obrazow:
+- canny (detekcja krawędzi)
+	http://pl.wikipedia.org/wiki/Canny
+	http://aragorn.pb.bialystok.pl/~boldak/DIP/CPO-W04-v01-50pr.pdf
+-http://matlabserver.cs.rug.nl/ ?
