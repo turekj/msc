@@ -29,7 +29,8 @@ Rozpoznawanie obrazow
 - przykladowe algorytmy (np. wykrywanie krawedzi)
 
 Algorytmy w rozpoznawaniu obrazow:
+- filtrowanie: sobel, roberts http://wwwmath.tau.ac.il/~turkel/notes/Maini.pdf
 - canny (detekcja krawędzi)
 	http://pl.wikipedia.org/wiki/Canny
 	http://aragorn.pb.bialystok.pl/~boldak/DIP/CPO-W04-v01-50pr.pdf
--http://matlabserver.cs.rug.nl/ ?
+- http://matlabserver.cs.rug.nl/ ?
