@@ -1,0 +1,124 @@
+\documentclass[a4paper,10pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[MeX]{polski}
+\usepackage{amsmath}
+\usepackage{fullpage}
+
+\title{Praca magisterska - Scrabble \\ \vspace{2mm} {\normalsize Specyfikacja wymagań i~projekt techniczny}}
+\author{Jakub Turek}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\chapter{Projekt techniczny}
+
+\section{Moduł wspólny}
+
+Moduł wspólny obejmuje: 
+
+\begin{itemize}
+ \item \verb|Board| planszę do gry.
+ \item \verb|Field| pole planszy do gry.
+ \item \verb|Tile| płytkę.
+ \item \verb|TileBag| worek z~płytkami.
+ \item \verb|Rack| stojak z~płytkami.
+\end{itemize}
+
+\subsection{Plansza do gry}
+
+Plansza do gry posiada:
+
+\begin{itemize}
+ \item Rozmiar.
+ \item Zestaw pól.
+\end{itemize}
+
+Luźne uwagi:
+
+\begin{itemize}
+ \item Plansza jest iterowalna. Iterator zwraca najpierw wszystkie płytki z~pierwszego wiersza, później z~drugiego...
+\end{itemize}
+
+\subsection{Pole planszy do gry}
+
+Pole planszy do gry posiada:
+
+\begin{itemize}
+ \item Typ pola. Dopuszczalne typy: 
+	\begin{itemize}
+		\item Standardowe.
+		\item Startowe.
+		\item Podwójna premia literowa.
+		\item Podwójna premia słowna.
+		\item Potrójna premia literowa.
+		\item Potrójna premia słowna.
+	\end{itemize}
+ \item Miejsce na płytkę.
+\end{itemize}
+
+\subsection{Płytka}
+
+Płytka posiada:
+
+\begin{itemize}
+ \item Typ płytki. Dopuszczalne typy:
+	\begin{itemize}
+		\item Litera.
+		\item Blank.
+	\end{itemize}
+ \item Wartość punktową.
+\end{itemize}
+
+\subsection{Worek z~płytkami}
+
+Worek z~płytkami posiada:
+
+\begin{itemize}
+ \item Zbiór płytek.
+\end{itemize}
+
+\subsection{Stojak z~płytkami}
+
+Stojak z~płytkami posiada:
+
+\begin{itemize}
+ \item Maksymalną pojemność.
+ \item Zbiór płytek.
+\end{itemize}
+
+\section{Moduł gry}
+
+Moduł gry składa się z:
+
+\begin{itemize}
+ \item Zarządcy zasad gry.
+ \item Zarządcy gry.
+ \item Graczy.
+\end{itemize}
+
+\subsection{Zarządca zasad gry}
+
+Zarządca zasad gry jest zestawem fabryk, które na podstawie konfiguracji tworzą:
+
+\begin{itemize}
+ \item Planszę wypełnioną polami.
+ \item Worek wypełniony płytkami.
+ \item Zarządcę gry wraz z~ograniczonym czasem na grę i~słownikiem wyrazów.
+\end{itemize}
+
+\subsection{Zarządca gry}
+
+Zarządca gry odpowiada za:
+
+\begin{itemize}
+ \item Losowanie początkowego gracza.
+ \item Przekazywanie sterowania pomiędzy graczami.
+ \item Odmierzanie czasu przeznaczonego na rozgrywkę.
+ \item Sprawdzanie legalności ruchów.
+ \item Sumowanie punktów.
+\end{itemize}
+
+
+\end{document}
