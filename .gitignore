@@ -1,4 +1,9 @@
 =======
+Windows
+=======
+~$*
+
+=======
 Git
 =======
 .gitignore~
@@ -31,3 +36,4 @@ trello_settings.xml
 
 # Build files #
 target/
+bin/
