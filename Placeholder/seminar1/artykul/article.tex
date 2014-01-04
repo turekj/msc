@@ -1,0 +1,34 @@
+\documentclass[a4paper,twocolumn,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[MeX]{polski}
+\usepackage{fullpage}
+\usepackage[breaklinks=true]{hyperref}
+
+\title{
+ \LARGE{Projekt aplikacji mobilnej umożliwiającej umieszczenie wirtualnej grafiki w rzeczywistym położeniu} 
+ \\ \vspace{2mm} 
+ \large{Podstawy przetwarzania obrazów}
+}
+\author{Michał Aniserowicz}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Celem artykułu jest opisanie zbioru koncepcji, które posłużą do implementacji algorytmu sztucznej inteligencji grającego w~grę Scrabble w~języku polskim. W~artykule zostały przeanalizowane i~porównane dane zawarte w~dwóch głównych słownikach wyrazów do gier dla języka polskiego, przedstawione dane statystyczne ułatwiające wprowadzanie heurystyk do algorytmu, a~także opisane metody niezbędne do wyznaczania wszystkich możliwych kombinacji ruchów w~danej turze. Autor omawia również podział rozgrywki na fazy gry i~przybliża podejście, które pozwala uzyskiwać najlepsze wyniki na każdym etapie rozgrywki.
+\end{abstract}
+
+\section*{Wstęp}
+
+
+\begin{thebibliography}{9}
+ \small
+ \bibitem{scrabble_definition} 
+  \emph{Wielki słownik ortograficzny PWN}, pod red. Edwarda Polańskiego, Wyd. 3 popr. i~uzup., Warszawa, Wydawnictwo Naukowe PWN, 2012, ISBN 978-83-01-16405-8.
+ \bibitem{scrabble_word_rules}
+  \emph{Zasady dopuszczalności słów} [online], Polska Federacja Scrabble [dostęp: 19 grudnia 2013], Dostępny w~Internecie: \href{http://www.pfs.org.pl/zds.php}{\nolinkurl{<http://www.pfs.org.pl/zds.php>}}.
+\end{thebibliography}
+
+\end{document}

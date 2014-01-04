@@ -15,6 +15,7 @@ TeX
 *.tex.backup
 *.toc
 *.aux
+*.out
 *.log
 
 =======
