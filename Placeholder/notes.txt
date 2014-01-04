@@ -1,0 +1,9 @@
+podobne:
+
+http://www.kooaba.com/en/how_it_works
+
+google glass (andorid app0)
+
+https://developer.qualcomm.com/mobile-development/mobile-technologies/augmented-reality
+
+face detection: http://www.developer.com/ws/android/programming/face-detection-with-android-apis.html

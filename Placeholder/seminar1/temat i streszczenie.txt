@@ -1,0 +1,5 @@
+Temat:
+Projekt aplikacji mobilnej umożliwiającej umieszczenie wirtualnej grafiki w rzeczywistym położeniu.
+
+Streszczenie:
+Tematem mojej pracy magisterskiej jest projekt i implementacja aplikacji mobilnej pozwalającej wybrać rzeczywisty obiekt (znacznik), na którego miejscu, po wskazaniu go kamerą telefonu, zostanie wyświetlona wybrana grafika. W ramach prezentacji przedstawię algorytm rozpoznawania znacznika i zarysuję projekt aplikacji. Omówię też możliwości istniejących aplikacji realizujących podobną funkcjonalność.

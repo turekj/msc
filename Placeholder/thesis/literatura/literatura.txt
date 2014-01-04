@@ -16,8 +16,12 @@ Detekcja sygnałów optycznych (Z. Bielecki, A. Rogalski)
 
 Komputerowa analiza obrazu (L. Wojnar, M. Majorek)
 
-Grafika i przetwarzanie obrazów: algorytmy (T. Pavlidis)
+Grafika i przetwarzanie obrazów: algorytmy (T. Pavlidis), WNT, Warszawa 1987
 
 Obraz cyfrowy (M. Domański)
 
 Marker Detection for Augmented Reality Applications (Martin Hirzer)
+
+Geometric Tools for Computer Graphics (Schneider P. J., Eberly D. H.)
+
+Hybrid SURF-Golay Marker Detection Method for Augmented Reality Applications (David Prochazka, Ondrej Popelka, Tomas Koubek, Jaromir Landa, Jan Kolomaznik)
