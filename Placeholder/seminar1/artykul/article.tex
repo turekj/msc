@@ -24,7 +24,7 @@
 Celem artykułu jest opisanie zbioru koncepcji, które posłużą do implementacji algorytmu sztucznej inteligencji grającego w~grę Scrabble w~języku polskim. W~artykule zostały przeanalizowane i~porównane dane zawarte w~dwóch głównych słownikach wyrazów do gier dla języka polskiego, przedstawione dane statystyczne ułatwiające wprowadzanie heurystyk do algorytmu, a~także opisane metody niezbędne do wyznaczania wszystkich możliwych kombinacji ruchów w~danej turze. Autor omawia również podział rozgrywki na fazy gry i~przybliża podejście, które pozwala uzyskiwać najlepsze wyniki na każdym etapie rozgrywki.
 \end{abstract}
 
-\section*{Wstęp}
+\section{Wstęp}
 
 
 
@@ -51,7 +51,7 @@ Operacja ta przebiega w następujących krokach:
   \end{enumerate}
 \end{enumerate}
 
-Neleży zauważyć, że wartość współczynnika normalizującego równa sumie wartości komórek maski gwarantuje wartość wyniku mieszczącą się w przedziale dopuszczalnych wartości piksela (np. 0-255)
+Neleży zauważyć, że wartość współczynnika normalizującego równa sumie wartości komórek maski gwarantuje wartość wyniku mieszczącą się w przedziale dopuszczalnych wartości piksela (np. $0-255$)
 
 Przebieg operacji dyskretnego splotu został zobrazowany na Rysunku \ref{fig:convolution}.
 
@@ -132,10 +132,12 @@ Przykład działania Rozmycia Gaussa został przedstawiony na Rysunku \ref{fig:g
 
 \section{Detekcja krawędzi}
 
-\begin{enumerate}
- \item Zastosowanie operatorów dyskretnego różniczkowania w celu aproksymacji pochodnych kierunkowych intensywności obrazu (gradientów) w kilku kierunkach
- \item Operatory różnią się liczbą i rodzajem masek
-\end{enumerate}
+Operacji dyskretnego splotu macierzy używa się również w celu wykrycia krawędzi na obrazie.
+W tym przypadku stosowane są filtry, które pozwalają aproksymować pochodne kierunkowe intensywności obrazu (gradienty).
+Pojedyncza maska filtru wykrywa gradienty obrazu dla pojedycznego kierunku.
+Powszechnie stosowane filtry, takie jak operatory Prewitt i Sobela, różnią się jedynie liczbą i rodzajem masek.
+
+Rysunek \ref{fig:edges_example} przedstawia przykładowy wynik zastosowania filtru wykrywającego krawędzie.
 
 \begin{figure}[!ht]
  \begin{center}
@@ -143,9 +145,9 @@ Przykład działania Rozmycia Gaussa został przedstawiony na Rysunku \ref{fig:g
   \subfigure[]{\includegraphics[width=0.33\textwidth]{../obrazki/filtry/edges_after.jpg}}
  \end{center}
  \caption{
-  Przykładowy rezultat:
-  (a) przed;
-  (b) po.
+  Przykładowy wynik działania filtru wykrywającego krawędzie w obrazie:
+  (a) obraz wejściowy;
+  (b) obraz wynikowy.
   Źródło: \cite{roberts}.
  }
  \label{fig:edges_example}
@@ -154,13 +156,10 @@ Przykład działania Rozmycia Gaussa został przedstawiony na Rysunku \ref{fig:g
 
 \subsection{Krzyż Robertsa}
 
-\begin{itemize}
- \item Jeden z najwcześniejszych algorytmów wykrywania krawędzi
- \item Zaproponowany w 1963 r. przez Lawrence’a G. Robertsa
- \item Wynikowy obraz otrzymuje się poprzez obliczenie różnic modułów wartości odpowiadających sobie pikseli z obrazów powstałych przez zastosowanie masek
- \item Zaleta: mała złożoność obliczeniowa
- \item Wada: mała odporność na szum
-\end{itemize}
+Jednym z najwcześniej opracowanych algorytmów wykrywania krawędzi jest Krzyż Robertsa
+Został on zaproponowany w 1963 r. przez Lawrence’a G. Robertsa.
+Wykorzystuje się w nim dwie maski, z których każda wykrywa krawędzie skierowane w innym kierunku.
+Maski te zostały przedstawione na Rysunku \ref{fig:roberts_matrices}.
 
 \begin{figure}[!ht]
  \begin{center}
@@ -178,22 +177,26 @@ Przykład działania Rozmycia Gaussa został przedstawiony na Rysunku \ref{fig:g
   }
  \end{center}
  \caption{
-  Maski:
-  (a) 45\textdegree;
-  (b) 135\textdegree.
+  Krzyżu Robertsa - maski:
+  (a) dla kierunku 45\textdegree;
+  (b) dla kierunku 135\textdegree.
  }
  \label{fig:roberts_matrices}
 \end{figure}
 
+Wynikowy obraz otrzymuje się poprzez obliczenie różnic modułów wartości odpowiadających sobie pikseli z obrazów powstałych przez zastosowanie masek.
 
-\subsection{Prewitt}
+Algorytm cechuje się niską złożonością obliczeniową.
+Jest on jednak mało odporny na szum, tzn. powoduje wykrycie wielu krawędzi powstałych w wyniku zaszumienia obrazu wejściowego.
 
-\begin{itemize}
- \item Zaproponowany w 1966 r. przez Judith M. Prewitt
- \item Zbiór 8 masek (0\textdegree - krawędzie pionowe, 90\textdegree - poziome)
- \item Wystarczy obliczyć splot z 4 macierzami ($M_{\alpha+180^\circ} = -M_\alpha$)
- \item Lepsza skuteczność, ale większa złożoność obliczeniowa
-\end{itemize}
+
+\subsection{Operator Prewitt}
+
+Kolejnym algorytmem wykrywania krawędzi jest operator Prewitt.
+Został on Zaproponowany w 1966 r. przez Judith M. Prewitt.
+
+Wykorzystuje zbiór czterech masek, wykrywających krawędzie skierowane w czterech kierunkach (0\textdegree, 45\textdegree, 90\textdegree, 135\textdegree).
+Maski te przedstawia Rysunek \ref{fig:prewitt_matrices}.
 
 \begin{figure}[!ht]
  \begin{center}
@@ -227,23 +230,23 @@ Przykład działania Rozmycia Gaussa został przedstawiony na Rysunku \ref{fig:g
   }
  \end{center}
  \caption{
-  Maski:
-  (a) 0\textdegree;
-  (b) 45\textdegree;
-  (c) 90\textdegree;
-  (d) 135\textdegree.
+  Operator Prewitt - maski:
+  (a) dla kierunku 0\textdegree;
+  (b) dla kierunku 45\textdegree;
+  (c) dla kierunku 90\textdegree;
+  (d) dla kierunku 135\textdegree.
  }
  \label{fig:prewitt_matrices}
 \end{figure}
 
+Operator Prewitt cechuje się dużo lepszą skutecznością i odpornością na szum od Krzyża Robertsa, ale jest bardziej wymagający obliczeniowo.
 
-\subsection{Sobel}
 
-\begin{enumerate}
- \item Zaproponowany w 1968 r. przez Irwina Sobela
- \item Od operatora Prewitt różni się jedynie wagami komórek masek (1, 2, 1)
- \item Lepsze wygładzenie obrazu
-\end{enumerate}
+\subsection{Operator Sobela}
+
+Najczęściej stosowanym filtrem wykrywającym krawędzie na obrazie jest operator Sobela.
+Został on opracowany w 1968 r. przez Irwina Sobela.
+Od operatora Prewitt różni się jedynie wagami komórek masek (Rysunek \ref{fig:sobel_matrices}).
 
 \begin{figure}[!ht]
  \begin{center}
@@ -277,23 +280,22 @@ Przykład działania Rozmycia Gaussa został przedstawiony na Rysunku \ref{fig:g
   }
  \end{center}
  \caption{
-  Maski:
-  (a) 0\textdegree;
-  (b) 45\textdegree;
-  (c) 90\textdegree;
-  (d) 135\textdegree.
+  Operator Sobela - maski:
+  (a) dla kierunku 0\textdegree;
+  (b) dla kierunku 45\textdegree;
+  (c) dla kierunku 90\textdegree;
+  (d) dla kierunku 135\textdegree.
  }
  \label{fig:sobel_matrices}
 \end{figure}
 
+W porównaniu z operatorem Prewitt, zastosowanie operatora Sobela powoduje otrzymanie obrazu bardziej wygładzonego.
 
-\subsection{Scharr}
 
-\begin{itemize}
- \item Zaproponowany w 2000 r. przez Hanno Scharra
- \item Od operatorów Prewitt i Sobela różni się jedynie wagami komórek masek (3, 10, 3)
- \item Lepiej wykrywa kierunek krawędzi
-\end{itemize}
+\subsection{Operator Scharra}
+
+Kolejnym filtrem wykrywającym krawędzie jest operator Scharra, zaproponowany w 2000 r. przez Hanno Scharra.
+Od operatorów Prewitt i Sobela różni się on jedynie wagami komórek masek (Rysunek \ref{fig:scharr_matrices}).
 
 \begin{figure}[!ht]
  \begin{center}
@@ -327,31 +329,35 @@ Przykład działania Rozmycia Gaussa został przedstawiony na Rysunku \ref{fig:g
   }
  \end{center}
  \caption{
-  Maski:
-  (a) 0\textdegree;
-  (b) 45\textdegree;
-  (c) 90\textdegree;
-  (d) 135\textdegree.
+  Operator Scharra - maski:
+  (a) dla kierunku 0\textdegree;
+  (b) dla kierunku 45\textdegree;
+  (c) dla kierunku 90\textdegree;
+  (d) dla kierunku 135\textdegree.
  }
  \label{fig:scharr_matrices}
 \end{figure}
 
+W porównaniu z operatorem Sobela, operatora Scharra lepiej wykrywa kierunek krawędzi na obrazie.
 
-\subsection{Porównanie}
 
-\begin{figure}[!ht]
+\subsection{Przykłady}
+
+Przykłady działania omówionych algorytmów przedstawia Rysunek \ref{fig:edges_comparison}.
+
+\begin{figure}
  \begin{center}
-  \subfigure[]{\includegraphics[width=0.33\textwidth]{../obrazki/filtry/init.png}}
-  \subfigure[]{\includegraphics[width=0.33\textwidth]{../obrazki/filtry/roberts.png}}
-  \subfigure[]{\includegraphics[width=0.33\textwidth]{../obrazki/filtry/prewitt.png}}
-  \subfigure[]{\includegraphics[width=0.33\textwidth]{../obrazki/filtry/sobel.png}}
+  \subfigure[]{\includegraphics[width=0.3\textwidth]{../obrazki/filtry/init.png}}
+  \subfigure[]{\includegraphics[width=0.3\textwidth]{../obrazki/filtry/roberts.png}}
+  \subfigure[]{\includegraphics[width=0.3\textwidth]{../obrazki/filtry/prewitt.png}}
+  \subfigure[]{\includegraphics[width=0.3\textwidth]{../obrazki/filtry/sobel.png}}
  \end{center}
  \caption{
-  Przykładowy rezultat:
-  (a) przed;
-  (b) Robets;
-  (c) Prewitt;
-  (d) Sobel.
+  Przykłady działania filtrów wykrywających krawędzie na obrazie:
+  (a) obraz wejściowy;
+  (b) wynik działania Krzyża Robertsa;
+  (c) wynik działania operatora Prewitt;
+  (d) wynik działania operatora Sobela.
   Źródło: \cite{maini}.
  }
  \label{fig:edges_comparison}
