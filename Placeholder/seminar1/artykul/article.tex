@@ -2,7 +2,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage[MeX]{polski}
 \usepackage{fullpage}
-\usepackage[breaklinks=true]{hyperref}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{pgfplots}
@@ -29,22 +28,32 @@ Celem artykułu jest opisanie zbioru koncepcji, które posłużą do implementac
 
 
 
-\section{Splot macierzy obrazów}
+\section{Dyskretny splot macierzy}
+
+Podstawową operacją wykorzystywaną podczas przetwarzania obrazów cyfrowych jest dyskretny splot macierzy.
+Pozwala on przefiltrować obraz, tzn. uwydatnić lub ukryć niektóre jego cechy, takie jak zaszumienie.
+
+Operacja ta przebiega w następujących krokach:
 
 \begin{enumerate}
+ \item Wybór obrazu, który zostanie poddany splotowi.
  \item Określenie:
   \begin{itemize}
-   \item macierzy (maski) filtru
-   \item współczynnika normalizującego (najczęściej równego sumie wartości komórek maski)
+   \item macierzy (tzw. maski) filtru, najczęściej o niewielkich rozmiarach, np. $3 \times 3$ lub $5 \times 5$;
+   \item współczynnika normalizującego, najczęściej równego sumie wartości komórek maski.
   \end{itemize}
- \item Obliczenie wartości każdego piksela obrazu poprzez:
-  \begin{itemize}
-   \item pomnożenie wartości komórek maski przez wartości odpowiednich piskeli,
-   \item zsumowanie wartości wszystkich komórek maski
-   \item podzielenie wyniku przez współczynnik normalizujący
-  \end{itemize}
- \item Wartość współczynnika normalizującego równa sumie wartości komórek maski gwarantuje wartość wyniku mieszczącą się w przedziale dopuszczalnych wartości piksela (np. 0-255)
+ \item Obliczenie wartości każdego piksela obrazu wynikowego poprzez nałożenie maski na dany piksel, tj.:
+  \begin{enumerate}
+   \item pomnożenie wartości piskeli obrazu wejściowego przez wartości odpowiadających komórek maski;
+   \item zsumowanie otrzymanych wartości;
+   \item podzielenie sumy przez współczynnik normalizujący;
+   \item ustawienie wyniku jako wartości odpowiedniego piksela obrazu wynikowego.
+  \end{enumerate}
 \end{enumerate}
+
+Neleży zauważyć, że wartość współczynnika normalizującego równa sumie wartości komórek maski gwarantuje wartość wyniku mieszczącą się w przedziale dopuszczalnych wartości piksela (np. 0-255)
+
+Przebieg operacji dyskretnego splotu został zobrazowany na Rysunku \ref{fig:convolution}.
 
 \begin{figure}[!ht]
  \begin{center}
@@ -54,20 +63,20 @@ Celem artykułu jest opisanie zbioru koncepcji, które posłużą do implementac
   }
  \end{center}
  \caption{
-  Operacja splotu.
-  Źródło: TODO
+  Operacja dyskretnego splotu macierzy.
+  Źródło: \cite{stec}.
  }
  \label{fig:convolution}
 \end{figure}
 
 
-\subsection{Przykład - rozmycie Gaussa}
+\subsection{Przykład - Rozmycie Gaussa}
 
-\begin{itemize}
- \item Wartość piksela maleje wraz z odległością od środka
- \item Jest to filtr uśredniający
- \item Pozwala wygładzić obraz (redukując szum, ale tracąc detale)
-\end{itemize}
+Przykładem praktycznego zastosowania operacji dyskretnego splotu macierzy jest operacja Rozmycia Gaussa.
+Pozwala ona wygładzić obraz, tzn. zredukować jego zaszumienie.
+Odbywa się to kosztem utraty ostrości.
+
+Przykładowe maski stosowane w tej opercaji przestawia Rysunek \ref{fig:gauss_matrices}.
 
 \begin{figure}[!ht]
  \begin{center}
@@ -89,12 +98,21 @@ Celem artykułu jest opisanie zbioru koncepcji, które posłużą do implementac
   }
  \end{center}
  \caption{
-  Maski:
-  (a) 3x3;
-  (b) 5x5.
+  Maski stosowanie w operacji Rozmycia Gaussa:
+  (a) $3 \times 3$;
+  (b) $5 \times 5$.
  }
  \label{fig:gauss_matrices}
 \end{figure}
+
+Maski te mają następujące cechy:
+
+\begin{itemize}
+ \item znaczenie piksela maleje wraz z jego odległością od środka maski według funkcji Gaussa;
+ \item wartość piksela wynikoweogo jest uśrednieniem wartości odpowiadającego piskela wejściowego i wartości jego sąsiadów\footnote{Filtry posiadajace tę cechę nazywa się filtrami uśredniającymi.}.
+\end{itemize}
+
+Przykład działania Rozmycia Gaussa został przedstawiony na Rysunku \ref{fig:gauss_example}.
 
 \begin{figure}[!ht]
  \begin{center}
@@ -102,9 +120,10 @@ Celem artykułu jest opisanie zbioru koncepcji, które posłużą do implementac
   \subfigure[]{\includegraphics[width=0.33\textwidth]{../obrazki/filtry/gauss_after.jpg}}
  \end{center}
  \caption{
-  Przykładowy rezultat:
-  (a) przed;
-  (b) po.
+  Przykad działania Rozmycia Gaussa:
+  (a) obraz wejściowy;
+  (b) obraz wynikowy.
+  Źródło: \cite{gauss}.
  }
  \label{fig:gauss_example}
 \end{figure}
@@ -127,6 +146,7 @@ Celem artykułu jest opisanie zbioru koncepcji, które posłużą do implementac
   Przykładowy rezultat:
   (a) przed;
   (b) po.
+  Źródło: \cite{roberts}.
  }
  \label{fig:edges_example}
 \end{figure}
@@ -332,6 +352,7 @@ Celem artykułu jest opisanie zbioru koncepcji, które posłużą do implementac
   (b) Robets;
   (c) Prewitt;
   (d) Sobel.
+  Źródło: \cite{maini}.
  }
  \label{fig:edges_comparison}
 \end{figure}
@@ -377,6 +398,7 @@ Kroki algorytmu:
   Przykładowy rezultat ($\sigma = 3$):
   (a) przed;
   (b) po.
+  Źródło: \cite{boldak}.
  }
  \label{fig:canny_smoothing}
 \end{figure}
@@ -398,8 +420,9 @@ Kroki algorytmu:
  \end{center}
  \caption{
   Przykładowy rezultat:
-  (a) Potenscjalne krawędzie
-  (b) Kierunek gradientu (ten sam odcień szarości przypisany krawędzion o tym samym nachyleniu)
+  (a) Potenscjalne krawędzie;
+  (b) Kierunek gradientu (ten sam odcień szarości przypisany krawędzion o tym samym nachyleniu).
+  Źródło: \cite{boldak}.
  }
  \label{fig:canny_gradient}
 \end{figure}
@@ -420,7 +443,7 @@ Kroki algorytmu:
    \end{center}
    \caption{
     Przykład.
-    Źródło: TODO
+    Źródło: \cite{boldak}.
    }
    \label{fig:canny_adjacent_pixels}
   \end{figure}
@@ -439,6 +462,7 @@ Kroki algorytmu:
  \end{center}
  \caption{
   Przykładowy rezultat.
+  Źródło: \cite{boldak}.
  }
  \label{fig:canny_redundant_pixels_removal}
 \end{figure}
@@ -471,6 +495,7 @@ Kroki algorytmu:
   (b) $\sigma = 3, T_1 = 75, T_2 = 125$;
   (c) $\sigma = 1, T_1 = 75, T_2 = 125$;
   (d) $\sigma = 3, T_1 = 25, T_2 = 75$.
+  Źródło: \cite{boldak}.
  }
  \label{fig:canny_comparison}
 \end{figure}
@@ -490,28 +515,38 @@ Kroki algorytmu:
 \begin{thebibliography}{9}
  \small
  
- \bibitem{stec}
-  \emph{Filtracja obrazów rastrowych} [online],
-  Steć P.,
-  http://www.uz.zgora.pl/$\sim$pstec/files/filtracja.pdf [dostęp: styczeń 2013].
-  
- \bibitem{boldak}
-  \emph{Wykrywanie cech w obrazach cyfrowych} [online],
-  Bołdak C.,
-  http://aragorn.pb.bialystok.pl/$\sim$boldak/DIP/CPO-W04-v01-50pr.pdf [dostęp: styczeń 2013].
-  
- \bibitem{maini}
-  \emph{Study and Comparison of Various Image Edge Detection Techniques} [online],
-  Maini R., Aggarwal H.,
-  http://wwwmath.tau.ac.il/$\sim$turkel/notes/Maini.pdf [dostęp: styczeń 2013].
- 
- \bibitem{scrabble_definition} 
+ \bibitem{anal} 
   \emph{Komputerowa analiza i przetwarzanie obrazów},
   Tadeusiewicz R., Korohoda P.,
   Kraków,
   Wydawnictwo Fundacji Postępu Telekomunikacji,
   1997,
   83-86476-15-X.
+ 
+ \bibitem{stec}
+  \emph{Filtracja obrazów rastrowych} [online],
+  Steć P.,
+  http://www.uz.zgora.pl/$\sim$pstec/files/\\filtracja.pdf [dostęp: styczeń 2013].
+ 
+ \bibitem{gauss}
+  \emph{Rozmycie Gaussowskie} [online],
+  Encyklopedia Artifice,
+  http://encyklopedia.\\artifice.pl/index.php?title=Rozmycie\_\\Gaussowskie [dostęp: styczeń 2013].
+ 
+ \bibitem{roberts}
+  \emph{Krzyż Robertsa} [online],
+  Wikipedia,
+  http://pl.wikipedia.org/wiki/Krzyż\_\\Robertsa [dostęp: styczeń 2013].
+ 
+ \bibitem{maini}
+  \emph{Study and Comparison of Various Image Edge Detection Techniques} [online],
+  Maini R., Aggarwal H.,
+  http://wwwmath.tau.ac.\\il/$\sim$turkel/notes/Maini.pdf [dostęp: styczeń 2013].
+ 
+ \bibitem{boldak}
+  \emph{Wykrywanie cech w obrazach cyfrowych} [online],
+  Bołdak C.,
+  http://aragorn.pb.\\bialystok.pl/$\sim$boldak/DIP/CPO-W04-v01-50pr.pdf [dostęp: styczeń 2013].
   
 \end{thebibliography}
 
