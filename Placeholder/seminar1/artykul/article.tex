@@ -70,7 +70,7 @@ Przebieg operacji dyskretnego splotu został zobrazowany na Rysunku \ref{fig:con
 \end{figure}
 
 
-\subsection{Przykład - Rozmycie Gaussa}
+\subsection{Przykład - Rozmycie Gaussa} \label{sec:gauss}
 
 Przykładem praktycznego zastosowania operacji dyskretnego splotu macierzy jest operacja Rozmycia Gaussa.
 Pozwala ona wygładzić obraz, tzn. zredukować jego zaszumienie.
@@ -130,7 +130,7 @@ Przykład działania Rozmycia Gaussa został przedstawiony na Rysunku \ref{fig:g
 
 
 
-\section{Detekcja krawędzi}
+\section{Detekcja krawędzi} \label{sec:edge_detection}
 
 Operacji dyskretnego splotu macierzy używa się również w celu wykrycia krawędzi na obrazie.
 W tym przypadku stosowane są filtry, które pozwalają aproksymować pochodne kierunkowe intensywności obrazu (gradienty).
@@ -347,10 +347,10 @@ Przykłady działania omówionych algorytmów przedstawia Rysunek \ref{fig:edges
 
 \begin{figure}
  \begin{center}
-  \subfigure[]{\includegraphics[width=0.3\textwidth]{../obrazki/filtry/init.png}}
-  \subfigure[]{\includegraphics[width=0.3\textwidth]{../obrazki/filtry/roberts.png}}
-  \subfigure[]{\includegraphics[width=0.3\textwidth]{../obrazki/filtry/prewitt.png}}
-  \subfigure[]{\includegraphics[width=0.3\textwidth]{../obrazki/filtry/sobel.png}}
+  \subfigure[]{\includegraphics[width=0.28\textwidth]{../obrazki/filtry/init.png}}
+  \subfigure[]{\includegraphics[width=0.28\textwidth]{../obrazki/filtry/roberts.png}}
+  \subfigure[]{\includegraphics[width=0.28\textwidth]{../obrazki/filtry/prewitt.png}}
+  \subfigure[]{\includegraphics[width=0.28\textwidth]{../obrazki/filtry/sobel.png}}
  \end{center}
  \caption{
   Przykłady działania filtrów wykrywających krawędzie na obrazie:
@@ -365,35 +365,35 @@ Przykłady działania omówionych algorytmów przedstawia Rysunek \ref{fig:edges
 
 
 
-\section{Canny}
+\section{Algorytm Canny'ego}
 
+Najczęściej stosowanym algorytmem wykrywnia krawędzi jest obecnie algorytm Canny'ego, powstały w 1986 roku.
+Jego autorem jest John F. Canny.
+
+Algorytm ma w założeniu osiągać trzy cele:
 \begin{itemize}
- \item Autor: John F. Canny, 1986
- \item Cele:
-  \begin{itemize}
-   \item dobra detekcja – wykrycie jak największej liczby rzeczywistych krawędzi
-   \item dobra lokalizacja – oznaczenie danej krawędzi jak najbliżej jej rzeczywistego położenia
-   \item minimalna odpowiedź – oznaczenie danej krawędzi tylko raz, brak krawędzi powstałych w wyniku zakłóceń
-  \end{itemize}
+ \item dobra detekcja – wykrycie jak największej liczby rzeczywistych krawędzi,
+ \item dobra lokalizacja – oznaczenie danej krawędzi jak najbliżej jej rzeczywistego położenia,
+ \item minimalna odpowiedź – oznaczenie danej krawędzi tylko raz; brak krawędzi powstałych w wyniku zakłóceń.
 \end{itemize}
 
-Kroki algorytmu:
+Kroki algorytmu są następujące:
 \begin{enumerate}
- \item Wygładzenie obrazu
- \item Obliczenie modułu gradientu obrazu
- \item Usunięcie niemaksymalnych pikseli
- \item Progowanie z histerezą
+ \item Wygładzenie obrazu.
+ \item Obliczenie modułu gradientu obrazu.
+ \item Usunięcie niemaksymalnych pikseli.
+ \item Progowanie z histerezą.
 \end{enumerate}
 
 
 \subsection{Wygładzenie obrazu}
 
-\begin{itemize}
- \item Wygładzenie obrazu filtrem Gaussa
- \item Odchylenie standardowe filtru ($\sigma$) - parametr metody
- \item Im większe $\sigma$, tym mniej fałszywych krawędzi
- \item Cel: redukcja szumu
-\end{itemize}
+Celem pierwszego kroku jest redukcja zaszumienia obrazu wejściowego.
+
+Wygładzenie obrazu polega na zastosowaniu filtru Gaussa (patrz sekcja \ref{sec:gauss}).
+Odchylenie standardowe filtru ($\sigma$) jest parametrem algorytmu - im większa wartość $\sigma$, tym mniej fałszywych krawędzi znajdzie się na obrazie wynikowym.
+
+Przykładowy obraz otrzymany w tym kroku został przedstawiony na Rysunku \ref{fig:canny_smoothing}.
 
 \begin{figure}[!ht]
  \begin{center}
@@ -401,9 +401,9 @@ Kroki algorytmu:
   \subfigure[]{\includegraphics[width=0.33\textwidth]{../obrazki/canny/1_gauss.png}}
  \end{center}
  \caption{
-  Przykładowy rezultat ($\sigma = 3$):
-  (a) przed;
-  (b) po.
+  Przykładowy rezultat wygładzenia obrazu ($\sigma = 3$):
+  (a) obraz wejściowy;
+  (b) obraz wygładzony.
   Źródło: \cite{boldak}.
  }
  \label{fig:canny_smoothing}
@@ -412,12 +412,11 @@ Kroki algorytmu:
 
 \subsection{Obliczenie gradientu}
 
-\begin{enumerate}
- \item Ponowne filtrowanie obrazu (Krzyż Robertsa / Prewitt / Sobel / Scharr)
- \item Cel: znalezienie potencjalnych krawędzi
- \item Należy zapamiętać kierunek gradientu
- \item Kierunek wyznacza się z dokładnością do 45° (pion, poziom, skosy)
-\end{enumerate}
+Kolejny krok na na celu znalezienie potencjalnych krawędzi na obrazie.
+Polega on na zastosowaniu jednego z filtrów wykrywających krawędzie (patrz sekcja \ref{sec:edge_detection}).
+
+Oprócz pozycji krawędzi, należy również zapamiętać ich kierunek.
+Przykładowy wynik tego kroku algorytmu przedstawia Rysunek \ref{fig:canny_gradient}.
 
 \begin{figure}[!ht]
  \begin{center}
@@ -425,9 +424,9 @@ Kroki algorytmu:
   \subfigure[]{\includegraphics[width=0.33\textwidth]{../obrazki/canny/2_2_kierunek_gradientu.png}}
  \end{center}
  \caption{
-  Przykładowy rezultat:
-  (a) Potenscjalne krawędzie;
-  (b) Kierunek gradientu (ten sam odcień szarości przypisany krawędzion o tym samym nachyleniu).
+  Przykładowy rezultat drugiego kroku algorytmu Canny'ego:
+  (a) potencjalne krawędzie;
+  (b) kierunek gradientu (ten sam odcień szarości przypisany krawędzion o tym samym nachyleniu).
   Źródło: \cite{boldak}.
  }
  \label{fig:canny_gradient}
@@ -436,28 +435,26 @@ Kroki algorytmu:
 
 \subsection{Usunięcie zbędnych pikseli}
 
-\begin{enumerate}
- \item Porównanie każdego pikela z dwoma pikselami sąsiednimi
- \item Piksele sąsiednie wyznaczane na podstawie informacji o kierunku gradientu
- 
-  \begin{figure}[!ht]
-   \begin{center}
-    \scalebox{0.25}
-    {
-     \includegraphics{../obrazki/canny/3_1_piksele.png}
-    }
-   \end{center}
-   \caption{
-    Przykład.
-    Źródło: \cite{boldak}.
-   }
-   \label{fig:canny_adjacent_pixels}
-  \end{figure}
+Celem trzeciego kroku algorytmu jest zmniejszenie grubości krawędzi otrzymanych w poprzednim kroku tak, aby wszystkie krawędzie miały grubość jednego piksela.
 
- \item Jeśli jasność piksela nie jest większa od jasności obu sąsiadów, piksel ten jest zerowany
- \item Cel: uzyskanie linii o grubości 1px
- \item Pozostaje pozbyć się zbyt ciemnych krawędzi
-\end{enumerate}
+Usunięcie zbędnych pikseli odbywa się poprzez porównianie każdego piksela obrazu z dwoma pikselami sąsiednimi i zachowaniu jego wartości tylko wtedy, gdy jego jasność jest większa od jasności obu sąsiadów (w przeciwnym wypadku jasność piksela jest ustawiana na 0).
+Piksele sąsiednie wyznaczane są na podstawie informacji o kierunku gradientu (patrz Rysunek \ref{fig:canny_adjacent_pixels}).
+
+\begin{figure}[!ht]
+ \begin{center}
+  \scalebox{0.45}
+  {
+   \includegraphics{../obrazki/canny/3_1_piksele.png}
+  }
+ \end{center}
+ \caption{
+  Zasada wyznaczania sąsiadów pikseli leżących na krawędzi na podstawie informacji o kierunku gradientu.
+  Źródło: \cite{boldak}.
+ }
+ \label{fig:canny_adjacent_pixels}
+\end{figure}
+
+Przykładowy wynik tego kroku algorytmu przedstawia Rysunek \ref{fig:canny_redundant_pixels_removal}.
 
 \begin{figure}[!ht]
  \begin{center}
@@ -467,7 +464,7 @@ Kroki algorytmu:
   }
  \end{center}
  \caption{
-  Przykładowy rezultat.
+  Przykładowy rezultat usunięcia zbędnych pikseli z obrazu.
   Źródło: \cite{boldak}.
  }
  \label{fig:canny_redundant_pixels_removal}
@@ -476,17 +473,20 @@ Kroki algorytmu:
 
 \subsection{Progowanie z histerezą}
 
+Ostatni krok algorytmu ma na celu usunięcie zbyt ciemnych krawędzi przy zachowaniu ciemnych fragmentów jasnych krawędzi (stąd użycie słowa ``histereza''\footnote{Wyjaśnienie zjawiska histerezy dostępne pod adresem: http://pl.wikipedia.org/wiki/Histereza.}).
+Przebiega on następująco:
+
 \begin{enumerate}
- \item Określenie dwóch progów: $T_1$, $T_2$
- \item $T_1$, $T_2$ – parametry  metody
- \item Zaakceptowanie krawędzi, dla których moduł gradientu jest > $T_2$
- \item Usunięcie krawędzi, dla których moduł gradientu jest < $T_1$
- \item Rekurencyjne usunięcie krawędzi, dla których moduł gradientu jest < $T_2$, i które nie przylegają do już zaakceptowanej krawędzi
- \item Cel: usunięcie ciemnych krawędzi przy zachowaniu ciemnych fragmentów jasnych krawędzi
+ \item Określenie dwóch progów: $T_1$, $T_2$ (są to dwa kolejne, obok $\sigma$, parametry algorytmu).
+ \item Zaakceptowanie krawędzi, dla których moduł gradientu jest większy od $T_2$.
+ \item Usunięcie krawędzi, dla których moduł gradientu jest mniejszy od $T_1$.
+ \item Rekurencyjne usunięcie krawędzi, dla których moduł gradientu jest mniejszy od $T_2$, i które nie przylegają do żadnej z już zaakceptowanych krawędzi.
 \end{enumerate}
 
 
 \subsection{Przykładowe rezultaty}
+
+Przykładowe rezultaty działania algorytmu Canny'ego przedstawia Rysunek \ref{fig:canny_comparison}.
 
 \begin{figure}[!ht]
  \begin{center}
@@ -496,11 +496,11 @@ Kroki algorytmu:
   \subfigure[]{\includegraphics[width=0.33\textwidth]{../obrazki/canny/4_3_wynik_3_25_75.png}}
  \end{center}
  \caption{
-  Przykładowe rezultaty:
-  (a) przed;
-  (b) $\sigma = 3, T_1 = 75, T_2 = 125$;
-  (c) $\sigma = 1, T_1 = 75, T_2 = 125$;
-  (d) $\sigma = 3, T_1 = 25, T_2 = 75$.
+  Przykładowe wyniki algorytmu Canny'ego:
+  (a) obraz wejściowy;
+  (b) wynik dla $\sigma = 3, T_1 = 75, T_2 = 125$;
+  (c) wynik dla $\sigma = 1, T_1 = 75, T_2 = 125$;
+  (d) wynik dla $\sigma = 3, T_1 = 25, T_2 = 75$.
   Źródło: \cite{boldak}.
  }
  \label{fig:canny_comparison}
