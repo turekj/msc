@@ -8,27 +8,32 @@
 \usepackage{subfigure}
 \usepackage{textcomp}
 
-\title{
- \LARGE{Projekt aplikacji mobilnej umożliwiającej umieszczenie wirtualnej grafiki w rzeczywistym położeniu} 
- \\ \vspace{2mm} 
- \large{Podstawy przetwarzania obrazów}
-}
+\title{Metody wykrywania krawędzi w obrazach cyfrowych}
 \author{Michał Aniserowicz}
-\date{\today}
+\date{5 stycznia 2014}
 
 \begin{document}
 
 \maketitle
 
-\begin{abstract}
-Celem artykułu jest opisanie zbioru koncepcji, które posłużą do implementacji algorytmu sztucznej inteligencji grającego w~grę Scrabble w~języku polskim. W~artykule zostały przeanalizowane i~porównane dane zawarte w~dwóch głównych słownikach wyrazów do gier dla języka polskiego, przedstawione dane statystyczne ułatwiające wprowadzanie heurystyk do algorytmu, a~także opisane metody niezbędne do wyznaczania wszystkich możliwych kombinacji ruchów w~danej turze. Autor omawia również podział rozgrywki na fazy gry i~przybliża podejście, które pozwala uzyskiwać najlepsze wyniki na każdym etapie rozgrywki.
-\end{abstract}
-
 \section{Wstęp}
+Celem niniejszego artykułu jest wyjaśnienie działania najpopularniejszych metod wykrywania krawędzi w obrazach cyfrowych.
+
+Sekcja \ref{sec:convolution} (``Dyskretny splot macierzy'') zawiera objaśnienie podstawowej operacji, której poddawane są obrazy: dyskretnego splotu macierzy.
+
+Sekcja \ref{sec:edge_detection} (``Wykrywanie krawędzi'') i Sekcja \ref{sec:canny} (``Algorytm Canny'ego'') zawierają opisy przebiegów i przykłady działania następujących algorytmów wykrywania krawędzi:
+\begin{itemize}
+ \item Krzyż Robertsa,
+ \item operator Prewitt,
+ \item operator Sobela,
+ \item operator Scharra,
+ \item algorytm Canny'ego.
+\end{itemize}
+
+Sekcja \ref{sec:summary} podsumowuje artykuł.
 
 
-
-\section{Dyskretny splot macierzy}
+\section{Dyskretny splot macierzy} \label{sec:convolution}
 
 Podstawową operacją wykorzystywaną podczas przetwarzania obrazów cyfrowych jest dyskretny splot macierzy.
 Pozwala on przefiltrować obraz, tzn. uwydatnić lub ukryć niektóre jego cechy, takie jak zaszumienie.
@@ -76,7 +81,7 @@ Przykładem praktycznego zastosowania operacji dyskretnego splotu macierzy jest 
 Pozwala ona wygładzić obraz, tzn. zredukować jego zaszumienie.
 Odbywa się to kosztem utraty ostrości.
 
-Przykładowe maski stosowane w tej opercaji przestawia Rysunek \ref{fig:gauss_matrices}.
+Przykładowe maski stosowane w tej operacji przedstawia Rysunek \ref{fig:gauss_matrices}.
 
 \begin{figure}[!ht]
  \begin{center}
@@ -109,7 +114,7 @@ Maski te mają następujące cechy:
 
 \begin{itemize}
  \item znaczenie piksela maleje wraz z jego odległością od środka maski według funkcji Gaussa;
- \item wartość piksela wynikoweogo jest uśrednieniem wartości odpowiadającego piskela wejściowego i wartości jego sąsiadów\footnote{Filtry posiadajace tę cechę nazywa się filtrami uśredniającymi.}.
+ \item wartość piksela wynikowego jest uśrednieniem wartości odpowiadającego piksela wejściowego i wartości jego sąsiadów\footnote{Filtry posiadajace tę cechę nazywa się filtrami uśredniającymi.}.
 \end{itemize}
 
 Przykład działania Rozmycia Gaussa został przedstawiony na Rysunku \ref{fig:gauss_example}.
@@ -120,7 +125,7 @@ Przykład działania Rozmycia Gaussa został przedstawiony na Rysunku \ref{fig:g
   \subfigure[]{\includegraphics[width=0.33\textwidth]{../obrazki/filtry/gauss_after.jpg}}
  \end{center}
  \caption{
-  Przykad działania Rozmycia Gaussa:
+  Przykład działania Rozmycia Gaussa:
   (a) obraz wejściowy;
   (b) obraz wynikowy.
   Źródło: \cite{gauss}.
@@ -130,7 +135,7 @@ Przykład działania Rozmycia Gaussa został przedstawiony na Rysunku \ref{fig:g
 
 
 
-\section{Detekcja krawędzi} \label{sec:edge_detection}
+\section{Wykrywanie krawędzi} \label{sec:edge_detection}
 
 Operacji dyskretnego splotu macierzy używa się również w celu wykrycia krawędzi na obrazie.
 W tym przypadku stosowane są filtry, które pozwalają aproksymować pochodne kierunkowe intensywności obrazu (gradienty).
@@ -156,8 +161,8 @@ Rysunek \ref{fig:edges_example} przedstawia przykładowy wynik zastosowania filt
 
 \subsection{Krzyż Robertsa}
 
-Jednym z najwcześniej opracowanych algorytmów wykrywania krawędzi jest Krzyż Robertsa
-Został on zaproponowany w 1963 r. przez Lawrence’a G. Robertsa.
+Jednym z najwcześniej opracowanych algorytmów wykrywania krawędzi jest Krzyż Robertsa.
+Został on zaproponowany w 1963~r. przez Lawrence’a G. Robertsa.
 Wykorzystuje się w nim dwie maski, z których każda wykrywa krawędzie skierowane w innym kierunku.
 Maski te zostały przedstawione na Rysunku \ref{fig:roberts_matrices}.
 
@@ -177,7 +182,7 @@ Maski te zostały przedstawione na Rysunku \ref{fig:roberts_matrices}.
   }
  \end{center}
  \caption{
-  Krzyżu Robertsa - maski:
+  Krzyż Robertsa - maski:
   (a) dla kierunku 45\textdegree;
   (b) dla kierunku 135\textdegree.
  }
@@ -338,7 +343,7 @@ Od operatorów Prewitt i Sobela różni się on jedynie wagami komórek masek (R
  \label{fig:scharr_matrices}
 \end{figure}
 
-W porównaniu z operatorem Sobela, operatora Scharra lepiej wykrywa kierunek krawędzi na obrazie.
+W porównaniu z operatorem Sobela, operator Scharra lepiej wykrywa kierunek krawędzi na obrazie.
 
 
 \subsection{Przykłady}
@@ -365,9 +370,9 @@ Przykłady działania omówionych algorytmów przedstawia Rysunek \ref{fig:edges
 
 
 
-\section{Algorytm Canny'ego}
+\section{Algorytm Canny'ego} \label{sec:canny}
 
-Najczęściej stosowanym algorytmem wykrywnia krawędzi jest obecnie algorytm Canny'ego, powstały w 1986 roku.
+Najczęściej stosowanym algorytmem wykrywania krawędzi jest obecnie algorytm Canny'ego, powstały w 1986 roku.
 Jego autorem jest John F. Canny.
 
 Algorytm ma w założeniu osiągać trzy cele:
@@ -390,7 +395,7 @@ Kroki algorytmu są następujące:
 
 Celem pierwszego kroku jest redukcja zaszumienia obrazu wejściowego.
 
-Wygładzenie obrazu polega na zastosowaniu filtru Gaussa (patrz sekcja \ref{sec:gauss}).
+Wygładzenie obrazu polega na zastosowaniu filtru Gaussa (patrz Sekcja \ref{sec:gauss}).
 Odchylenie standardowe filtru ($\sigma$) jest parametrem algorytmu - im większa wartość $\sigma$, tym mniej fałszywych krawędzi znajdzie się na obrazie wynikowym.
 
 Przykładowy obraz otrzymany w tym kroku został przedstawiony na Rysunku \ref{fig:canny_smoothing}.
@@ -412,8 +417,8 @@ Przykładowy obraz otrzymany w tym kroku został przedstawiony na Rysunku \ref{f
 
 \subsection{Obliczenie gradientu}
 
-Kolejny krok na na celu znalezienie potencjalnych krawędzi na obrazie.
-Polega on na zastosowaniu jednego z filtrów wykrywających krawędzie (patrz sekcja \ref{sec:edge_detection}).
+Kolejny krok ma na celu znalezienie potencjalnych krawędzi na obrazie.
+Polega on na zastosowaniu jednego z filtrów wykrywających krawędzie (patrz Sekcja \ref{sec:edge_detection}).
 
 Oprócz pozycji krawędzi, należy również zapamiętać ich kierunek.
 Przykładowy wynik tego kroku algorytmu przedstawia Rysunek \ref{fig:canny_gradient}.
@@ -426,18 +431,18 @@ Przykładowy wynik tego kroku algorytmu przedstawia Rysunek \ref{fig:canny_gradi
  \caption{
   Przykładowy rezultat drugiego kroku algorytmu Canny'ego:
   (a) potencjalne krawędzie;
-  (b) kierunek gradientu (ten sam odcień szarości przypisany krawędzion o tym samym nachyleniu).
+  (b) kierunek gradientu (ten sam odcień szarości przypisany krawędziom~o tym samym nachyleniu).
   Źródło: \cite{boldak}.
  }
  \label{fig:canny_gradient}
 \end{figure}
 
 
-\subsection{Usunięcie zbędnych pikseli}
+\subsection{Usunięcie niemaksymalnych pikseli}
 
 Celem trzeciego kroku algorytmu jest zmniejszenie grubości krawędzi otrzymanych w poprzednim kroku tak, aby wszystkie krawędzie miały grubość jednego piksela.
 
-Usunięcie zbędnych pikseli odbywa się poprzez porównianie każdego piksela obrazu z dwoma pikselami sąsiednimi i zachowaniu jego wartości tylko wtedy, gdy jego jasność jest większa od jasności obu sąsiadów (w przeciwnym wypadku jasność piksela jest ustawiana na 0).
+Usunięcie zbędnych pikseli odbywa się poprzez porównanie każdego piksela obrazu z dwoma pikselami sąsiednimi i zachowaniu jego wartości tylko wtedy, gdy jego jasność jest większa od jasności obu sąsiadów (w przeciwnym wypadku jasność piksela jest ustawiana na 0).
 Piksele sąsiednie wyznaczane są na podstawie informacji o kierunku gradientu (patrz Rysunek \ref{fig:canny_adjacent_pixels}).
 
 \begin{figure}[!ht]
@@ -480,7 +485,7 @@ Przebiega on następująco:
  \item Określenie dwóch progów: $T_1$, $T_2$ (są to dwa kolejne, obok $\sigma$, parametry algorytmu).
  \item Zaakceptowanie krawędzi, dla których moduł gradientu jest większy od $T_2$.
  \item Usunięcie krawędzi, dla których moduł gradientu jest mniejszy od $T_1$.
- \item Rekurencyjne usunięcie krawędzi, dla których moduł gradientu jest mniejszy od $T_2$, i które nie przylegają do żadnej z już zaakceptowanych krawędzi.
+ \item Rekurencyjne usunięcie krawędzi, dla których moduł gradientu jest mniejszy od $T_2$, i które nie przylegają do żadnej~z już zaakceptowanych krawędzi.
 \end{enumerate}
 
 
@@ -508,13 +513,12 @@ Przykładowe rezultaty działania algorytmu Canny'ego przedstawia Rysunek \ref{f
 
 
 
-\section{Podsumowanie}
+\section{Podsumowanie} \label{sec:summary}
 
-\begin{itemize}
- \item Wykrywanie krawędzi (a także wiele innych operacji) sprowadza się do zastosowania dyskretnego splotu macierzy
- \item Algorytmy zaproponowane w latach 60., czy 80. są nadal stosowane
- \item Operator Sobela i algorytm Canny’ego to obecnie najpopularniejsze metody wykrywania krawędzi
-\end{itemize}
+Wykrywanie krawędzi, a także wiele innych działań przeprowadzanych na obrazach cyfrowych, sprowadza się do zastosowania operacji dyskretnego splotu macierzy.
+Znajomość tej operacji pozwala zrozumieć działanie algorytmów takich jak operator Sobela, czy algorytm Canny'ego.
+
+Warto podkreślić, że zrozumienie powyższych algorytmów nie jest wiedzą bezwartościową - pomimo swojego wieku, są one jednymi z najczęściej stosowanych metod wykrywania krawędzi w obrazach cyfrowych.
 
 
 
