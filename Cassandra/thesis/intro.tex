@@ -1,0 +1,25 @@
+\chapter{Wstęp}
+
+\section{Cassandra}
+
+Apache Cassandra to darmowa, rozproszona baza danych przeznaczona do zarządzania dużymi ilościami ustrukturyzowanych danych. Projekt powstał, aby umożliwić realizację funkcjonalności przeszukiwania skrzynki odbiorczej użytkownika na portalu Facebook\footnote{Popularny portal społecznościowy dostępny pod adresem \url{http://fb.com}.}. Funkcjonalność ta nie była możliwa do zrealizowania w~oparciu o~tradycyjny, relacyjny model bazy danych. W~2008 Facebook udostępnił kod źródłowy Cassandry, która następnie (w~2010 roku) została wcielona do projektów pod opieką fundacji Apache\footnote{Fundacja wspierająca powstawanie oprogramowania o~otwartym źródle.}.\cite{casshistory} 
+
+Apache Cassandra jest częścią ruchu NoSQL\footnote{NoSQL - \emph{Not only SQL} (ang. nie tylko SQL).}. Chociaż brakuje oficjalnej, ustanowionej odgórnie definicji pojęcia NoSQL możemy wyróżnić zestaw cech wspólnych baz danych, które powszechnie zaliczane są do tej grupy:
+
+\begin{itemize}
+	\item Wewnętrzna reprezentacja danych w~bazach NoSQL nie opiera się na tabelach i~relacjach.
+	\item Brak pełnej implementacji języka SQL. Chociaż niektóre bazy NoSQL wykorzystują język zapytań o~składni podobnej do SQL, żadna z~nich nie implementuje jej w~pełni.
+	\item Bazy NoSQL posiadają elastyczny model danych. Nie wykorzystują sztywnego, narzuconego z~góry schematu.
+	\item Model danych w~bazach NoSQL jest zazwyczaj ukierunkowany na łatwe klastrowanie, chociaż istnieją wyjątki od tej reguły (na przykład Neo4j\footnote{Neo4j - baza danych oparta wewnętrznie o~grafy.}).
+	\item Bazy NoSQL są przystosowane do wymagań nowoczesnych portali internetowych, które muszą obsługiwać ogromne zbiory danych z~szybkim czasem dostępu. \cite{nosqldistilled}
+\end{itemize}
+
+Konsekwencją ostatniej cechy jest odejście od idei właściwości ACID. Zestaw cech ACID\footnote{ACID - skrót od \emph{Atomicity, Consistency, Isolation, Durability} (ang. atomowość, jednorodność, izolacja, trwałość)} to minimalny zbiór cech, które gwarantują realizację transakcyjności w~bazie danych. \cite{transactionconcept} Klastrowanie sprawia, że nie da się zachować spójności danych na wszystkich węzłach, stąd wymagane są inne mechanizmy zachowania poprawności danych.
+
+\section{Historia Cassandry}
+
+Placeholder.
+
+\section{Architektura}
+
+Placeholder.
