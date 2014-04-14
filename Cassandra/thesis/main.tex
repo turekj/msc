@@ -1,0 +1,25 @@
+\documentclass{report}
+
+% language settings %
+\usepackage[utf8]{inputenc}
+\usepackage[MeX]{polski}
+
+% bibliography with online sources %
+\usepackage[backend=bibtex]{biblatex}
+\bibliography{references.bib}
+
+% package for generating urls %
+\usepackage{hyperref}
+
+\begin{document}
+
+\chapter{Wstęp}
+
+\section{Cassandra}
+
+Apache Cassandra to darmowa, rozproszona baza danych przeznaczona do zarządzania dużymi ilościami ustrukturyzowanych danych. Projekt powstał, aby umożliwić realizację funkcjonalności przeszukiwania skrzynki odbiorczej użytkownika na portalu Facebook\footnote{Popularny portal społecznościowy dostępny pod adresem \url{http://fb.com}.}. Funkcjonalność ta nie była możliwa do zrealizowania w~oparciu o~tradycyjny, relacyjny model bazy danych. W~2008 Facebook udostępnił kod źródłowy Cassandry, która następnie (w~2010 roku) została wcielona do projektów pod opieką fundacji Apache\footnote{Fundacja wspierająca powstawanie oprogramowania o~otwartym źródle.}.\cite{casshistory} 
+
+\printbibliography
+
+
+\end{document}
