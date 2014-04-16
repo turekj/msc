@@ -16,11 +16,15 @@ Apache Cassandra jest częścią ruchu NoSQL\footnote{NoSQL - \emph{Not only SQL
 
 Konsekwencją ostatniej cechy jest odejście od idei właściwości ACID. Zestaw cech ACID\footnote{ACID - skrót od \emph{Atomicity, Consistency, Isolation, Durability} (ang. atomowość, jednorodność, izolacja, trwałość)} to minimalny zbiór cech, które gwarantują realizację transakcyjności w~bazie danych. \cite{transactionconcept} Klastrowanie sprawia, że nie da się zachować spójności danych na wszystkich węzłach, stąd wymagane są inne mechanizmy zachowania poprawności danych.
 
-\section{Historia Cassandry}
+\section{Opis Apache Cassandra}
 
-Apache Cassandra powstała z~połączenia rozwiązań wykorzystywanych w~dwóch mechanizmach bazodanowych: Google Bigtable oraz Amazon Dynamo. Google Bigtable to rozproszony system bazodanowy do przechowywania ustrukturyzowanych danych. Został stworzony z~myślą o~skalowaniu dla ogromnych ilości danych. Wykorzystywany jest między innymi w~takich produktach jak Google Analytics, Google Finance, Google Earth oraz mechanizmach takich jak spersonalizowane wyszukiwanie w~przeglądarce Google. 
+Apache Cassandra powstała z~połączenia rozwiązań wykorzystywanych w~dwóch mechanizmach bazodanowych: Google Bigtable oraz Amazon Dynamo. Opis działania Cassandry wymaga przytoczenia zasad działania wymienionych baz danych.
 
-Model danych w~Google Bigtable jest opisany trójwymiarową strukturą mapy. Mapa ta jest identyfikowana unikalnymi kluczami, które reprezentują klucz wiersza, nazwę (klucz) kolumny oraz znacznik czasu. Wszystkie wiersze są uporządkowane w~rosnącym porządku leksykograficznym względem klucza. W~każdej komórce mapy przechowywane są wartości w~postaci łańcucha znaków, co implikuje konieczność serializacji i~deserializacji wartości w~aplikacjach klienckich. Dodatkowo, nazwy kolumn mogą być grupowane w~rodziny. Nazwa każdej kolumny w~rodzinie jest poprzedzona klasyfikatorem, który identyfikuje tę rodzinę (w~formacie \emph{rodzina:nazwa\_kolumny}). \cite{googlebigtable} Schematyczny rysunek przykładowej struktury danych przedstawiono na rysunku \ref{fig:bigtabledatamodel}.
+\subsection{Google Bigtable}
+
+Google Bigtable to rozproszony system bazodanowy do przechowywania ustrukturyzowanych danych. Został stworzony z~myślą o~skalowaniu dla ogromnych ilości danych. Wykorzystywany jest między innymi w~takich produktach jak Google Analytics, Google Finance, Google Earth oraz mechanizmach takich jak spersonalizowane wyszukiwanie w~przeglądarce Google. 
+
+Model danych w~Google Bigtable jest opisany trójwymiarową strukturą mapy. Mapa ta jest identyfikowana unikalnymi kluczami, które reprezentują klucz wiersza, nazwę (klucz) kolumny oraz znacznik czasu. Wszystkie wiersze są uporządkowane w~rosnącym porządku leksykograficznym względem klucza. W~każdej komórce mapy przechowywane są wartości w~postaci łańcucha znaków, co implikuje konieczność serializacji i~deserializacji wartości w~aplikacjach klienckich. Dodatkowo, nazwy kolumn mogą być grupowane w~rodziny. Nazwa każdej kolumny w~rodzinie jest poprzedzona klasyfikatorem, który identyfikuje tę rodzinę (w~formacie \emph{rodzina:nazwa\_kolumny}). \cite{googlebigtable} 
 
 \begin{figure}[ht!]
 	\centering
@@ -34,15 +38,15 @@ Model danych w~Google Bigtable jest opisany trójwymiarową strukturą mapy. Map
 		\draw[style=dotted] (6, 0) -- (6, 4);
 		\draw[style=dotted] (6.5, 0) -- (6.5, 4);
 		\draw[style=dashed] (8.5, 0) -- (8.5, 4);
-		\node[font=\scriptsize, align=center] (content) at (2, 4.5) {(nazwa kolumny) \\ ,,treść''};
-		\node[font=\scriptsize, align=center] (polish) at (5, 4.5) {(rodzina:kolumna) \\ ,,tytuł:pl''};
-		\node[font=\scriptsize, align=center] (english) at (7.5, 4.5) {(rodzina:kolumna) \\ ,,tytuł:en''};
+		\node[font=\scriptsize, align=center] (content) at (2, 4.5) {treść};
+		\node[font=\scriptsize, align=center] (polish) at (5, 4.5) {tytuł:pl};
+		\node[font=\scriptsize, align=center] (english) at (7.5, 4.5) {tytuł:en};
 		\node[rectangle, text=black, draw=black, minimum width=2cm, minimum height=0.8cm, font=\scriptsize, inner sep=0mm] (contentt6) at (1.5, 1.4) { Litwo... };
 		\node[rectangle, text=gray, draw=gray, minimum width=2cm, minimum height=0.8cm, font=\scriptsize, inner sep=0mm] (contentt5) at (2.0, 2.0) { Litwo... };
 		\node[rectangle, text=gray, draw=gray, minimum width=2cm, minimum height=0.8cm, font=\scriptsize, inner sep=0mm] (contentt3) at (2.5, 2.6) { Litwo... };
 		\node[rectangle, text=black, draw=black, minimum width=2cm, minimum height=0.8cm, font=\scriptsize, inner sep=0mm] (titlepolish) at (5, 2.0) { ,,Pan Tadeusz'' };
 		\node[rectangle, text=black, draw=black, minimum width=2cm, minimum height=0.8cm, font=\scriptsize, inner sep=0mm] (titleenglish) at (7.5, 2.0) { ,,Sir Thaddeus'' };
-		\node[font=\scriptsize, align=center] (rowkey) at (-1.25, 2) {(nazwa wiersza) \\ ,,pantadeusz''};
+		\node[font=\scriptsize, align=center] (rowkey) at (-1.25, 2) {pantadeusz};
 		\node[font=\scriptsize, align=center] (t6) at (3.85, 1.4) {$t_{6}$};
 		\node[font=\scriptsize, align=center, text=gray] (t5) at (3.85, 2.0) {$t_{5}$};
 		\node[font=\scriptsize, align=center, text=gray] (t3) at (3.85, 2.6) {$t_{3}$};
@@ -62,6 +66,15 @@ Model danych w~Google Bigtable jest opisany trójwymiarową strukturą mapy. Map
 	\label{fig:bigtabledatamodel}
 \end{figure}
 
-\section{Architektura}
+Model danych Google Bigtable przedstawia schematyczny rysunek \ref{fig:bigtabledatamodel}, na którym zostały zawarte informacje na temat książek:
+
+\begin{itemize}
+	\item Każdy wiersz w~bazie danych posiada uniwersalny identyfikator. Na przedstawionym schemacie identyfikatorem wiersza jest \emph{pantadeusz}.
+	\item Każdy wiersz może posiadać nieograniczoną liczbę kolumn. Każda kolumna posiada unikalny identyfikator. Na przedstawionym schemacie identyfikatorami kolumn są \emph{treść}, \emph{tytuł:pl} oraz \emph{tytuł:en}.
+	\item Kolumny mogą być grupowane w~rodziny. Na przedstawionym schemacie rodziną jest \emph{tytuł}. W~ramach rodziny \emph{tytuł} zgrupowane są tytuły książek w~różnych językach. Na przedstawionym schemacie pokazany został tytuł w~języku polskim w~kolumnie \emph{pl} oraz tytuł w~języku angielskim w~kolumnie \emph{en}.
+	\item Każda komórka danych jest dodatkowo identyfikowana przez znacznik czasu. Na przedstawionym schemacie istnieją trzy różne wersje tekstu ,,Pana Tadeusza'' różniące się znacznikiem czasu (odpowiednio $t_3$, $t_5$, $t_6$).
+\end{itemize}
+
+\subsection{Amazon Dynamo}
 
 Placeholder.
