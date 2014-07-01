@@ -15,6 +15,7 @@ TeX
 *.tex.backup
 *.toc
 *.aux
+*.out
 *.log
 *.nav
 *.out
@@ -49,4 +50,3 @@ Python
 # Build files #
 *.pyc
 =======
-
